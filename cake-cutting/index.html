@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+	<html class="sl-root decks export offline loaded">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, minimal-ui">
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<link rel="manifest" href='data:application/manifest+json,{"display": "standalone", "name": "The Math of Cutting Cake and Dividing Candy"}' />
+		<title>The Math of Cutting Cake and Dividing Candy</title>
+
+
+		<link rel="stylesheet" type="text/css" href="lib/offline-v2.css">
+
+
+
+		<!-- User CSS -->
+		<style id="user-css-output" type="text/css">
+			@font-face {
+				font-family: 'heliotrope_3';
+				src: url('../assets/webfonts/heliotrope_3_regular.woff2') format('woff2');
+				font-weight: normal;
+				font-style: normal;
+			}
+			@font-face {
+				font-family: 'heliotrope_3';
+				src: url('../assets/webfonts/heliotrope_3_italic.woff2') format('woff2');
+				font-weight: normal;
+				font-style: italic;
+			}
+			@font-face {
+				font-family: 'heliotrope_3';
+				src: url('../assets/webfonts/heliotrope_3_bold.woff2') format('woff2');
+				font-weight: bold;
+				font-style: normal;
+			}
+			@font-face {
+				font-family: 'heliotrope_3';
+				src: url('../assets/webfonts/heliotrope_3_bold_italic.woff2') format('woff2');
+				font-weight: bold;
+				font-style: italic;
+			}
+.reveal {
+  
+}
+.reveal .slides h1,
+.reveal .slides h2,
+.reveal .slides h3,
+.reveal body,
+.reveal p,
+.reveal a {
+  font-family: 'heliotrope_3', sans-serif;
+}
+.reveal .slides section.smallcaps h3 {
+  font-family: 'heliotrope_3_caps', sans-serif !important;
+}
+.reveal .slides section.orangebg {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.com/svgjs' width='1440' height='560' preserveAspectRatio='none' viewBox='0 0 1440 560'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1028%26quot%3b)' fill='none'%3e%3cpath d='M475.74044379896577 225.40414810920913L441.1427629386578 346.06060006484523 561.799214894294 380.65828092515324 596.3968957546019 260.0018289695171z' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float3'%3e%3c/path%3e%3cpath d='M921.5310494686497 462.8832866466635L982.9050782486223 522.1514973041693 1042.1732889061282 460.77746852419665 980.7992601261554 401.50925786669086z' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M790.9452368231106 478.57390729473013L817.1642472029883 365.0068963866835 703.5972362949417 338.78788600680565 677.3782259150639 452.3548969148523z' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M611.1846938119692 385.49896792551704L562.9564817674883 301.96525430627094 479.42276814824226 350.19346635075175 527.6509801927231 433.72717996999785z' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M581.5020782144692 232.79480174338443L469.52211238508266 138.83245371670176 375.5597643584 250.81241954608828 487.5397301877865 344.77476757277094z' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M426.9163558163354 107.41941717033569L335.1977796315499 238.4071189298619 466.1854813910761 330.1256951146474 557.9040575758615 199.13799335512118z' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M186.27450367911317 57.642116616997086L74.71780156285094 177.272033360021 194.34771830587482 288.8287354762832 305.90442042213704 169.19881873325932z' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1028'%3e%3crect width='1440' height='560' fill='white'%3e%3c/rect%3e%3c/mask%3e%3cstyle%3e %40keyframes float1 %7b 0%25%7btransform: translate(0%2c 0)%7d 50%25%7btransform: translate(-10px%2c 0)%7d 100%25%7btransform: translate(0%2c 0)%7d %7d .triangle-float1 %7b animation: float1 5s infinite%3b %7d %40keyframes float2 %7b 0%25%7btransform: translate(0%2c 0)%7d 50%25%7btransform: translate(-5px%2c -5px)%7d 100%25%7btransform: translate(0%2c 0)%7d %7d .triangle-float2 %7b animation: float2 4s infinite%3b %7d %40keyframes float3 %7b 0%25%7btransform: translate(0%2c 0)%7d 50%25%7btransform: translate(0%2c -10px)%7d 100%25%7btransform: translate(0%2c 0)%7d %7d .triangle-float3 %7b animation: float3 6s infinite%3b %7d %3c/style%3e%3c/defs%3e%3c/svg%3e");
+}
+
+		</style>
+	</head>
+	<body class="reveal-viewport theme-font-overpass2 theme-color-white-blue">
+		<div class="reveal">
+			<div class="slides">
+				<section class="stack" data-id="90114e8289bc8997b76a7dd7751b56a5"><section data-id="60fba0a5077e0b20f5bc36c46bdb6e76"><div class="sl-block" data-block-type="text" style="width: 876px; left: 42px; top: 204px; height: auto;" data-block-id="4d3d47dce15712e397462aa4fd36fd25" data-name="text-aed0f8"><div class="sl-block-content" data-placeholder-tag="h1" style="z-index: 10; font-size: 160%; padding: 20px; line-height: 1.508;" data-has-line-height="" data-placeholder-text="Text"><h1>cutting cake &amp; dividing candy</h1></div></div>
+<div class="sl-block" data-block-type="line" data-name="line-a5c0c7" style="width: auto; height: auto; left: 323px; top: 480px;" data-block-id="7eb71755232c87cdf42a26cd3ca90489"><div class="sl-block-content" data-line-x1="0" data-line-y1="0" data-line-x2="314" data-line-y2="0" data-line-color="#ffffff" data-line-start-type="none" data-line-end-type="none" style="z-index: 11;" data-line-width="4px"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveaspectratio="xMidYMid" width="314" height="1" viewbox="0 0 314 1"><path class="line-element" fill="rgba(0,0,0,0)" stroke="#ffffff" stroke-width="4" d="M0 0 L314 0"></path><path class="line-skeleton" fill="rgba(0,0,0,0)" stroke="rgba(0,0,0,0)" d="M0 0 L314 0"></path><path class="line-hitarea" fill="rgba(0,0,0,0)" stroke="rgba(0,0,0,0)" stroke-width="15" d="M0 0 L314 0"></path></svg></div></div>
+<div class="sl-block" data-block-type="text" style="width: 336px; left: 144px; top: 125px; height: auto;" data-name="text-d18e72" data-block-id="048901c3a5a91bcc8fe27f2494374b0c"><div class="sl-block-content" data-placeholder-tag="p" style="z-index: 12; text-align: center; color: rgb(0, 0, 0); font-size: 185%; padding: 20px;" data-placeholder-text="Text"><p><em>the math of...</em></p></div></div></section><section data-id="a7805f69319fac342487aeb152ece87d">
+
+<div class="sl-block" data-block-type="iframe" data-name="iframe-656868" data-block-id="37c92bcd4879fb50a3466bc34b15065b" style="width: 640px; height: 360px; left: 160px; top: 210px;"><div class="sl-block-content" style="z-index: 10;"><iframe allow="fullscreen; autoplay; accelerometer; geolocation; gyroscope; camera; encrypted-media; microphone; midi" data-src="https://www.youtube.com/embed/CBVg8x4LWZE?enablejsapi=1" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock allow-presentation"></iframe></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-be0eb1" data-block-id="3d9ff031d8e58315727ffde4c21a09f3" style="height: auto; width: 600px; left: 160px; top: 140px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11; text-align: left;"><p>Inspiration:</p></div></div></section><section data-id="829422d6d8eda3817a9d659f172507fe">
+
+<div class="sl-block" data-block-type="text" data-name="text-220b66" style="height: auto; width: 474.614px; left: 242.693px; top: 270px;" data-block-id="19beb6e9c638e6b81039ccbbac07e967"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10; font-size: 139%;"><p>Math models are useful in the social sciences<br>
+<br>
+Social sciences motivate<br>
+new math</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 180px; top: 70px;" data-name="text-c2d8bf" data-block-id="f0079ad27353f8536c5b161126a233e2"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11; font-size: 184%;"><p><em>Takeaways...</em></p></div></div></section><section data-id="14fbb41a277694a4fe4865c9793a69f8">
+
+<div class="sl-block" data-block-type="text" data-name="text-220b66" style="height: auto; width: 474.614px; left: 242.693px; top: 299px;" data-block-id="6c32a41d2783bdc66a9bb86aa6ad625f"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10; font-size: 139%;" data-fragment-index="0"><p>Cut a cake into n pieces fairly.</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 180px; top: 70px;" data-name="text-c2d8bf" data-block-id="303be9145a7070051cb6b07c32e1cd64"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11; font-size: 184%;"><p><em>Goal.</em></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 930.614px; left: 14.693px; top: 439px;" data-block-id="74abd41082788d36677dafe2857fe5c0" data-name="text-be5c6b"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; font-size: 139%;" data-fragment-index="1"><p>Distribute a set of candies among n people fairly.</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 204.614px; left: 377.693px; top: 512px;" data-block-id="f63c386d11c383be60bb9faaf0461991" data-name="text-f8162c"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: right;" data-fragment-index="3"><p><em>Indivisible Setting</em></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 204.614px; left: 377.693px; top: 244px;" data-block-id="c8f56ebb18cc4a675f142fc7f87bb9ca" data-name="text-7714f9"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14; text-align: right;" data-fragment-index="2"><p><em>Divisible Setting</em></p></div></div></section><section data-id="dfb137e877603d8fe3982b10118a6877">
+
+<div class="sl-block" data-block-type="text" data-name="text-220b66" style="height: auto; width: 474.614px; left: 242.693px; top: 299px;" data-block-id="a66d43057b215b0dd887474e8c50a4ee"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10; font-size: 139%;"><p><span style="color:#FF0000">Cut</span> a cake into n pieces fairly.</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 180px; top: 70px;" data-name="text-c2d8bf" data-block-id="0176903b8caa7f676b8b85275ab415f2"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11; font-size: 184%;"><p><em>Goal.</em></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 930.614px; left: 14.693px; top: 439px;" data-name="text-be5c6b" data-block-id="ea4b036ab5a9108af8556591ec5f7470"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; font-size: 139%;"><p>Distribute a set of candies among n people fairly.</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 204.614px; left: 377.693px; top: 512px;" data-name="text-f8162c" data-block-id="862ae35dd9cb42c1818ad08b626ef29d"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: right;"><p><em>Indivisible Setting</em></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 204.614px; left: 377.693px; top: 244px;" data-name="text-7714f9" data-block-id="e8ab040e63891c8ad5a14300ad8ef54e"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14; text-align: right;"><p><em>Divisible Setting</em></p></div></div></section><section data-id="5e89bbdfd6ee099460a9be60814cba8d">
+
+<div class="sl-block" data-block-type="text" data-name="text-220b66" style="height: auto; width: 474.614px; left: 242.693px; top: 299px;" data-block-id="abb5e87b811feb80156b18facc5a3325"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10; font-size: 139%;"><p>Cut a <span style="color:#0000FF">cake</span> into n pieces fairly.</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 180px; top: 70px;" data-name="text-c2d8bf" data-block-id="64d013c4b12d7d18aad48854bf0425d6"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11; font-size: 184%;"><p><em>Goal.</em></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 930.614px; left: 14.693px; top: 439px;" data-name="text-be5c6b" data-block-id="56bba21742950750b6c7d22fc44bde43"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; font-size: 139%;"><p>Distribute a set of candies among n people fairly.</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 204.614px; left: 377.693px; top: 512px;" data-name="text-f8162c" data-block-id="e416403597e34df25d96aff72c893098"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: right;"><p><em>Indivisible Setting</em></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 204.614px; left: 377.693px; top: 244px;" data-name="text-7714f9" data-block-id="b79e3877d652915754b5949b2035f678"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14; text-align: right;"><p><em>Divisible Setting</em></p></div></div>
+<div class="sl-block" data-block-type="line" data-name="line-d98ba1" data-block-id="5679cd1f375a7a827f3341f187030af0" style="width: auto; height: auto; min-width: 0px; min-height: 0px; left: 298.5px; top: 387px;"><div class="sl-block-content fragment" data-line-x1="0" data-line-y1="0" data-line-x2="371.01212918178294" data-line-y2="0" data-line-color="#a64d79" data-line-width="2px" data-line-start-type="none" data-line-end-type="none" data-line-style="solid-rounded" style="z-index: 15;" data-fragment-index="0"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveaspectratio="xMidYMid" width="371.01212918178294" height="1" viewbox="0 0 371.01212918178294 1"><path class="line-element" fill="rgba(0,0,0,0)" stroke="#a64d79" stroke-width="2" stroke-linecap="round" d="M0 0 L371.012 0"></path><path class="line-skeleton" fill="rgba(0,0,0,0)" stroke="rgba(0,0,0,0)" d="M0 0 L371.012 0"></path><path class="line-hitarea" fill="rgba(0,0,0,0)" stroke="rgba(0,0,0,0)" stroke-width="15" d="M0 0 L371.012 0"></path></svg></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-547b58" data-block-id="8a06d634abd5d8550b670a1293a86e87" style="height: auto; width: 24px; left: 270.5px; top: 369px;"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 16; color: rgb(166, 77, 121);" data-fragment-index="0"><p>0</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 24px; left: 672.5px; top: 369px;" data-block-id="d4b1710943fb4b14519eabed3e2c36d4" data-name="text-fe2d61"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 18; color: rgb(166, 77, 121);" data-fragment-index="0"><p>1</p></div></div></section><section data-id="1f4bb6e167683f0efbf59de65f945c29">
+
+<div class="sl-block" data-block-type="text" data-name="text-220b66" style="height: auto; width: 474.614px; left: 242.693px; top: 299px;" data-block-id="3cd65e1bea3ea76db27bc9a92811fe9b"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10; font-size: 139%;"><p>Cut a cake into n pieces <span style="color:#008000">fairly</span>.</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 180px; top: 70px;" data-name="text-c2d8bf" data-block-id="f45344083e3ec2729de415e7ac9fe97d"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11; font-size: 184%;"><p><em>Goal.</em></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 930.614px; left: 14.693px; top: 439px;" data-name="text-be5c6b" data-block-id="9274781aaa1dc00ebe00f30bed166fd7"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; font-size: 139%;"><p>Distribute a set of candies among n people fairly.</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 204.614px; left: 377.693px; top: 512px;" data-name="text-f8162c" data-block-id="ad9ad990b053195bc7f4babf2c3efce0"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: right;"><p><em>Indivisible Setting</em></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 204.614px; left: 377.693px; top: 244px;" data-name="text-7714f9" data-block-id="8e26ea94d76e14254cdb387a8eee6d32"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14; text-align: right;"><p><em>Divisible Setting</em></p></div></div></section><section data-id="929cf1524cddc8ca935f6cd84553bab1">
+
+<div class="sl-block" data-block-type="text" data-name="text-220b66" style="height: auto; width: 904.614px; left: 27.693px; top: 168px;" data-block-id="1c07093e2b2084144a4fa0064b4bc56c"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10; font-size: 139%;" data-fragment-index="1"><p>Each thinks her piece is at least 1/N in her measure.</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 180px; top: 19px;" data-name="text-c2d8bf" data-block-id="148aabc3b6e9420e16e0d9bb053a851f"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11; font-size: 184%;"><p><em>Notions of fairness</em></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 930.614px; left: 14.693px; top: 295px;" data-name="text-be5c6b" data-block-id="876624218e83ab4e0bae2f35971c9ec1"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; font-size: 139%;" data-fragment-index="3"><p><span style="color:rgb(0, 0, 0); font-size:38.92px">Each thinks her piece is biggest.</span></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 204.614px; left: 377.693px; top: 239px;" data-name="text-f8162c" data-block-id="cf560447a993f48fc0dfb67eb0159ffc"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: right; color: rgb(103, 78, 167);" data-fragment-index="2"><p style="text-align:center"><em>Envy-free</em></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 204.614px; left: 377.693px; top: 112px;" data-name="text-7714f9" data-block-id="4fc54f1b4eac6e09a6e5b03dc76f50c3"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14; text-align: right; color: rgb(103, 78, 167);" data-fragment-index="0"><p style="text-align:center"><em>Proprortional</em></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 204.614px; left: 377.693px; top: 366px;" data-block-id="6b1e85ce34a69e884d1bd13d201d09b8" data-name="text-704fcd"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 15; text-align: right; color: rgb(103, 78, 167);" data-fragment-index="4"><p style="text-align:center"><em>Equitable</em></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 930.614px; left: 14.693px; top: 422px;" data-block-id="f45daded4817ba900f8ff6a0913c596b" data-name="text-7c7ae5"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 16; font-size: 139%;" data-fragment-index="5"><p><span style="color:rgb(0, 0, 0); font-size:38.92px">Each views his piece as the </span><span style="color:rgb(0, 0, 0); font-size:38.92px">same as<br>
+everyone else views their piece.</span></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 204.614px; left: 377.693px; top: 543px;" data-block-id="ee92be3a9d681d94468f4d08795a7a85" data-name="text-c5500a"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 17; text-align: right; color: rgb(103, 78, 167);" data-fragment-index="6"><p style="text-align:center"><em>Efficient</em></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 930.614px; left: 14.693px; top: 599px;" data-block-id="102f768ea6f8133d402131f3db5d3b43" data-name="text-7a9a8a"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 18; font-size: 139%;" data-fragment-index="7"><p><span style="color:rgb(0, 0, 0); font-size:38.92px">There is no other division that</span><br>
+<span style="color:rgb(0, 0, 0); font-size:38.92px">dominates this one for ALL players.</span></p></div></div></section></section><section class="stack" data-id="c16f21ec299a490137fce0dee37d372b"><section data-id="b63659e79ac626bc525fb41d003e1633">
+
+<div class="sl-block" data-block-type="text" style="width: 876px; left: 42px; top: 154px; height: auto;" data-name="text-aed0f8" data-block-id="9f70373e32bab23c157e7b346ec3b847"><div class="sl-block-content" data-placeholder-tag="h1" style="z-index: 10; font-size: 120%; padding: 20px; line-height: 1.508;" data-has-line-height="" data-placeholder-text="Text"><h1>divide one cake<br>
+between two people</h1></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-64642b" style="height: auto; width: 600px; left: 180px; top: 391px;" data-block-id="7e3339ab8d33b9b3b6c900d96a309813"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11; font-size: 160%; color: rgb(106, 168, 79);"><p><em>nicely</em></p></div></div></section><section data-id="8b4e527d4bc31e384a4c8598dd4622ff"><div class="sl-block" data-block-type="text" data-name="text-9068cb" style="height: auto; width: 896.464px; left: 40px; top: 290px;" data-block-id="6746a115f9c84b6159bcfe2bf9c51d12"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10;" data-fragment-index="2"><p style="text-align:left"><em>Hesiod's Theogony:</em><br>
+Prometheus cuts ox in two, offers Zeus choice<br>
+<br>
+<em>Old Testament Book of Genesis:</em><br>
+Abraham offers Lot choice: land to left or right</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 896.464px; left: 40px; top: 521px;" data-name="text-f6788f" data-block-id="1e3b5ae501ef0a1da39093d40c0aefe4"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;" data-fragment-index="3"><p style="text-align:left"><em>Mining in the Ocean:</em><br>
+<span style="color:rgb(32, 33, 34); text-align:start">The </span><a href="https://en.wikipedia.org/wiki/United_Nations_Convention_on_the_Law_of_the_Sea" target="_blank">United Nations Convention on the Law of the Sea</a><span style="color:rgb(32, 33, 34); text-align:start"> applies a procedure similar to divide-and-choose for allocating areas in the ocean among countries.</span></p></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-64642b" style="height: auto; width: 600px; left: 35.9389px; top: 70px;" data-block-id="f9fcf575a140d6383ff5ef5d8c4baf06"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; font-size: 160%; color: rgb(60, 95, 199); text-align: left;" data-fragment-index="0"><p style="text-align: left;"><em>Protocol dating back ages...</em></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 40px; top: 168px;" data-block-id="6dffb77fc0d12d0ceff4ac6af19dd8a0" data-name="text-b014df"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; font-size: 160%; color: rgb(198, 34, 67); text-align: left;" data-fragment-index="1"><p style="text-align:left"><u>I cut, you choose.</u></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 190px; left: 761px; top: 14px;" data-block-id="de349ece51b08cf7322974f9f70fd60d" data-name="text-2d83c2"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14; text-align: center;"><p style="text-align:left"><em>1 cake, 2 people.</em></p></div></div></section></section><section class="stack" data-id="019f6e8a9fe43d48271ae2fa4882641b"><section data-id="1dc1784425582cd5b972881244eaf7e8"><div class="sl-block" data-block-type="text" style="width: 876px; left: 42px; top: 154px; height: auto;" data-name="text-aed0f8" data-block-id="6e4a97996cd5857bae91c496f4c6fee3"><div class="sl-block-content" data-placeholder-tag="h1" style="z-index: 10; font-size: 120%; padding: 20px; line-height: 1.508;" data-has-line-height="" data-placeholder-text="Text"><h1>divide one cake<br>
+between N people</h1></div></div>
+
+<div class="sl-block" data-block-type="text" data-name="text-64642b" data-block-id="61dffbe9385dd6aecce27a94d2b6a448" style="height: auto; width: 600px; left: 180px; top: 391px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11; font-size: 160%; color: rgb(106, 168, 79);"><p><em>proportionally</em></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 190px; left: 761px; top: 14px;" data-name="text-2d83c2" data-block-id="bf89688a1c75d190dfd5ead3b8d88c74"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; text-align: center;"><p style="text-align:left"><em>1 cake, N people.</em></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 190px; left: 761px; top: 59.7396px;" data-name="text-ad6c1e" data-block-id="2ff09e3b0893385c4fba36d003e8de88"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: center;"><p><em>Goal: PROP</em></p></div></div></section><section data-id="b321aec6aced914ba416b1222adb80d8" data-auto-animate=""><div class="sl-block" data-block-type="line" data-name="line-2407e4" data-block-id="850e7be468eba958b3a5166668251b23" style="width: auto; height: auto; min-width: 0px; min-height: 0px; left: 77.5px; top: 419.5px;"><div class="sl-block-content" data-line-x1="0" data-line-y1="0" data-line-x2="805.2552904663216" data-line-y2="0" data-line-color="#a64d79" data-line-width="2px" data-line-start-type="none" data-line-end-type="none" data-line-style="solid-rounded" style="z-index: 10;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveaspectratio="xMidYMid" width="805.2552904663216" height="1" viewbox="0 0 805.2552904663216 1"><path class="line-element" fill="rgba(0,0,0,0)" stroke="#a64d79" stroke-width="2" stroke-linecap="round" d="M0 0 L805.255 0"></path><path class="line-skeleton" fill="rgba(0,0,0,0)" stroke="rgba(0,0,0,0)" d="M0 0 L805.255 0"></path><path class="line-hitarea" fill="rgba(0,0,0,0)" stroke="rgba(0,0,0,0)" stroke-width="15" d="M0 0 L805.255 0"></path></svg></div></div>
+<div class="sl-block" data-block-type="image" data-name="image-92ead6" data-block-id="e3767f7d66aee02b866d329b8747befc" style="width: 129.064px; height: 129.064px; left: 65.5px; top: 220.936px; min-width: 1px; min-height: 1px;"><div class="sl-block-content" style="z-index: 11;"><img class="" data-natural-width="512" data-natural-height="512" data-lazy-loaded="" data-src="cake-cutting/791252ab398d6849cb55d7a5c087847f.png"></div></div>
+<div class="sl-block" data-block-type="line" data-name="line-3baa26" data-block-id="2f127e71bd009b85648a6ea5b1ac92ca" style="width: auto; height: auto; min-width: 0px; min-height: 0px; left: 77.5px; top: 397px;"><div class="sl-block-content" data-line-x1="0" data-line-y1="0" data-line-x2="2.738714621011361e-15" data-line-y2="44.72660399583228" data-line-color="#a64d79" data-line-width="2px" data-line-start-type="none" data-line-end-type="none" data-line-style="solid-rounded" style="z-index: 12;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveaspectratio="xMidYMid" width="1" height="44.72660399583228" viewbox="0 0 1 44.72660399583228"><path class="line-element" fill="rgba(0,0,0,0)" stroke="#a64d79" stroke-width="2" stroke-linecap="round" d="M0 0 L0 44.727"></path><path class="line-skeleton" fill="rgba(0,0,0,0)" stroke="rgba(0,0,0,0)" d="M0 0 L0 44.727"></path><path class="line-hitarea" fill="rgba(0,0,0,0)" stroke="rgba(0,0,0,0)" stroke-width="15" d="M0 0 L0 44.727"></path></svg></div></div>
+<div class="sl-block" data-block-type="line" style="width: auto; height: auto; min-width: 0px; min-height: 0px; left: 881.755px; top: 397.5px;" data-block-id="ec8675987fa7480df4f92dca4f58cf29" data-name="line-c6028c"><div class="sl-block-content" data-line-x1="0" data-line-y1="0" data-line-x2="2.738714621011361e-15" data-line-y2="44.72660399583228" data-line-color="#a64d79" data-line-width="2px" data-line-start-type="none" data-line-end-type="none" data-line-style="solid-rounded" style="z-index: 13;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveaspectratio="xMidYMid" width="1" height="44.72660399583228" viewbox="0 0 1 44.72660399583228"><path class="line-element" fill="rgba(0,0,0,0)" stroke="#a64d79" stroke-width="2" stroke-linecap="round" d="M0 0 L0 44.727"></path><path class="line-skeleton" fill="rgba(0,0,0,0)" stroke="rgba(0,0,0,0)" d="M0 0 L0 44.727"></path><path class="line-hitarea" fill="rgba(0,0,0,0)" stroke="rgba(0,0,0,0)" stroke-width="15" d="M0 0 L0 44.727"></path></svg></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-547b58" style="height: auto; width: 24px; left: 65.5px; top: 460px;" data-block-id="8644a48076bda4a833378d1771f8d1fa"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14; color: rgb(166, 77, 121);"><p>0</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 24px; left: 870.755px; top: 460px;" data-name="text-fe2d61" data-block-id="19ee33a3f0644a887c57b0cf1332bbb2"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 15; color: rgb(166, 77, 121);"><p>1</p></div></div>
+<div class="sl-block" data-block-type="image" data-name="image-08a5e3" style="width: 69.9611px; height: 69.9611px; left: 341.005px; top: 561.163px; min-width: 1px; min-height: 1px;" data-block-id="c62a7f4f4b82a14d3f266c2f9744065e"><div class="sl-block-content" style="z-index: 16;"><img class="" data-natural-width="512" data-natural-height="512" data-lazy-loaded="" data-src="cake-cutting/f91c3e07705d83610ff660bf649fbc09.png"></div></div>
+<div class="sl-block" data-block-type="image" data-name="image-adc271" style="width: 69.9611px; height: 69.9611px; left: 448.608px; top: 561.163px; min-width: 1px; min-height: 1px;" data-block-id="63efa467aca054d14e5634eb31b76c29"><div class="sl-block-content" style="z-index: 17;"><img class="" data-natural-width="512" data-natural-height="512" data-lazy-loaded="" data-src="cake-cutting/9ac51a486772f0ad5c0ec9bf55bb1052.png"></div></div>
+<div class="sl-block" data-block-type="image" data-name="image-9fd618" style="width: 69.9611px; height: 69.9611px; left: 549.034px; top: 561.163px; min-width: 1px; min-height: 1px;" data-block-id="195d2d6b0a8931940cb312f29592bd66"><div class="sl-block-content" style="z-index: 18;"><img class="" data-natural-width="512" data-natural-height="512" data-lazy-loaded="" data-src="cake-cutting/a8d1434e79da08305376079a7594202b.png"></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 404.921px; height: 133.173px; left: 277.539px; top: 529.557px;" data-name="shape-abc7bd" data-block-id="1ad2694ce2372ddf10076858f732c6d5"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgba(0, 0, 0, 0)" data-shape-stretch="true" style="z-index: 19;" data-shape-stroke-color="#000000" data-shape-stroke-width="2px" data-shape-corner-radius="9px"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 405 133"><defs><clippath id="shape-mask-24-1728964004046"><rect width="404.921" height="133.173" rx="9" ry="9" fill="rgba(0, 0, 0, 0)" stroke="#000000" stroke-width="4"></rect></clippath></defs><rect width="404.921" height="133.173" rx="9" ry="9" class="shape-element" fill="rgba(0, 0, 0, 0)" stroke="#000000" stroke-width="4" clip-path="url(#shape-mask-24-1728964004046)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 190px; left: 761px; top: 14px;" data-name="text-2d83c2" data-block-id="11285651453858b7d1281d5c45b352a2"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 20; text-align: center;"><p style="text-align:left"><em>1 cake, N people.</em></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 190px; left: 761px; top: 59.7396px;" data-name="text-ad6c1e" data-block-id="c30f22913d14a377f623cf9ed1a26b39"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 21; text-align: center;"><p><em>Goal: PROP</em></p></div></div></section><section data-id="3615c727997e962a5b0bc23cc334dcfa" data-auto-animate=""><div class="sl-block" data-block-type="line" data-name="line-2407e4" style="width: auto; height: auto; left: 77.5px; top: 419.5px;" data-block-id="20592aba227c92612e501ad70070c121"><div class="sl-block-content" data-line-x1="0" data-line-y1="0" data-line-x2="805.2552904663216" data-line-y2="0" data-line-color="#a64d79" data-line-width="2px" data-line-start-type="none" data-line-end-type="none" data-line-style="solid-rounded" style="z-index: 10;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveaspectratio="xMidYMid" width="805.2552904663216" height="1" viewbox="0 0 805.2552904663216 1"><path class="line-element" fill="rgba(0,0,0,0)" stroke="#a64d79" stroke-width="2" stroke-linecap="round" d="M0 0 L805.255 0"></path><path class="line-skeleton" fill="rgba(0,0,0,0)" stroke="rgba(0,0,0,0)" d="M0 0 L805.255 0"></path><path class="line-hitarea" fill="rgba(0,0,0,0)" stroke="rgba(0,0,0,0)" stroke-width="15" d="M0 0 L805.255 0"></path></svg></div></div>
+<div class="sl-block" data-block-type="image" data-name="image-92ead6" style="width: 129.064px; height: 129.064px; left: 299.517px; top: 220.936px; min-width: 1px; min-height: 1px;" data-block-id="d8b216098774a3d6a8b8ad9b44b990bf"><div class="sl-block-content" style="z-index: 11;"><img class="" data-natural-width="512" data-natural-height="512" data-lazy-loaded="" data-src="cake-cutting/791252ab398d6849cb55d7a5c087847f.png"></div></div>
+<div class="sl-block" data-block-type="line" data-name="line-3baa26" style="width: auto; height: auto; left: 77.5px; top: 397px;" data-block-id="5440497c133740da956d22a9bd36a5a5"><div class="sl-block-content" data-line-x1="0" data-line-y1="0" data-line-x2="2.738714621011361e-15" data-line-y2="44.72660399583228" data-line-color="#a64d79" data-line-width="2px" data-line-start-type="none" data-line-end-type="none" data-line-style="solid-rounded" style="z-index: 12;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveaspectratio="xMidYMid" width="1" height="44.72660399583228" viewbox="0 0 1 44.72660399583228"><path class="line-element" fill="rgba(0,0,0,0)" stroke="#a64d79" stroke-width="2" stroke-linecap="round" d="M0 0 L0 44.727"></path><path class="line-skeleton" fill="rgba(0,0,0,0)" stroke="rgba(0,0,0,0)" d="M0 0 L0 44.727"></path><path class="line-hitarea" fill="rgba(0,0,0,0)" stroke="rgba(0,0,0,0)" stroke-width="15" d="M0 0 L0 44.727"></path></svg></div></div>
+<div class="sl-block" data-block-type="line" style="width: auto; height: auto; left: 881.755px; top: 397.5px;" data-name="line-c6028c" data-block-id="af51e49debb800c3a1769fb17d2db9b5"><div class="sl-block-content" data-line-x1="0" data-line-y1="0" data-line-x2="2.738714621011361e-15" data-line-y2="44.72660399583228" data-line-color="#a64d79" data-line-width="2px" data-line-start-type="none" data-line-end-type="none" data-line-style="solid-rounded" style="z-index: 13;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveaspectratio="xMidYMid" width="1" height="44.72660399583228" viewbox="0 0 1 44.72660399583228"><path class="line-element" fill="rgba(0,0,0,0)" stroke="#a64d79" stroke-width="2" stroke-linecap="round" d="M0 0 L0 44.727"></path><path class="line-skeleton" fill="rgba(0,0,0,0)" stroke="rgba(0,0,0,0)" d="M0 0 L0 44.727"></path><path class="line-hitarea" fill="rgba(0,0,0,0)" stroke="rgba(0,0,0,0)" stroke-width="15" d="M0 0 L0 44.727"></path></svg></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-547b58" style="height: auto; width: 24px; left: 65.5px; top: 460px;" data-block-id="a599e19d197f834c33e6693d377a8d9f"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14; color: rgb(166, 77, 121);"><p>0</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 24px; left: 870.755px; top: 460px;" data-name="text-fe2d61" data-block-id="3b3ecfd7458173010f26eccfe919e731"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 15; color: rgb(166, 77, 121);"><p>1</p></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-93470d" data-block-id="771a996e14740e53457d129aa5036439" style="height: auto; width: 110.693px; left: 529.307px; top: 626.73px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 16;"><p><em>stop!</em></p></div></div>
+<div class="sl-block" data-block-type="line" style="width: auto; height: auto; left: 319px; top: 397px;" data-block-id="9b38af647d5f80cb5a756aff482b7846" data-name="line-29cc29"><div class="sl-block-content" data-line-x1="0" data-line-y1="0" data-line-x2="2.738714621011361e-15" data-line-y2="44.72660399583228" data-line-color="#a64d79" data-line-width="2px" data-line-start-type="none" data-line-end-type="none" data-line-style="solid-rounded" style="z-index: 17;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveaspectratio="xMidYMid" width="1" height="44.72660399583228" viewbox="0 0 1 44.72660399583228"><path class="line-element" fill="rgba(0,0,0,0)" stroke="#a64d79" stroke-width="2" stroke-linecap="round" d="M0 0 L0 44.727"></path><path class="line-skeleton" fill="rgba(0,0,0,0)" stroke="rgba(0,0,0,0)" d="M0 0 L0 44.727"></path><path class="line-hitarea" fill="rgba(0,0,0,0)" stroke="rgba(0,0,0,0)" stroke-width="15" d="M0 0 L0 44.727"></path></svg></div></div>
+<div class="sl-block" data-block-type="image" data-name="image-08a5e3" style="width: 69.9611px; height: 69.9611px; left: 341.005px; top: 561.163px; min-width: 1px; min-height: 1px;" data-block-id="70cbdccc6c975fc2bde77feee0eb8cfd"><div class="sl-block-content" style="z-index: 18;"><img class="" data-natural-width="512" data-natural-height="512" data-lazy-loaded="" data-src="cake-cutting/f91c3e07705d83610ff660bf649fbc09.png"></div></div>
+<div class="sl-block" data-block-type="image" data-name="image-adc271" style="width: 69.9611px; height: 69.9611px; left: 448.608px; top: 561.163px; min-width: 1px; min-height: 1px;" data-block-id="5fbbc7b746fe4d45613a474633c4f2d0"><div class="sl-block-content" style="z-index: 19;"><img class="" data-natural-width="512" data-natural-height="512" data-lazy-loaded="" data-src="cake-cutting/9ac51a486772f0ad5c0ec9bf55bb1052.png"></div></div>
+<div class="sl-block" data-block-type="image" data-name="image-9fd618" style="width: 69.9611px; height: 69.9611px; left: 549.034px; top: 561.163px; min-width: 1px; min-height: 1px;" data-block-id="11e6ac1cb476c38fa80bbd0de6f6d734"><div class="sl-block-content" style="z-index: 20;"><img class="" data-natural-width="512" data-natural-height="512" data-lazy-loaded="" data-src="cake-cutting/a8d1434e79da08305376079a7594202b.png"></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 404.921px; height: 133.173px; left: 277.539px; top: 529.557px;" data-name="shape-abc7bd" data-block-id="b8e1c5ac430a7aa87ec229c95d797546"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgba(0, 0, 0, 0)" data-shape-stretch="true" style="z-index: 21;" data-shape-stroke-color="#000000" data-shape-stroke-width="2px" data-shape-corner-radius="9px"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 405 133"><defs><clippath id="shape-mask-3-1729678558680"><rect width="404.921" height="133.173" rx="9" ry="9" fill="rgba(0, 0, 0, 0)" stroke="#000000" stroke-width="4"></rect></clippath></defs><rect width="404.921" height="133.173" rx="9" ry="9" class="shape-element" fill="rgba(0, 0, 0, 0)" stroke="#000000" stroke-width="4" clip-path="url(#shape-mask-3-1729678558680)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 190px; left: 761px; top: 14px;" data-name="text-2d83c2" data-block-id="cb2d4a70859b8324e7f015f0728c25fe"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 22; text-align: center;"><p style="text-align:left"><em>1 cake, N people.</em></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 190px; left: 761px; top: 59.7396px;" data-name="text-ad6c1e" data-block-id="2aeb365a41ead720563e4cad541851e3"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 23; text-align: center;"><p><em>Goal: PROP</em></p></div></div></section><section data-id="0e9f73b52b5fbc3f187bd9ff54cceca1"><div class="sl-block" data-block-type="text" data-name="text-93eaf6" data-block-id="5735b835bb6451955b9f5836fb31fd25" style="height: auto; width: 600px; left: 180px; top: 112.75px;"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10; text-align: left;" data-fragment-index="0"><p>A referee starts moving a knife from left to right across a cake.</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 180px; top: 234.013px;" data-block-id="1e5376d5b29e9248f7c764dba0817a3a" data-name="text-35825f"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11; text-align: left;" data-fragment-index="1"><p>As soon as any player feels the piece to the left of the knife is worth a fair share, they shout “STOP.”</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 180px; top: 356.25px;" data-block-id="6aa496a287f4aa9dcadbf24ae91a4d84" data-name="text-7e7453"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; text-align: left;" data-fragment-index="2"><p>The referee then cuts the cake at the current knife position and the player who called stop gets the piece to the left of the knife.</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 180px; top: 514.25px;" data-block-id="9693b2fdf5e0af844d51c8e6a9923c13" data-name="text-66b713"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left;" data-fragment-index="3"><p>This procedure continues until there is only one player left. The player left gets the remaining cake.</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 190px; left: 761px; top: 14px;" data-name="text-cb290d" data-block-id="84510d61c7fc5e411de9e3667725c5fd"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14; text-align: center;"><p style="text-align:left"><em>1 cake, N people.</em></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 190px; left: 761px; top: 59.7396px;" data-name="text-ad6c1e" data-block-id="85e39e45b3f50e9bed88b3eb76573b27"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 15; text-align: center;"><p><em>Goal: PROP</em></p></div></div></section><section data-id="a894989bd62da951c5712f48b4adac97"><div class="sl-block" data-block-type="text" data-name="text-93eaf6" style="height: auto; width: 761.684px; left: 80px; top: 190.754px;" data-block-id="9c8ce042bf0686b042a6dfab88b10204"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10; text-align: left;" data-fragment-index="0"><p>Each partner is asked to draw a line dividing the cake into a right and left part such that he believes the ratio is ⌊n/2⌋:⌈n/2⌉.</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 190px; left: 761px; top: 14px;" data-name="text-cb290d" data-block-id="ba8c2517529ccaad40d86d00d0557bd6"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11; text-align: center;"><p style="text-align:left"><em>1 cake, N people.</em></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 190px; left: 761px; top: 59.7396px;" data-name="text-ad6c1e" data-block-id="2ad972f476bd9d90072ed5166317cceb"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; text-align: center;"><p><em>Goal: PROP</em></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 746.792px; left: 80px; top: 310.514px;" data-block-id="f54d5101a3c02be4febea83bb7bbd263" data-name="text-c0daad"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left;" data-fragment-index="1"><p>The algorithm sorts the n lines in increasing order and cuts the cake in the median of the lines, i.e. at the ⌊n/2⌋th line.</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 746.792px; left: 80px; top: 430.514px;" data-block-id="2f6e968e50cefe539cc0af85f07896b1" data-name="text-14cae9"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14; text-align: left;" data-fragment-index="2"><p>The algorithm assigns to each of the two parts the partners whose line is inside that part, i.e. the partners that drew the first ⌊n/2⌋ lines get assigned to the left part, the others to the right part. Each part is divided recursively among the partners assigned to it.</p></div></div></section></section><section class="stack" data-id="f1f66cfe7c1ac43c4e60527cee659b59"><section data-id="7e5da60afbc6bed1a8d383cfc5235ea3"><div class="sl-block" data-block-type="text" style="width: 876px; left: 42px; top: 154px; height: auto;" data-name="text-aed0f8" data-block-id="5e160a40dd574e3c1536b11ec4d2a531"><div class="sl-block-content" data-placeholder-tag="h1" style="z-index: 10; font-size: 120%; padding: 20px; line-height: 1.508;" data-has-line-height="" data-placeholder-text="Text"><h1>divide one cake<br>
+between 3 people</h1></div></div>
+
+<div class="sl-block" data-block-type="text" data-name="text-64642b" style="height: auto; width: 600px; left: 180px; top: 391px;" data-block-id="70a73ab715859ac037819d680f410fd9"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11; font-size: 160%; color: rgb(106, 168, 79);"><p><em>in an envy-free manner</em></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 190px; left: 761px; top: 14px;" data-name="text-cb290d" data-block-id="643000b912edcb80c094eca4b7572112"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; text-align: center;"><p style="text-align:left"><em>1 cake, 3 people.</em></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 190px; left: 761px; top: 59.7396px;" data-block-id="73d15c8f89fffd4785464a1726fd4ca7" data-name="text-ad6c1e"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: center;"><p style="text-align:left"><em>Goal: EF division</em></p></div></div></section><section data-id="7e13ace538d65502dc39a4e7a6f279c8"><div class="sl-block" data-block-type="text" style="height: auto; width: 190px; left: 761px; top: 14px;" data-name="text-cb290d" data-block-id="d0b648af9904c5fc737261c392b379e7"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10; text-align: center;"><p style="text-align:left"><em>1 cake, 3 people.</em></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 190px; left: 761px; top: 59.7396px;" data-name="text-ad6c1e" data-block-id="f8bd7670660973d5567663cf4d5ae60b"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11; text-align: center;"><p style="text-align:left"><em>Goal: EF division</em></p></div></div>
+<div class="sl-block" data-block-type="shape" data-name="shape-16c23b" data-block-id="abd160e5d310c178107a66da7219141c" style="width: 342.549px; height: 57.4737px; left: 308.726px; top: 251.263px;"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="#000000" data-shape-stretch="true" style="z-index: 12;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 343 57"><rect width="342.549" height="57.4737" rx="0" ry="0" class="shape-element" fill="#000000"></rect></svg></div></div>
+<div class="sl-block" data-block-type="image" data-name="image-08a5e3" style="width: 69.9611px; height: 69.9611px; left: 341.005px; top: 560.039px; min-width: 1px; min-height: 1px;" data-block-id="66514b2cc6b7f6d590a689efbe34e189"><div class="sl-block-content" style="z-index: 13;"><img class="" data-natural-width="512" data-natural-height="512" data-lazy-loaded="" data-src="cake-cutting/f91c3e07705d83610ff660bf649fbc09.png"></div></div>
+<div class="sl-block" data-block-type="image" data-name="image-adc271" style="width: 69.9611px; height: 69.9611px; left: 448.608px; top: 560.039px; min-width: 1px; min-height: 1px;" data-block-id="9ac23f758e6b665bc23ebc6a927d3320"><div class="sl-block-content" style="z-index: 14;"><img class="" data-natural-width="512" data-natural-height="512" data-lazy-loaded="" data-src="cake-cutting/9ac51a486772f0ad5c0ec9bf55bb1052.png"></div></div>
+<div class="sl-block" data-block-type="image" data-name="image-9fd618" style="width: 69.9611px; height: 69.9611px; left: 549.034px; top: 560.039px; min-width: 1px; min-height: 1px;" data-block-id="1d8d545d6761c47ee49afebfdece3b2a"><div class="sl-block-content" style="z-index: 15;"><img class="" data-natural-width="512" data-natural-height="512" data-lazy-loaded="" data-src="cake-cutting/a8d1434e79da08305376079a7594202b.png"></div></div></section><section data-id="c4c8ee914a0425b4e71a58f630e7e563"><div class="sl-block" data-block-type="text" style="height: auto; width: 190px; left: 761px; top: 14px;" data-name="text-cb290d" data-block-id="1612a6d290b21b89ae20b3573fa0ec70"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10; text-align: center;"><p style="text-align:left"><em>1 cake, 3 people.</em></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 190px; left: 761px; top: 59.7396px;" data-name="text-ad6c1e" data-block-id="2bfdd440c49cc3105488c34f762eec51"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11; text-align: center;"><p style="text-align:left"><em>Goal: EF division</em></p></div></div>
+<div class="sl-block" data-block-type="shape" data-name="shape-16c23b" style="width: 342.549px; height: 57.4737px; left: 308.048px; top: 140px;" data-block-id="c92269e80a3eab9ef69f4d629e4a7a56"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="#000000" data-shape-stretch="true" style="z-index: 12;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 343 57"><rect width="342.549" height="57.4737" rx="0" ry="0" class="shape-element" fill="#000000"></rect></svg></div></div>
+<div class="sl-block" data-block-type="image" data-name="image-08a5e3" style="width: 69.9611px; height: 69.9611px; left: 341.005px; top: 560.039px; min-width: 1px; min-height: 1px;" data-block-id="7a1159336ea7e203e7e5e6d9a93f1d85"><div class="sl-block-content" style="z-index: 13;"><img class="" data-natural-width="512" data-natural-height="512" data-lazy-loaded="" data-src="cake-cutting/f91c3e07705d83610ff660bf649fbc09.png"></div></div>
+<div class="sl-block" data-block-type="image" data-name="image-adc271" style="width: 69.9611px; height: 69.9611px; left: 448.608px; top: 560.039px; min-width: 1px; min-height: 1px;" data-block-id="7f1720a214f3521ddfa5a8b046c28cba"><div class="sl-block-content" style="z-index: 14;"><img class="" data-natural-width="512" data-natural-height="512" data-lazy-loaded="" data-src="cake-cutting/9ac51a486772f0ad5c0ec9bf55bb1052.png"></div></div>
+<div class="sl-block" data-block-type="image" data-name="image-9fd618" style="width: 69.9611px; height: 69.9611px; left: 549.034px; top: 560.039px; min-width: 1px; min-height: 1px;" data-block-id="8e511d4c3893c88a9ee42be0d386b731"><div class="sl-block-content" style="z-index: 15;"><img class="" data-natural-width="512" data-natural-height="512" data-lazy-loaded="" data-src="cake-cutting/a8d1434e79da08305376079a7594202b.png"></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 155.335px; height: 57.4737px; left: 308.048px; top: 238.737px;" data-block-id="5361adbf7fb9a9e8e6c62f83dd6b51df" data-name="shape-4d4b02"><div class="sl-block-content fragment" data-shape-type="rect" data-shape-fill-color="#000000" data-shape-stretch="true" style="z-index: 16;" data-fragment-index="0"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 155 57"><rect width="155.335" height="57.4737" rx="0" ry="0" class="shape-element" fill="#000000"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 114.914px; height: 57.4737px; left: 470.008px; top: 238.737px;" data-block-id="456feb11cb15cd06f5b8a15d00b0578f" data-name="shape-33b137"><div class="sl-block-content fragment" data-shape-type="rect" data-shape-fill-color="#000000" data-shape-stretch="true" style="z-index: 17;" data-fragment-index="0"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 115 57"><rect width="114.914" height="57.4737" rx="0" ry="0" class="shape-element" fill="#000000"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 58.5375px; height: 57.4737px; left: 593.414px; top: 238.737px;" data-block-id="a152b29be890840cd8015e8456f0c073" data-name="shape-b22bc6"><div class="sl-block-content fragment" data-shape-type="rect" data-shape-fill-color="#000000" data-shape-stretch="true" style="z-index: 18;" data-fragment-index="0"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 59 57"><rect width="58.5375" height="57.4737" rx="0" ry="0" class="shape-element" fill="#000000"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 343.904px; height: 15.9889px; left: 308.048px; top: 296.211px;" data-block-id="b38092301716b29170a69c506c2b1433" data-name="shape-c8b38e"><div class="sl-block-content fragment" data-shape-type="rect" data-shape-fill-color="#3c5fc7" data-shape-stretch="true" style="z-index: 19;" data-fragment-index="0"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 344 16"><rect width="343.904" height="15.9889" rx="0" ry="0" class="shape-element" fill="#3c5fc7"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 114.914px; height: 57.4737px; left: 470.008px; top: 346.537px;" data-block-id="5e47bce057d6adcb844c1fcc659197a1" data-name="shape-082342"><div class="sl-block-content fragment" data-shape-type="rect" data-shape-fill-color="#000000" data-shape-stretch="true" style="z-index: 20;" data-fragment-index="2"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 115 57"><rect width="114.914" height="57.4737" rx="0" ry="0" class="shape-element" fill="#000000"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 58.5375px; height: 57.4737px; left: 593.414px; top: 346.537px;" data-block-id="e18cabd068fc94b8ac2643ba995aa423" data-name="shape-1a7a01"><div class="sl-block-content fragment" data-shape-type="rect" data-shape-fill-color="#000000" data-shape-stretch="true" style="z-index: 21;" data-fragment-index="2"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 59 57"><rect width="58.5375" height="57.4737" rx="0" ry="0" class="shape-element" fill="#000000"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 343.904px; height: 15.9889px; left: 308.048px; top: 404.011px;" data-block-id="a30b07e8a0a136417cafb19334fdf99c" data-name="shape-db46ca"><div class="sl-block-content fragment" data-shape-type="rect" data-shape-fill-color="#352120" data-shape-stretch="true" style="z-index: 22;" data-fragment-index="2"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 344 16"><rect width="343.904" height="15.9889" rx="0" ry="0" class="shape-element" fill="#352120"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 114.914px; height: 57.4737px; left: 308.048px; top: 346.537px;" data-block-id="3b6c1e6ddf3fa15a52b81493a7d20e61" data-name="shape-05e345"><div class="sl-block-content fragment" data-shape-type="rect" data-shape-fill-color="#000000" data-shape-stretch="true" style="z-index: 23;" data-fragment-index="2"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 115 57"><rect width="114.914" height="57.4737" rx="0" ry="0" class="shape-element" fill="#000000"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 40.4542px; height: 57.4737px; left: 219.773px; top: 346.537px;" data-block-id="c76dfcf1435041940d262afc8fade18d" data-name="shape-8b220f"><div class="sl-block-content fragment" data-shape-type="rect" data-shape-fill-color="#000000" data-shape-stretch="true" style="z-index: 24;" data-fragment-index="1"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 40 57"><rect width="40.4542" height="57.4737" rx="0" ry="0" class="shape-element" fill="#000000"></rect></svg></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-f3c873" data-block-id="644463f296c57ac56d6135094991eb0a" style="height: auto; width: 134.094px; left: 71.0251px; top: 357.274px;"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 25;" data-fragment-index="2"><p><em>trimmings</em></p></div></div></section><section data-id="0ecc7f2696d4c42fc3b0193460a34940"><div class="sl-block" data-block-type="text" data-name="text-4b96d9" data-block-id="0e08890539e28a2d7fb189743d108995" style="height: auto; width: 773.385px; left: 93.3075px; top: 7.63491px;"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10; text-align: left;" data-fragment-index="0"><p>P1 divides the cake into three pieces they consider of equal size.</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 773.385px; left: 93.3075px; top: 77.6349px;" data-block-id="0e7b5c7be167634db55e40f2dc1e200d" data-name="text-acef42"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11; text-align: left;" data-fragment-index="1"><p><span style="color:rgb(0, 0, 0); text-align:center">Let's call A the largest piece according to P2.</span></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 773.385px; left: 93.3075px; top: 147.635px;" data-block-id="0f5ffe15e4390b9bb50d07b8c9ceb170" data-name="text-4708e8"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; text-align: left;" data-fragment-index="2"><p><span style="color:rgb(0, 0, 0); text-align:center">P2 cuts off a bit of A to make it the same size as the second largest.</span></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 773.385px; left: 93.3075px; top: 217.635px;" data-block-id="759224741626ba1c24fcbfb6c0e3bab7" data-name="text-93344e"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left;" data-fragment-index="3"><p><span style="color:rgb(0, 0, 0); text-align:center">Now A is divided into: the trimmed piece A1 and the trimmings A2. </span></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 773.385px; left: 93.3075px; top: 287.635px;" data-block-id="8a767c78b78ca3b4d996f0cc4a3ef0f4" data-name="text-15140c"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14; text-align: left;" data-fragment-index="4"><p><span style="color:rgb(0, 0, 0); text-align:center">Leave the trimmings A2 to the side for now.</span></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 773.385px; left: 93.3075px; top: 357.635px;" data-block-id="d4e21ed8eb66b7e7c1d848750d5e9357" data-name="text-c2c4e4"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 15; text-align: left;" data-fragment-index="5"><p><span style="color:rgb(0, 0, 0); text-align:center">If P2 thinks that the two largest parts are equal (such that no trimming is needed), then each player chooses a part in this order: P3, P2 and finally P1.</span></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 773.385px; left: 93.3075px; top: 493.79px;" data-block-id="4dd743af6bca319394694b2d7c3f8bc9" data-name="text-b5bb1b"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 16; text-align: left;" data-fragment-index="6"><p><span style="color:rgb(0, 0, 0); text-align:center">P3 chooses a piece among A1 and the two other pieces.</span></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 773.385px; left: 93.3075px; top: 556.79px;" data-block-id="921d01e62797aa37a260b664e622046a" data-name="text-92052d"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 17; text-align: left;" data-fragment-index="7"><p><span style="color:rgb(0, 0, 0); text-align:center">P2 chooses a piece with the limitation that if P3 didn't choose A1, P2 must choose it.</span></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 838.271px; left: 93.3075px; top: 656.365px;" data-block-id="168df0bb725a7dfc6361d3598c1879c1" data-name="text-59c441"><div class="sl-block-style" style="z-index: 18; transform: rotate(0deg);"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 18; text-align: left;" data-fragment-index="8"><p><span style="color:rgb(0, 0, 0); text-align:center">P1 chooses the last piece leaving just the trimmings A2 to be divided.</span></p></div></div></div></section><section data-id="f37e1053ec5c8cddebdb9a73a701a1d1"><div class="sl-block" data-block-type="text" data-name="text-67a253" data-block-id="56bd0a7bbbe9b43df36f4a803be6c5dc" style="height: auto; width: 600px; left: 180px; top: 280px;"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10;" data-fragment-index="1"><p>PB cuts A2 into three equal pieces.</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 746.792px; left: 106.604px; top: 117.669px;" data-block-id="fdf7afef37433bc60d7f400f54e5ee47" data-name="text-ae1b2c"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11; line-height: 1.677;" data-has-line-height="" data-fragment-index="0"><p>The trimmed piece A1 has been chosen by either P2 or P3;<br>
+let's call the player who chose it PA and the other player PB.</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 180px; top: 350px;" data-block-id="9d21f686d66a09d231294b87f9f25bb1" data-name="text-79f062"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;" data-fragment-index="2"><p>PA chooses a piece of A2 - we name it A21.</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 180px; top: 420px;" data-block-id="524e549cfd270bfac53bd571f4de0696" data-name="text-3739e6"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13;" data-fragment-index="3"><p><span style="color:rgb(0, 0, 0)">P1 chooses a piece of A2 - we name it A22.</span></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 727.645px; left: 116.177px; top: 490px;" data-block-id="4964c49274e96c228da5e74a41ba59fc" data-name="text-63871f"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14;" data-fragment-index="4"><p><span style="color:rgb(0, 0, 0)">PB chooses the last remaining piece of A2 - we name it A23.</span></p></div></div></section></section><section class="stack" data-id="dcd2b092e1b18459ad975bc61970968e"><section data-id="1bd1ba1dafda7bd33f70fb5cad95d64a"><div class="sl-block" data-block-type="text" style="width: 876px; left: 42px; top: 154px; height: auto;" data-name="text-aed0f8" data-block-id="cc6ebf5e4b236c442f20e3b7b8ddcc52"><div class="sl-block-content" data-placeholder-tag="h1" style="z-index: 10; font-size: 120%; padding: 20px; line-height: 1.508;" data-has-line-height="" data-placeholder-text="Text"><h1>divide one cake<br>
+between N people</h1></div></div>
+
+<div class="sl-block" data-block-type="text" data-name="text-64642b" style="height: auto; width: 600px; left: 180px; top: 391px;" data-block-id="c31c8245cabc8b62b2c007bca334ad08"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11; font-size: 160%; color: rgb(106, 168, 79);"><p><em>in an envy-free manner</em></p></div></div></section><section data-id="453f6270b7703b5fed9c519e327a1f41"><div class="sl-block" data-block-type="text" data-name="text-7967d1" data-block-id="c2715f815a40092b6eaffd47763c9ac7" style="height: auto; width: 600px; left: 180px; top: 57.3813px;"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10;" data-fragment-index="0"><p>In the 2010s, several approximation procedures and procedures for special cases were published.</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 180px; top: 179.382px;" data-block-id="556688240c88e3f20f4af5a7d6ebe8b9" data-name="text-87adfe"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;" data-fragment-index="1"><p><span style="color:rgb(0, 0, 0)"> The question whether bounded-time procedures exist for the case of general pieces had remained open for a long time.</span></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 180px; top: 344.257px;" data-block-id="277a8a30df36aeee1e6a7ae52e628dd0" data-name="text-3dc7f9"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;" data-fragment-index="2"><p><span style="color:rgb(0, 0, 0)"> The problem was finally solved in 2016.<br>
+Haris Aziz and Simon Mackenzie presented a discrete envy-free protocol that requires at most \(n^{n^{n^{n^{n^n}}}}\) or \(n \uparrow \uparrow 6\) queries.</span></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 180px; top: 558.063px;" data-block-id="364e3070f6f853ff3387b842a8d82e03" data-name="text-847931"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13;" data-fragment-index="3"><p><span style="color:rgb(0, 0, 0)"> There is still a very large gap between the lower bound and the procedure The exact run-time complexity of envy-freeness is still unknown.</span></p></div></div></section><section data-id="sperner-interactive">
+<style>
+#sperner-container { position: relative; width: 960px; height: 700px; overflow: hidden; }
+#sperner-svg { position: absolute; left: 30px; top: 10px; }
+#sperner-controls { position: absolute; left: 640px; top: 20px; width: 290px; font-family: sans-serif; font-size: 14px; color: #333; }
+#sperner-controls button { display: block; width: 100%; margin: 6px 0; padding: 8px 12px; font-size: 14px; border: 2px solid #555; border-radius: 6px; background: #f0f0f0; cursor: pointer; }
+#sperner-controls button:hover { background: #ddd; }
+#sperner-stats { margin-top: 14px; line-height: 1.7; }
+#sperner-stats .odd { color: #B22222; font-weight: bold; }
+#sperner-legend { margin-top: 12px; }
+#sperner-legend span.lswatch { display: inline-block; width: 14px; height: 14px; border-radius: 50%; margin-right: 4px; vertical-align: middle; }
+#sperner-explanation { position: absolute; left: 640px; top: 60px; width: 290px; font-family: sans-serif; font-size: 12.5px; color: #444; line-height: 1.55; display: none; }
+#sperner-tabs { position: absolute; left: 640px; top: 16px; width: 290px; display: flex; gap: 0; }
+#sperner-tabs button { flex: 1; padding: 6px 0; font-size: 13px; border: 1.5px solid #555; background: #f0f0f0; cursor: pointer; font-family: sans-serif; }
+#sperner-tabs button:first-child { border-radius: 6px 0 0 6px; }
+#sperner-tabs button:last-child { border-radius: 0 6px 6px 0; }
+#sperner-tabs button.active { background: #555; color: #fff; }
+#sperner-controls { position: absolute; left: 640px; top: 60px; width: 290px; font-family: sans-serif; font-size: 14px; color: #333; }
+.sp-tri-rain { fill: rgba(255,215,0,0.35); }
+.sp-tri-norm { fill: rgba(200,200,200,0.08); }
+.sp-edge-door { stroke: orange; stroke-width: 3; }
+.sp-edge-norm { stroke: #bbb; stroke-width: 1; }
+.sp-walk-dot { fill: #B22222; }
+.sp-vert { cursor: pointer; stroke: #333; stroke-width: 1.5; }
+</style>
+<div id="sperner-container">
+<svg id="sperner-svg" width="590" height="520"></svg>
+<div id="sperner-tabs">
+<button id="tab-controls" class="active">Controls</button>
+<button id="tab-proof">The Argument</button>
+</div>
+<div id="sperner-controls">
+<div id="sperner-legend">
+<span class="lswatch" style="background:#e74c3c"></span>Label 1 &nbsp;
+<span class="lswatch" style="background:#3498db"></span>Label 2 &nbsp;
+<span class="lswatch" style="background:#2ecc71"></span>Label 3
+</div>
+<div id="sperner-stats"></div>
+<button id="btn-manual">Manual Mode</button>
+<button id="btn-randomize">Randomize Interior Labels</button>
+<button id="btn-walk">Walk Through Doors</button>
+<button id="btn-reset">Reset to Default</button>
+</div>
+<div id="sperner-explanation">
+<strong>Sperner's Lemma (parity argument):</strong><br><br>
+Label vertices of a triangulated triangle with 1, 2, 3 obeying: each corner keeps its own label; boundary vertices between corners i, j use only labels i or j.<br><br>
+Call every 1-2 edge a <em>door</em>. On the edge between corners 1 and 2, labels transition from 1 to 2, so there is an <strong style="color:#B22222">odd</strong> number of doors. The other two sides have no 1-2 edges.<br><br>
+Each non-rainbow triangle has 0 or 2 doors; each rainbow (1-2-3) triangle has exactly 1. Since boundary doors are odd, rainbow triangles must be <strong style="color:#B22222">odd</strong> too.<br><br>
+<em>Click interior/boundary vertices to change labels!</em>
+</div>
+</div>
+<script>
+(function(){
+var svg=document.getElementById('sperner-svg');
+var statsEl=document.getElementById('sperner-stats');
+var A=[295,20],B=[30,490],C=[560,490],N=5;
+var verts=[],vertMap={},tris=[];
+function b2c(u,v,w){return[u*A[0]+v*B[0]+w*C[0],u*A[1]+v*B[1]+w*C[1]];}
+for(var i=0;i<=N;i++){for(var j=0;j<=N-i;j++){
+  var k=N-i-j,p=b2c(i/N,j/N,k/N),idx=verts.length;
+  vertMap[i+","+j]=idx;
+  var onB=(i===0||j===0||k===0),cL=0;
+  if(i===N&&j===0&&k===0)cL=1;if(i===0&&j===N&&k===0)cL=2;if(i===0&&j===0&&k===N)cL=3;
+  verts.push({x:p[0],y:p[1],i:i,j:j,k:k,bnd:onB,cL:cL,label:0});
+}}
+for(var i=0;i<N;i++){for(var j=0;j<N-i;j++){
+  tris.push([vertMap[i+","+j],vertMap[i+","+(j+1)],vertMap[(i+1)+","+j]]);
+  var f=vertMap[(i+1)+","+(j+1)];
+  if(f!==undefined)tris.push([vertMap[(i+1)+","+j],vertMap[i+","+(j+1)],f]);
+}}
+var eSet={},edges=[];
+function eK(a,b){return Math.min(a,b)+"-"+Math.max(a,b);}
+tris.forEach(function(t){for(var p=0;p<3;p++){var ek=eK(t[p],t[(p+1)%3]);if(!eSet[ek]){eSet[ek]=true;edges.push([t[p],t[(p+1)%3]]);}}});
+
+function defLabel(){verts.forEach(function(v){
+  if(v.cL){v.label=v.cL;return;}
+  if(v.i===0&&v.j>0&&v.k>0){v.label=v.j>v.k?2:3;return;}
+  if(v.j===0&&v.i>0&&v.k>0){v.label=v.i>v.k?1:3;return;}
+  if(v.k===0&&v.i>0&&v.j>0){v.label=v.i>v.j?1:2;return;}
+  if(v.i>=v.j&&v.i>=v.k)v.label=1;else if(v.j>=v.k)v.label=2;else v.label=3;
+});}
+
+var lC={0:"#aaa",1:"#e74c3c",2:"#3498db",3:"#2ecc71"};
+var manual=false;
+var triEls=[],edgeEls=[],vertEls=[],wDot=null,wPath=[];
+
+function buildSVG(){
+  svg.innerHTML='';triEls=[];edgeEls=[];vertEls=[];
+  tris.forEach(function(t){
+    var po=document.createElementNS("http://www.w3.org/2000/svg","polygon");
+    po.setAttribute("points",t.map(function(vi){return verts[vi].x+","+verts[vi].y;}).join(" "));
+    po.setAttribute("class","sp-tri-norm");po.setAttribute("stroke","none");
+    svg.appendChild(po);triEls.push(po);
+  });
+  edges.forEach(function(e){
+    var ln=document.createElementNS("http://www.w3.org/2000/svg","line");
+    ln.setAttribute("x1",verts[e[0]].x);ln.setAttribute("y1",verts[e[0]].y);
+    ln.setAttribute("x2",verts[e[1]].x);ln.setAttribute("y2",verts[e[1]].y);
+    svg.appendChild(ln);edgeEls.push(ln);
+  });
+  verts.forEach(function(v){
+    var c=document.createElementNS("http://www.w3.org/2000/svg","circle");
+    c.setAttribute("cx",v.x);c.setAttribute("cy",v.y);
+    c.setAttribute("r",v.bnd?8:9);c.setAttribute("class","sp-vert");
+    if(!v.cL&&!v.bnd){
+      c.addEventListener("click",function(){
+        if(manual){v.label=(v.label+1)%4;}
+        else{v.label=v.label%3+1;}
+        upd();
+      });
+    } else if(v.bnd&&!v.cL){
+      var al=v.i===0?[2,3]:v.j===0?[1,3]:[1,2];
+      c.addEventListener("click",function(){
+        if(manual){var full=[0].concat(al);v.label=full[(full.indexOf(v.label)+1)%3];}
+        else{v.label=al[(al.indexOf(v.label)+1)%2];}
+        upd();
+      });
+    }
+    svg.appendChild(c);vertEls.push(c);
+  });
+}
+
+function isR(t){var s=new Set(t.map(function(i){return verts[i].label;}));return s.has(1)&&s.has(2)&&s.has(3);}
+function isD(e){var a=verts[e[0]].label,b=verts[e[1]].label;return(a===1&&b===2)||(a===2&&b===1);}
+function isBE(e){var a=verts[e[0]],b=verts[e[1]];return a.bnd&&b.bnd&&((a.i===0&&b.i===0)||(a.j===0&&b.j===0)||(a.k===0&&b.k===0));}
+
+function clrW(){if(wDot){wDot.remove();wDot=null;}wPath.forEach(function(el){el.remove();});wPath=[];}
+
+function upd(){
+  clrW();var rc=0,bd=0;
+  tris.forEach(function(t,i){var r=isR(t);triEls[i].setAttribute("class",r?"sp-tri-rain":"sp-tri-norm");if(r)rc++;});
+  edges.forEach(function(e,i){var d=isD(e);edgeEls[i].setAttribute("class",d?"sp-edge-door":"sp-edge-norm");if(d&&isBE(e))bd++;});
+  verts.forEach(function(v,i){vertEls[i].setAttribute("fill",lC[v.label]);});
+  var unlab=verts.filter(function(v){return v.label===0;}).length;
+  var info="Boundary doors (1-2 edges): <span class='odd'>"+bd+"</span><br>Rainbow (1-2-3) triangles: <span class='odd'>"+rc+"</span>";
+  if(unlab>0) info+="<br>Unlabeled vertices: "+unlab;
+  else info+="<br><em>Both counts are always odd!</em>";
+  statsEl.innerHTML=info;
+}
+
+function eMid(e){return[(verts[e[0]].x+verts[e[1]].x)/2,(verts[e[0]].y+verts[e[1]].y)/2];}
+function tCtr(t){return[(verts[t[0]].x+verts[t[1]].x+verts[t[2]].x)/3,(verts[t[0]].y+verts[t[1]].y+verts[t[2]].y)/3];}
+
+function doWalk(){
+  clrW();
+  var et={};
+  tris.forEach(function(t,ti){for(var p=0;p<3;p++){var ek=eK(t[p],t[(p+1)%3]);if(!et[ek])et[ek]=[];et[ek].push(ti);}});
+  var si=-1;
+  for(var i=0;i<edges.length;i++){if(isD(edges[i])&&isBE(edges[i])){si=i;break;}}
+  if(si<0){statsEl.innerHTML+="<br>No boundary doors!";return;}
+  var ek=eK(edges[si][0],edges[si][1]),adj=et[ek];
+  if(!adj||!adj.length)return;
+  var cur=adj[0],path=[],sm=eMid(edges[si]);
+  path.push([sm[0],sm[1]+30]);path.push(sm);
+  for(var st=0;st<100;st++){
+    path.push(tCtr(tris[cur]));
+    if(isR(tris[cur]))break;
+    var ex=null;
+    for(var p=0;p<3;p++){var ea=tris[cur][p],eb=tris[cur][(p+1)%3],eek=eK(ea,eb);if(eek===ek)continue;if(isD([ea,eb])){ex=eek;break;}}
+    if(!ex)break;ek=ex;
+    var na=et[ek],nt=-1;
+    for(var n=0;n<na.length;n++){if(na[n]!==cur){nt=na[n];break;}}
+    if(nt<0){var pts=ek.split("-"),em=eMid([+pts[0],+pts[1]]);path.push(em);path.push([em[0],em[1]+30]);break;}
+    cur=nt;
+  }
+  var pl=document.createElementNS("http://www.w3.org/2000/svg","polyline");
+  pl.setAttribute("fill","none");pl.setAttribute("stroke","#B22222");pl.setAttribute("stroke-width","3");
+  pl.setAttribute("stroke-dasharray","6,4");pl.setAttribute("opacity","0.8");
+  svg.appendChild(pl);wPath.push(pl);
+  wDot=document.createElementNS("http://www.w3.org/2000/svg","circle");
+  wDot.setAttribute("r","7");wDot.setAttribute("class","sp-walk-dot");
+  wDot.setAttribute("cx",path[0][0]);wDot.setAttribute("cy",path[0][1]);
+  svg.appendChild(wDot);
+  var idx=0,pp="";
+  (function anim(){if(idx>=path.length)return;pp+=path[idx][0]+","+path[idx][1]+" ";
+  pl.setAttribute("points",pp);wDot.setAttribute("cx",path[idx][0]);wDot.setAttribute("cy",path[idx][1]);
+  idx++;setTimeout(anim,400);})();
+}
+
+document.getElementById('tab-controls').addEventListener('click',function(e){
+  e.stopPropagation();
+  document.getElementById('sperner-controls').style.display='block';
+  document.getElementById('sperner-explanation').style.display='none';
+  this.classList.add('active');document.getElementById('tab-proof').classList.remove('active');
+});
+document.getElementById('tab-proof').addEventListener('click',function(e){
+  e.stopPropagation();
+  document.getElementById('sperner-controls').style.display='none';
+  document.getElementById('sperner-explanation').style.display='block';
+  this.classList.add('active');document.getElementById('tab-controls').classList.remove('active');
+});
+document.getElementById('btn-manual').addEventListener('click',function(){
+  manual=true;verts.forEach(function(v){v.label=v.cL?v.cL:0;});upd();
+  document.getElementById('btn-manual').style.background='#d0d0d0';
+});
+document.getElementById('btn-randomize').addEventListener('click',function(){
+  manual=false;document.getElementById('btn-manual').style.background='';
+  verts.forEach(function(v){if(!v.bnd)v.label=Math.floor(Math.random()*3)+1;
+    else{if(v.cL)v.label=v.cL;else if(v.i===0)v.label=[2,3][Math.floor(Math.random()*2)];
+    else if(v.j===0)v.label=[1,3][Math.floor(Math.random()*2)];else v.label=[1,2][Math.floor(Math.random()*2)];}
+  });upd();});
+document.getElementById('btn-walk').addEventListener('click',doWalk);
+document.getElementById('btn-reset').addEventListener('click',function(){manual=false;document.getElementById('btn-manual').style.background='';defLabel();upd();});
+defLabel();buildSVG();upd();
+})();
+</script>
+</section><section data-id="sperner-cake-connection">
+<style>
+#cake-tri-container { position: relative; width: 960px; height: 700px; font-family: 'heliotrope_3', sans-serif; }
+#cake-tri-text { position: absolute; left: 40px; top: 30px; width: 520px; color: #333; }
+#cake-tri-text h2 { font-size: 36px; margin: 0 0 24px 0; color: #222; font-family: 'heliotrope_3', sans-serif; }
+#cake-tri-text ul { list-style: disc; padding-left: 24px; font-size: 19px; line-height: 1.7; }
+#cake-tri-text ul li span.hilite { color: #6a28a0; }
+#cake-tri-svg-wrap { position: absolute; right: 20px; top: 120px; width: 380px; height: 560px; }
+</style>
+<div id="cake-tri-container">
+<div id="cake-tri-text">
+<h2>Triangulate!</h2>
+<ul>
+<li class="fragment" data-fragment-index="0">A point \((x_1, x_2, x_3)\) in the simplex with \(x_1+x_2+x_3=1\) represents a division of the cake into three pieces of sizes \(x_1, x_2, x_3\).</li>
+<li class="fragment" data-fragment-index="1">Each vertex is a division. Assign "owners".</li>
+<li class="fragment" data-fragment-index="2">So ask owner at each vertex: <span class="hilite">"which piece would you choose in this division?"</span></li>
+<li class="fragment" data-fragment-index="3">The answer is the <strong>label</strong> (1, 2, or 3).</li>
+<li class="fragment" data-fragment-index="4">Corner \((1,0,0)\): all cake is piece 1 &mdash; owner must prefer piece 1. Similarly for the other corners. <strong>Sperner condition is satisfied!</strong></li>
+<li class="fragment" data-fragment-index="5">By Sperner's lemma, a rainbow triangle exists: three nearly-identical divisions where each player prefers a <em>different</em> piece &mdash; an <strong>approximately envy-free</strong> allocation.</li>
+</ul>
+</div>
+<div id="cake-tri-svg-wrap">
+<svg id="cake-tri-svg" width="380" height="560"></svg>
+</div>
+</div>
+<script>
+(function(){
+var svg=document.getElementById('cake-tri-svg');
+var ns="http://www.w3.org/2000/svg";
+
+// Cake bar at top
+var barY=10,barH=20,barL=80,barR=300;
+function mkLine(x1,y1,x2,y2,s,w){var l=document.createElementNS(ns,"line");l.setAttribute("x1",x1);l.setAttribute("y1",y1);l.setAttribute("x2",x2);l.setAttribute("y2",y2);l.setAttribute("stroke",s);l.setAttribute("stroke-width",w);svg.appendChild(l);}
+function mkRect(x,y,w,h,f){var r=document.createElementNS(ns,"rect");r.setAttribute("x",x);r.setAttribute("y",y);r.setAttribute("width",w);r.setAttribute("height",h);r.setAttribute("fill",f);r.setAttribute("stroke","#555");r.setAttribute("stroke-width","1.5");svg.appendChild(r);}
+// three cuts
+mkLine(barL,barY-5,barL,barY+barH+5,"#888",1.5);
+mkLine(barR,barY-5,barR,barY+barH+5,"#888",1.5);
+var c1=barL+60,c2=c1+35;
+mkLine(c1,barY-5,c1,barY+barH+5,"#888",1.5);
+mkLine(c2,barY-5,c2,barY+barH+5,"#888",1.5);
+mkRect(barL,barY,c1-barL,barH,"#6a28a0");
+mkRect(c1,barY,c2-c1,barH,"#c8e620");
+mkRect(c2,barY,barR-c2,barH,"#b07ab8");
+
+// Triangle - use JS to generate clean barycentric triangulation
+var N=4;
+var top=[190,70],bl=[40,470],br=[340,470];
+function b2c(u,v,w){return[u*top[0]+v*bl[0]+w*br[0],u*top[1]+v*bl[1]+w*br[1]];}
+var pts={};
+for(var i=0;i<=N;i++){for(var j=0;j<=N-i;j++){
+  var k=N-i-j;
+  pts[i+","+j]=b2c(i/N,j/N,k/N);
+}}
+// draw edges
+function mkEdge(p1,p2){
+  var l=document.createElementNS(ns,"line");
+  l.setAttribute("x1",p1[0]);l.setAttribute("y1",p1[1]);
+  l.setAttribute("x2",p2[0]);l.setAttribute("y2",p2[1]);
+  l.setAttribute("stroke","#444");l.setAttribute("stroke-width","1.2");
+  svg.appendChild(l);
+}
+for(var i=0;i<=N;i++){for(var j=0;j<=N-i;j++){
+  var k=N-i-j;
+  var p=pts[i+","+j];
+  // right neighbor
+  if(j+1<=N-i) mkEdge(p,pts[i+","+(j+1)]);
+  // up neighbor
+  if(i+1<=N-j) mkEdge(p,pts[(i+1)+","+j]);
+  // diagonal
+  if(i+1<=N && j-1>=0 && (i+1)+(j-1)<=N) mkEdge(p,pts[(i+1)+","+(j-1)]);
+}}
+// outer triangle thicker
+var outerPoly=document.createElementNS(ns,"polygon");
+outerPoly.setAttribute("points",top[0]+","+top[1]+" "+bl[0]+","+bl[1]+" "+br[0]+","+br[1]);
+outerPoly.setAttribute("fill","none");
+outerPoly.setAttribute("stroke","#333");
+outerPoly.setAttribute("stroke-width","2.5");
+svg.appendChild(outerPoly);
+
+// labels with enough margin
+function mkLabel(x,y,text,color,anchor){
+  var t=document.createElementNS(ns,"text");
+  t.setAttribute("x",x);t.setAttribute("y",y);
+  t.setAttribute("text-anchor",anchor||"middle");
+  t.setAttribute("fill",color);
+  t.setAttribute("font-family","'heliotrope_3', sans-serif");
+  t.setAttribute("font-weight","bold");
+  t.setAttribute("font-size","16");
+  t.textContent=text;
+  svg.appendChild(t);
+}
+mkLabel(top[0],top[1]-14,"(0,0,1)","#6a28a0","middle");
+mkLabel(bl[0]-5,bl[1]+22,"(1,0,0)","#2e7d32","start");
+mkLabel(br[0]+5,br[1]+22,"(0,1,0)","#c8a600","end");
+})();
+</script>
+</section><section data-id="5cd934a0633703b46ccd802ff436da78"><div class="sl-block" data-block-type="image" data-name="image-fe1283" data-block-id="3e3f092ab6ef51f33b9c49fe7f5e6b7a" style="width: 526.898px; height: 461.036px; left: 216.551px; top: 119.482px;"><div class="sl-block-content" style="z-index: 10;"><img class="" data-natural-width="240" data-natural-height="210" data-src="cake-cutting/3b293b5895aaefc31073edb7cad44686.png"></div></div></section></section><section data-id="1d1b7f9312321bdcfc74a74c078bbb62">
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 840.399px; left: 59.8005px; top: 31px;" data-name="text-c2d8bf" data-block-id="34634970ab11d52cc5c25ffa1f636d5e"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10; font-size: 184%;"><p><em><span style="color:#B22222">Approximate </span>Notions of fairness</em></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 930.614px; left: 14.6925px; top: 242.878px;" data-name="text-be5c6b" data-block-id="d8231cfead88a931d991d126a6362cfc"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11; font-size: 139%;" data-fragment-index="1"><p><span style="color:rgb(0, 0, 0); font-size:38.92px">Each thinks her piece is biggest,</span></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 406.719px; left: 276.64px; top: 179px;" data-name="text-f8162c" data-block-id="0173971b6e4adf9d7b85b8efa84c29c0"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; text-align: right; color: rgb(103, 78, 167);" data-fragment-index="0"><p style="text-align:center"><em>Envy-free up to one item</em></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 930.614px; left: 14.693px; top: 309px;" data-block-id="8635a506ceb16bfaa331b7e7c97699ba" data-name="text-4294e6"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; font-size: 139%;" data-fragment-index="1">
+<p><span style="color:rgb(0, 0, 0); font-size:38.92px">after removing their most valued piece from</span></p>
+
+<p><span style="color:rgb(0, 0, 0); font-size:38.92px">the other agent's bundle.</span></p>
+</div></div></section>
+			</div>
+		</div>
+
+		<script>
+			var SLConfig = {"deck": {"id":3293118,"slug":"cake-cutting","title":"The Math of Cutting Cake and Dividing Candy","description":"","width":960,"height":700,"margin":0.05,"visibility":"all","published_at":"2024-10-23T09:36:33.376Z","sanitize_messages":null,"thumbnail_url":"https://s3.amazonaws.com/media-p.slid.es/thumbnails/c4ed13e8669d34678427897f930ed4cd/thumb.jpg?1729675987","view_count":790,"user":{"id":428671,"username":"neeldhara","name":"Neeldhara Misra","description":"","thumbnail_url":"https://media.slid.es/avatars/428671/P1000160-NPTEL.jpg","account_type":"pro","team_id":null,"settings":{"id":267964,"present_controls":true,"present_upsizing":true,"present_pointer":true,"present_notes":true,"default_deck_tag_id":null}},"background_transition":"none","transition":"none","theme_id":null,"theme_font":"overpass2","theme_color":"white-blue","auto_slide_interval":0,"comments_enabled":false,"forking_enabled":false,"rolling_links":false,"center":false,"shuffle":false,"should_loop":false,"share_notes":false,"slide_number":false,"slide_count":29,"rtl":false,"version":2,"collaborative":false,"deck_user_editor_limit":3,"data_updated_at":1743481552564,"font_typekit":null,"font_google":null,"time_limit":null,"navigation_mode":"default","upsizing_enabled":true,"language":"en","notes":{}}};
+
+
+			// Use local fonts
+			SLConfig.fonts_url = 'lib/fonts/';
+		</script>
+
+		<script src="lib/reveal.js"></script>
+		<script src="lib/reveal-plugins.js"></script>
+		<script src="lib/offline.js"></script>
+
+		<!-- Initialize the presentation -->
+		<script>
+			Reveal.initialize({
+				width: 960,
+				height: 700,
+				margin: 0.05,
+				
+
+				hash: true,
+				controls: true,
+				progress: true,
+				mouseWheel: false,
+				showNotes: false,
+				slideNumber: false,
+				fragmentInURL: true,
+
+				autoSlide: 0,
+				autoSlideStoppable: true,
+
+				autoAnimateMatcher: SL.deck.AutoAnimate.matcher,
+
+				scrollActivationWidth: null,
+
+				center: false,
+				shuffle: false,
+				loop: false,
+				rtl: false,
+				navigationMode: "default",
+
+				transition: "none",
+				backgroundTransition: "none",
+
+				highlight: {
+					escapeHTML: false
+				},
+
+				plugins: [ RevealZoom, RevealNotes, RevealMarkdown, RevealHighlight ]
+			});
+		</script>
+
+		
+
+
+	</body>
+</html>
