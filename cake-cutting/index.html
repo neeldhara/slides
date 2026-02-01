@@ -165,7 +165,228 @@ between N people</h1></div></div>
 <div class="sl-block" data-block-type="text" style="height: auto; width: 190px; left: 761px; top: 14px;" data-name="text-cb290d" data-block-id="ba8c2517529ccaad40d86d00d0557bd6"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11; text-align: center;"><p style="text-align:left"><em>1 cake, N people.</em></p></div></div>
 <div class="sl-block" data-block-type="text" style="height: auto; width: 190px; left: 761px; top: 59.7396px;" data-name="text-ad6c1e" data-block-id="2ad972f476bd9d90072ed5166317cceb"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; text-align: center;"><p><em>Goal: PROP</em></p></div></div>
 <div class="sl-block" data-block-type="text" style="height: auto; width: 746.792px; left: 80px; top: 310.514px;" data-block-id="f54d5101a3c02be4febea83bb7bbd263" data-name="text-c0daad"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left;" data-fragment-index="1"><p>The algorithm sorts the n lines in increasing order and cuts the cake in the median of the lines, i.e. at the ⌊n/2⌋th line.</p></div></div>
-<div class="sl-block" data-block-type="text" style="height: auto; width: 746.792px; left: 80px; top: 430.514px;" data-block-id="2f6e968e50cefe539cc0af85f07896b1" data-name="text-14cae9"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14; text-align: left;" data-fragment-index="2"><p>The algorithm assigns to each of the two parts the partners whose line is inside that part, i.e. the partners that drew the first ⌊n/2⌋ lines get assigned to the left part, the others to the right part. Each part is divided recursively among the partners assigned to it.</p></div></div></section></section><section class="stack" data-id="f1f66cfe7c1ac43c4e60527cee659b59"><section data-id="7e5da60afbc6bed1a8d383cfc5235ea3"><div class="sl-block" data-block-type="text" style="width: 876px; left: 42px; top: 154px; height: auto;" data-name="text-aed0f8" data-block-id="5e160a40dd574e3c1536b11ec4d2a531"><div class="sl-block-content" data-placeholder-tag="h1" style="z-index: 10; font-size: 120%; padding: 20px; line-height: 1.508;" data-has-line-height="" data-placeholder-text="Text"><h1>divide one cake<br>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 746.792px; left: 80px; top: 430.514px;" data-block-id="2f6e968e50cefe539cc0af85f07896b1" data-name="text-14cae9"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14; text-align: left;" data-fragment-index="2"><p>The algorithm assigns to each of the two parts the partners whose line is inside that part, i.e. the partners that drew the first ⌊n/2⌋ lines get assigned to the left part, the others to the right part. Each part is divided recursively among the partners assigned to it.</p></div></div></section><section data-id="prop-interactive">
+<style>
+#prop-wrap { position:relative; width:960px; height:700px; font-family:'heliotrope_3',sans-serif; color:#333; overflow:hidden; }
+#prop-top { position:absolute; left:30px; top:12px; display:flex; align-items:center; gap:18px; font-size:15px; }
+#prop-top label { font-weight:bold; }
+#prop-slider { width:120px; }
+#prop-n-display { font-size:18px; font-weight:bold; color:#6a28a0; }
+#prop-status { position:absolute; left:30px; top:52px; font-size:14px; color:#555; min-height:22px; }
+#prop-canvas { position:absolute; left:30px; top:82px; width:900px; height:580px; }
+#prop-canvas svg { width:100%; height:100%; }
+.prop-cake { rx:6; ry:6; }
+.prop-cut-line { stroke-width:2; cursor:pointer; }
+.prop-cut-handle { cursor:pointer; }
+.prop-label { font-family:'heliotrope_3',sans-serif; font-size:12px; fill:#333; text-anchor:middle; }
+.prop-agent-label { font-family:'heliotrope_3',sans-serif; font-size:11px; text-anchor:middle; }
+.prop-median-line { stroke:#B22222; stroke-width:3; stroke-dasharray:6,3; }
+#prop-actions { position:absolute; right:30px; top:12px; display:flex; gap:8px; }
+#prop-actions button { padding:6px 14px; font-size:13px; border:2px solid #555; border-radius:6px; background:#f0f0f0; cursor:pointer; font-family:'heliotrope_3',sans-serif; }
+#prop-actions button:hover { background:#ddd; }
+#prop-actions button:disabled { opacity:0.4; cursor:default; }
+#prop-corner-label { position:absolute; right:30px; top:52px; font-size:13px; color:#555; font-style:italic; text-align:right; }
+</style>
+<div id="prop-wrap">
+<div id="prop-top">
+<label>Agents:</label>
+<input type="range" id="prop-slider" min="2" max="8" value="4">
+<span id="prop-n-display">4</span>
+</div>
+<div id="prop-actions">
+<button id="prop-btn-step" disabled>Find Median &amp; Split</button>
+<button id="prop-btn-reset">Reset</button>
+</div>
+<div id="prop-status"></div>
+<div id="prop-corner-label">1 cake, N people. Goal: PROP</div>
+<div id="prop-canvas"><svg id="prop-svg"></svg></div>
+</div>
+<script>
+(function(){
+var svg=document.getElementById('prop-svg');
+var ns="http://www.w3.org/2000/svg";
+var slider=document.getElementById('prop-slider');
+var nDisp=document.getElementById('prop-n-display');
+var statusEl=document.getElementById('prop-status');
+var btnStep=document.getElementById('prop-btn-step');
+var btnReset=document.getElementById('prop-btn-reset');
+
+var agentColors=["#e74c3c","#3498db","#2ecc71","#f39c12","#9b59b6","#1abc9c","#e67e22","#2c3e50"];
+
+// State
+var N=4;
+var tasks=[]; // [{agents:[indices], left, right}] — subproblems
+var cuts={}; // taskIdx -> [cut positions per agent]
+var phase=""; // "cutting","done"
+var cutCount=0;
+
+function el(tag,attrs){
+  var e=document.createElementNS(ns,tag);
+  for(var k in attrs) e.setAttribute(k,attrs[k]);
+  return e;
+}
+
+function init(){
+  N=parseInt(slider.value);
+  nDisp.textContent=N;
+  tasks=[{agents:Array.from({length:N},function(_,i){return i;}),left:0,right:1}];
+  cuts={};phase="cutting";cutCount=0;
+  btnStep.disabled=true;
+  render();
+  statusEl.innerHTML="Click on each sub-cake to place agent cuts. Each agent marks where they think the "+
+    "&#8970;n/2&#8971;:&#8968;n/2&#8969; split is.";
+}
+
+function render(){
+  svg.innerHTML="";
+  var margin=20, w=860, rowH=0;
+  // check if all done (single-agent tasks) — render flat
+  var allDone=tasks.every(function(t){return t.agents.length<=1;});
+  if(allDone&&tasks.length>1){
+    var barH=60,barY=margin+40;
+    var titleT=el("text",{x:margin,y:margin+20,"font-family":"'heliotrope_3',sans-serif","font-size":"16","font-weight":"bold",fill:"#2e7d32"});
+    titleT.textContent="Final allocation:";
+    svg.appendChild(titleT);
+    tasks.forEach(function(task){
+      var x0=margin+task.left*w,cw=(task.right-task.left)*w;
+      var ai=task.agents[0];
+      var rect=el("rect",{x:x0,y:barY,width:cw,height:barH,fill:agentColors[ai]+"22",stroke:agentColors[ai],"stroke-width":"2.5",rx:"5",ry:"5"});
+      svg.appendChild(rect);
+      var t=el("text",{x:x0+cw/2,y:barY+barH/2+5,"text-anchor":"middle","font-size":"15","font-weight":"bold",fill:agentColors[ai],"font-family":"'heliotrope_3',sans-serif"});
+      t.textContent="P"+(ai+1);
+      svg.appendChild(t);
+    });
+    return;
+  }
+  // active layout: group into rows by depth
+  // separate done tasks from active tasks
+  var activeTasks=[],doneTasks=[];
+  tasks.forEach(function(t,i){if(t.agents.length<=1)doneTasks.push(t);else activeTasks.push(t);});
+  var rows=[];
+  if(doneTasks.length>0) rows.push({tasks:doneTasks,type:"done"});
+  activeTasks.forEach(function(t){rows.push({tasks:[t],type:"active"});});
+  var availH=540;
+  var totalRows=rows.length;
+  rowH=Math.min(80,availH/(totalRows||1));
+  var gap=Math.max(8,rowH*0.2);
+  rows.forEach(function(row,ri){
+    var y=margin+ri*(rowH+gap);
+    row.tasks.forEach(function(task){
+      var ti=tasks.indexOf(task);
+      var x0=margin+task.left*w,cw=(task.right-task.left)*w;
+      var ch=row.type==="done"?rowH*0.45:rowH*0.55;
+      var rect=el("rect",{x:x0,y:y,width:cw,height:ch,fill:row.type==="done"?agentColors[task.agents[0]]+"22":"#f5deb3",stroke:row.type==="done"?agentColors[task.agents[0]]:"#a0522d","stroke-width":"2","class":"prop-cake"});
+      svg.appendChild(rect);
+      if(row.type==="done"){
+        var dt=el("text",{x:x0+cw/2,y:y+ch/2+4,"text-anchor":"middle","font-size":"12",fill:agentColors[task.agents[0]],"font-family":"'heliotrope_3',sans-serif","font-weight":"bold"});
+        dt.textContent="P"+(task.agents[0]+1);
+        svg.appendChild(dt);
+        return;
+      }
+      task.agents.forEach(function(ai,j){
+        var lx=x0+cw*(j+0.5)/task.agents.length;
+        var t=el("text",{x:lx,y:y+ch+14,"class":"prop-agent-label",fill:agentColors[ai]});
+        t.textContent="P"+(ai+1);
+        svg.appendChild(t);
+      });
+    // draw existing cuts for this task
+    var taskCuts=cuts[ti]||[];
+    taskCuts.forEach(function(c,ci){
+      var cx=x0+c*cw;
+      var line=el("line",{x1:cx,y1:y,x2:cx,y2:y+ch,stroke:agentColors[task.agents[ci]],"stroke-width":"2","class":"prop-cut-line"});
+      svg.appendChild(line);
+      var circ=el("circle",{cx:cx,cy:y-5,r:5,fill:agentColors[task.agents[ci]],"class":"prop-cut-handle"});
+      svg.appendChild(circ);
+    });
+    if(taskCuts.length===task.agents.length){
+      var sorted=taskCuts.slice().sort(function(a,b){return a-b;});
+      var medIdx=Math.floor(task.agents.length/2)-1;
+      var medVal=sorted[medIdx];
+      var mx=x0+medVal*cw;
+      var ml=el("line",{x1:mx,y1:y-2,x2:mx,y2:y+ch+2,"class":"prop-median-line"});
+      svg.appendChild(ml);
+      var mt=el("text",{x:mx,y:y-10,"text-anchor":"middle","font-size":"11",fill:"#B22222","font-family":"'heliotrope_3',sans-serif"});
+      mt.textContent="median";
+      svg.appendChild(mt);
+    }
+    if(phase==="cutting"&&taskCuts.length<task.agents.length){
+      var overlay=el("rect",{x:x0,y:y,width:cw,height:ch,fill:"transparent",cursor:"crosshair"});
+      (function(tsk,tIdx,cx0,ccw){
+        overlay.addEventListener("click",function(ev){
+          ev.stopPropagation();
+          var svgRect=svg.getBoundingClientRect();
+          var clickX=(ev.clientX-svgRect.left)/(svgRect.width)*900;
+          var rel=(clickX-cx0)/ccw;
+          rel=Math.max(0.05,Math.min(0.95,rel));
+          if(!cuts[tIdx])cuts[tIdx]=[];
+          cuts[tIdx].push(rel);
+          cutCount++;
+          checkAllCuts();
+          render();
+        });
+      })(task,ti,x0,cw);
+      svg.appendChild(overlay);
+      // status: which agent is cutting next
+      var nextAgent=task.agents[taskCuts.length];
+      statusEl.innerHTML="<strong style='color:"+agentColors[nextAgent]+"'>P"+(nextAgent+1)+"</strong>: click on the cake to place your cut.";
+    }
+  });
+}
+
+function checkAllCuts(){
+  var allDone=true;
+  tasks.forEach(function(task,ti){
+    if(task.agents.length<=1)return;
+    if(!cuts[ti]||cuts[ti].length<task.agents.length) allDone=false;
+  });
+  btnStep.disabled=!allDone;
+  if(allDone) statusEl.innerHTML="All cuts placed! Click <strong>Find Median &amp; Split</strong> to proceed.";
+}
+
+function doStep(){
+  var newTasks=[];
+  tasks.forEach(function(task,ti){
+    if(task.agents.length<=1){newTasks.push(task);return;}
+    var taskCuts=cuts[ti]||[];
+    if(taskCuts.length<task.agents.length){newTasks.push(task);return;}
+    // pair agents with their cuts
+    var pairs=task.agents.map(function(ai,j){return{agent:ai,cut:taskCuts[j]};});
+    pairs.sort(function(a,b){return a.cut-b.cut;});
+    var half=Math.floor(pairs.length/2);
+    var medCut=pairs[half-1].cut;
+    var leftAgents=pairs.slice(0,half).map(function(p){return p.agent;});
+    var rightAgents=pairs.slice(half).map(function(p){return p.agent;});
+    var splitAbs=task.left+medCut*(task.right-task.left);
+    newTasks.push({agents:leftAgents,left:task.left,right:splitAbs});
+    newTasks.push({agents:rightAgents,left:splitAbs,right:task.right});
+  });
+  tasks=newTasks;
+  cuts={};
+  // check if all tasks have 1 agent
+  var allSingle=tasks.every(function(t){return t.agents.length<=1;});
+  if(allSingle){
+    phase="done";
+    btnStep.disabled=true;
+    statusEl.innerHTML="<strong style='color:#2e7d32'>Done!</strong> Each agent has a proportionally fair piece.";
+  } else {
+    phase="cutting";
+    btnStep.disabled=true;
+    statusEl.innerHTML="Click on each sub-cake to place agent cuts for the next round.";
+  }
+  render();
+}
+
+slider.addEventListener("input",function(e){
+  e.stopPropagation();
+  init();
+});
+btnStep.addEventListener("click",function(e){e.stopPropagation();doStep();});
+btnReset.addEventListener("click",function(e){e.stopPropagation();init();});
+
+init();
+})();
+</script>
+</section></section><section class="stack" data-id="f1f66cfe7c1ac43c4e60527cee659b59"><section data-id="7e5da60afbc6bed1a8d383cfc5235ea3"><div class="sl-block" data-block-type="text" style="width: 876px; left: 42px; top: 154px; height: auto;" data-name="text-aed0f8" data-block-id="5e160a40dd574e3c1536b11ec4d2a531"><div class="sl-block-content" data-placeholder-tag="h1" style="z-index: 10; font-size: 120%; padding: 20px; line-height: 1.508;" data-has-line-height="" data-placeholder-text="Text"><h1>divide one cake<br>
 between 3 people</h1></div></div>
 
 <div class="sl-block" data-block-type="text" data-name="text-64642b" style="height: auto; width: 600px; left: 180px; top: 391px;" data-block-id="70a73ab715859ac037819d680f410fd9"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11; font-size: 160%; color: rgb(106, 168, 79);"><p><em>in an envy-free manner</em></p></div></div>
@@ -203,7 +424,437 @@ between 3 people</h1></div></div>
 let's call the player who chose it PA and the other player PB.</p></div></div>
 <div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 180px; top: 350px;" data-block-id="9d21f686d66a09d231294b87f9f25bb1" data-name="text-79f062"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;" data-fragment-index="2"><p>PA chooses a piece of A2 - we name it A21.</p></div></div>
 <div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 180px; top: 420px;" data-block-id="524e549cfd270bfac53bd571f4de0696" data-name="text-3739e6"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13;" data-fragment-index="3"><p><span style="color:rgb(0, 0, 0)">P1 chooses a piece of A2 - we name it A22.</span></p></div></div>
-<div class="sl-block" data-block-type="text" style="height: auto; width: 727.645px; left: 116.177px; top: 490px;" data-block-id="4964c49274e96c228da5e74a41ba59fc" data-name="text-63871f"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14;" data-fragment-index="4"><p><span style="color:rgb(0, 0, 0)">PB chooses the last remaining piece of A2 - we name it A23.</span></p></div></div></section></section><section class="stack" data-id="dcd2b092e1b18459ad975bc61970968e"><section data-id="1bd1ba1dafda7bd33f70fb5cad95d64a"><div class="sl-block" data-block-type="text" style="width: 876px; left: 42px; top: 154px; height: auto;" data-name="text-aed0f8" data-block-id="cc6ebf5e4b236c442f20e3b7b8ddcc52"><div class="sl-block-content" data-placeholder-tag="h1" style="z-index: 10; font-size: 120%; padding: 20px; line-height: 1.508;" data-has-line-height="" data-placeholder-text="Text"><h1>divide one cake<br>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 727.645px; left: 116.177px; top: 490px;" data-block-id="4964c49274e96c228da5e74a41ba59fc" data-name="text-63871f"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14;" data-fragment-index="4"><p><span style="color:rgb(0, 0, 0)">PB chooses the last remaining piece of A2 - we name it A23.</span></p></div></div></section><section data-id="selfridge-conway-interactive">
+<style>
+#sc-wrap{position:relative;width:960px;height:700px;font-family:'heliotrope_3',sans-serif;color:#333;overflow:hidden}
+#sc-header{position:absolute;left:30px;top:10px;font-size:15px;font-weight:bold}
+#sc-corner{position:absolute;right:30px;top:10px;font-size:13px;font-style:italic;color:#555;text-align:right;line-height:1.4}
+#sc-status{position:absolute;left:30px;top:36px;width:700px;font-size:14px;color:#555;line-height:1.5}
+#sc-canvas{position:absolute;left:0;top:70px;width:960px;height:560px}
+#sc-canvas svg{width:100%;height:100%}
+#sc-actions{position:absolute;right:30px;top:58px;display:flex;gap:8px}
+#sc-actions button{padding:5px 12px;font-size:13px;border:2px solid #555;border-radius:6px;background:#f0f0f0;cursor:pointer;font-family:'heliotrope_3',sans-serif}
+#sc-actions button:hover{background:#ddd}
+#sc-actions button:disabled{opacity:.4;cursor:default}
+.sc-piece{stroke:#a0522d;stroke-width:2;rx:5;ry:5;cursor:pointer}
+.sc-trim-area{fill:#ffe0b2;stroke:#e65100;stroke-width:1.5;stroke-dasharray:4,3;rx:4;ry:4}
+.sc-label{font-family:'heliotrope_3',sans-serif;font-size:13px;text-anchor:middle;fill:#333}
+.sc-name{font-family:'heliotrope_3',sans-serif;font-size:12px;text-anchor:middle;font-weight:bold}
+.sc-arrow{fill:none;stroke:#888;stroke-width:1.5;marker-end:url(#sc-arrowhead)}
+.sc-highlight{stroke:#B22222;stroke-width:3;stroke-dasharray:none}
+</style>
+<div id="sc-wrap">
+<div id="sc-header">Selfridge-Conway: Interactive</div>
+<div id="sc-corner">1 cake, 3 people.<br>Goal: Envy-free</div>
+<div id="sc-status"></div>
+<div id="sc-actions">
+<button id="sc-btn-next" disabled>Next</button>
+<button id="sc-btn-reset">Reset</button>
+</div>
+<div id="sc-canvas"><svg id="sc-svg"></svg></div>
+</div>
+<script>
+(function(){
+var svg=document.getElementById('sc-svg');
+var ns="http://www.w3.org/2000/svg";
+var statusEl=document.getElementById('sc-status');
+var btnNext=document.getElementById('sc-btn-next');
+var btnReset=document.getElementById('sc-btn-reset');
+
+var P=["Alice","Bob","Carol"];
+var PC=["#e74c3c","#3498db","#2ecc71"];
+
+// State
+var step=0;
+var aliceCuts=[]; // 2 cut positions (fractions 0-1) -> 3 pieces
+var pieces=[]; // [{left,right,owner:-1,trimmed:false,label}]
+var trimPos=0; // where Bob trims
+var trimPiece=-1; // which piece Bob thinks is largest
+var trimming=null; // {left,right} the trimmed-off bit
+var chosenBy=[-1,-1,-1]; // who chose each piece index
+var PA=-1,PB=-1; // who took trimmed piece, who didn't
+var trimPieces=[]; // 3 sub-pieces of trimming
+var trimChosenBy=[-1,-1,-1];
+
+function el(tag,attrs){var e=document.createElementNS(ns,tag);for(var k in attrs)e.setAttribute(k,attrs[k]);return e;}
+
+// Layout constants
+var CX=60,CY=40,CW=700,CH=50;
+
+function drawCake(x,y,w,h,fill,cls){
+  return el("rect",{x:x,y:y,width:w,height:h,fill:fill||"#f5deb3","class":"sc-piece "+(cls||"")});
+}
+
+function init(){
+  step=0;aliceCuts=[];pieces=[];trimPos=0;trimPiece=-1;trimming=null;
+  chosenBy=[-1,-1,-1];PA=-1;PB=-1;trimPieces=[];trimChosenBy=[-1,-1,-1];
+  btnNext.disabled=true;
+  statusEl.innerHTML="<strong style='color:"+PC[0]+"'>Alice</strong> cuts the cake into 3 equal pieces. Click twice on the cake to place cuts.";
+  renderStep0();
+}
+
+function renderStep0(){
+  svg.innerHTML="";
+  // whole cake
+  svg.appendChild(drawCake(CX,CY,CW,CH,"#f5deb3"));
+  // label
+  var t=el("text",{x:CX+CW/2,y:CY+CH+20,"class":"sc-label"});
+  t.textContent="Click to place Alice's cuts (2 cuts needed)";
+  svg.appendChild(t);
+  // click handler
+  var overlay=el("rect",{x:CX,y:CY,width:CW,height:CH,fill:"transparent",cursor:"crosshair"});
+  overlay.addEventListener("click",function(ev){
+    ev.stopPropagation();
+    var r=svg.getBoundingClientRect();
+    var frac=(ev.clientX-r.left)/(r.width)*960;
+    var rel=(frac-CX)/CW;
+    rel=Math.max(0.05,Math.min(0.95,rel));
+    if(aliceCuts.length<2){
+      aliceCuts.push(rel);
+      aliceCuts.sort(function(a,b){return a-b;});
+      if(aliceCuts.length===2){
+        // ensure they're not too close
+        if(Math.abs(aliceCuts[0]-aliceCuts[1])<0.05){
+          aliceCuts.pop();return;
+        }
+        pieces=[
+          {left:0,right:aliceCuts[0],label:"L"},
+          {left:aliceCuts[0],right:aliceCuts[1],label:"M"},
+          {left:aliceCuts[1],right:1,label:"R"}
+        ];
+        step=1;
+        statusEl.innerHTML="Alice has cut 3 pieces. Now <strong style='color:"+PC[1]+"'>Bob</strong> inspects. Click the piece Bob thinks is <strong>largest</strong> (he'll trim it).";
+        renderStep1();
+        return;
+      }
+    }
+    renderStep0Draw();
+  });
+  svg.appendChild(overlay);
+  renderStep0Draw();
+}
+
+function renderStep0Draw(){
+  // redraw cuts
+  var existing=svg.querySelectorAll(".sc-cutline");
+  existing.forEach(function(e){e.remove();});
+  aliceCuts.forEach(function(c){
+    var cx=CX+c*CW;
+    var l=el("line",{x1:cx,y1:CY-5,x2:cx,y2:CY+CH+5,stroke:PC[0],"stroke-width":"3","class":"sc-cutline"});
+    svg.appendChild(l);
+  });
+}
+
+function renderStep1(){
+  svg.innerHTML="";
+  // draw 3 pieces
+  var fills=["#f5deb3","#ffe0b2","#fff8e1"];
+  pieces.forEach(function(p,i){
+    var px=CX+p.left*CW,pw=(p.right-p.left)*CW;
+    var r=drawCake(px,CY,pw,CH,fills[i]);
+    svg.appendChild(r);
+    var t=el("text",{x:px+pw/2,y:CY+CH/2+5,"class":"sc-label","font-size":"14"});
+    t.textContent="Piece "+(i+1);
+    svg.appendChild(t);
+    // clickable for Bob to pick largest
+    var ov=el("rect",{x:px,y:CY,width:pw,height:CH,fill:"transparent",cursor:"pointer"});
+    (function(idx){
+      ov.addEventListener("click",function(ev){
+        ev.stopPropagation();
+        trimPiece=idx;
+        step=2;
+        statusEl.innerHTML="Bob thinks Piece "+(idx+1)+" is largest. <strong style='color:"+PC[1]+"'>Bob</strong> trims it. Click inside Piece "+(idx+1)+" to place the trim line.";
+        renderStep2();
+      });
+    })(i);
+    svg.appendChild(ov);
+  });
+}
+
+function renderStep2(){
+  svg.innerHTML="";
+  var fills=["#f5deb3","#ffe0b2","#fff8e1"];
+  pieces.forEach(function(p,i){
+    var px=CX+p.left*CW,pw=(p.right-p.left)*CW;
+    var r=drawCake(px,CY,pw,CH,fills[i]);
+    if(i===trimPiece) r.setAttribute("stroke","#e65100");
+    svg.appendChild(r);
+    var t=el("text",{x:px+pw/2,y:CY+CH/2+5,"class":"sc-label","font-size":"14"});
+    t.textContent="Piece "+(i+1)+(i===trimPiece?" (trim this)":"");
+    svg.appendChild(t);
+  });
+  // click on the trimPiece to set trim position
+  var tp=pieces[trimPiece];
+  var tpx=CX+tp.left*CW,tpw=(tp.right-tp.left)*CW;
+  var ov=el("rect",{x:tpx,y:CY,width:tpw,height:CH,fill:"transparent",cursor:"crosshair"});
+  ov.addEventListener("click",function(ev){
+    ev.stopPropagation();
+    var r=svg.getBoundingClientRect();
+    var frac=(ev.clientX-r.left)/(r.width)*960;
+    var rel=(frac-CX)/CW;
+    // trim must be inside the piece, from left side
+    rel=Math.max(tp.left+0.02,Math.min(tp.right-0.02,rel));
+    trimPos=rel;
+    // create trimming: the right portion is trimmed off
+    trimming={left:trimPos,right:tp.right};
+    // the kept piece shrinks
+    pieces[trimPiece]={left:tp.left,right:trimPos,label:tp.label+"(trimmed)"};
+    step=3;
+    statusEl.innerHTML="Bob trimmed Piece "+(trimPiece+1)+". Now <strong style='color:"+PC[2]+"'>Carol</strong> chooses first. Click a piece for Carol.";
+    renderStep3();
+  });
+  svg.appendChild(ov);
+}
+
+function renderStep3(){
+  svg.innerHTML="";
+  // Show pieces + trimming aside
+  var fills=["#f5deb3","#ffe0b2","#fff8e1"];
+  var y1=CY,y2=CY+CH+60;
+  // main pieces row
+  pieces.forEach(function(p,i){
+    var px=CX+p.left*CW,pw=(p.right-p.left)*CW;
+    var chosen=chosenBy[i]>=0;
+    var r=drawCake(px,y1,pw,CH,chosen?lighten(PC[chosenBy[i]]):fills[i]);
+    if(chosen) r.setAttribute("stroke",PC[chosenBy[i]]);
+    svg.appendChild(r);
+    var t=el("text",{x:px+pw/2,y:y1+CH/2+5,"class":"sc-label","font-size":"13"});
+    t.textContent=chosen?P[chosenBy[i]]:"Piece "+(i+1);
+    svg.appendChild(t);
+    if(!chosen&&canChoose(i)){
+      var ov=el("rect",{x:px,y:y1,width:pw,height:CH,fill:"transparent",cursor:"pointer"});
+      (function(idx){ov.addEventListener("click",function(ev){ev.stopPropagation();doChoose(idx);});})(i);
+      svg.appendChild(ov);
+    }
+  });
+  // trimming shown aside
+  if(trimming){
+    var tx=CX+trimming.left*CW,tw=(trimming.right-trimming.left)*CW;
+    svg.appendChild(el("rect",{x:tx,y:y1,width:tw,height:CH,fill:"#ffe0b2",stroke:"#e65100","stroke-width":"1.5","stroke-dasharray":"4,3",rx:"4",ry:"4"}));
+    var tt=el("text",{x:tx+tw/2,y:y1+CH/2+5,"class":"sc-label","font-size":"11",fill:"#e65100"});
+    tt.textContent="trimmings";
+    svg.appendChild(tt);
+  }
+  // Show who has chosen
+  var order=getChoiceOrder();
+  var infoY=y1+CH+20;
+  var info=el("text",{x:CX,y:infoY,"font-family":"'heliotrope_3',sans-serif","font-size":"13",fill:"#555"});
+  info.textContent="Choice order: Carol, then Bob"+(chosenBy.filter(function(c){return c===2;}).length>0?
+    " (must take trimmed if Carol didn't)":"")+", then Alice.";
+  svg.appendChild(info);
+}
+
+function lighten(c){
+  // simple hex lighten
+  return c+"33";
+}
+
+function getChoiceOrder(){return [2,1,0];} // Carol, Bob, Alice
+
+function currentChooser(){
+  var chosen=chosenBy.filter(function(c){return c>=0;}).length;
+  return [2,1,0][chosen]; // Carol=2, Bob=1, Alice=0
+}
+
+function canChoose(pieceIdx){
+  if(chosenBy[pieceIdx]>=0) return false;
+  var chooser=currentChooser();
+  if(chooser===undefined) return false;
+  // Bob must take trimmed piece if Carol didn't
+  if(chooser===1){
+    var carolTookTrimmed=chosenBy[trimPiece]===2;
+    if(!carolTookTrimmed) return pieceIdx===trimPiece;
+  }
+  return true;
+}
+
+function doChoose(pieceIdx){
+  var chooser=currentChooser();
+  chosenBy[pieceIdx]=chooser;
+  var allChosen=chosenBy.every(function(c){return c>=0;});
+  if(allChosen){
+    // determine PA (took trimmed), PB (other of Bob/Carol)
+    PA=chosenBy[trimPiece]; // whoever got the trimmed piece
+    PB=(PA===1)?2:1; // the other one
+    step=4;
+    statusEl.innerHTML="All main pieces chosen! Now divide the trimmings. <strong style='color:"+PC[PB]+"'>"+P[PB]+"</strong> (PB) cuts trimmings into 3. Click twice on the trimmings.";
+    renderStep4();
+    return;
+  }
+  var next=currentChooser();
+  var mustTake="";
+  if(next===1){
+    var carolTookTrimmed=chosenBy[trimPiece]===2;
+    if(!carolTookTrimmed) mustTake=" (must take the trimmed piece)";
+  }
+  statusEl.innerHTML="<strong style='color:"+PC[next]+"'>"+P[next]+"</strong> chooses next"+mustTake+". Click a piece.";
+  renderStep3();
+}
+
+// Step 4: divide trimmings
+var trimCuts=[];
+function renderStep4(){
+  svg.innerHTML="";
+  // show main pieces assigned (small, top)
+  var y0=CY;
+  pieces.forEach(function(p,i){
+    var px=CX+p.left*CW,pw=(p.right-p.left)*CW;
+    var r=drawCake(px,y0,pw,CH*0.6,lighten(PC[chosenBy[i]]));
+    r.setAttribute("stroke",PC[chosenBy[i]]);r.setAttribute("opacity","0.6");
+    svg.appendChild(r);
+    var t=el("text",{x:px+pw/2,y:y0+CH*0.35,"class":"sc-name",fill:PC[chosenBy[i]]});
+    t.textContent=P[chosenBy[i]];
+    svg.appendChild(t);
+  });
+  // trimmings larger below
+  var ty=y0+CH+30,th=CH*0.8;
+  var tx=CX+trimming.left*CW,tw=(trimming.right-trimming.left)*CW;
+  // scale trimmings to use more width for visibility
+  var trimX=CX+100,trimW=500;
+  svg.appendChild(el("rect",{x:trimX,y:ty,width:trimW,height:th,fill:"#ffe0b2",stroke:"#e65100","stroke-width":"2",rx:"5",ry:"5"}));
+  var tl=el("text",{x:trimX+trimW/2,y:ty-8,"class":"sc-label","font-size":"13",fill:"#e65100"});
+  tl.textContent="Trimmings ("+P[PB]+" cuts into 3)";
+  svg.appendChild(tl);
+  // draw existing trim cuts
+  trimCuts.forEach(function(c){
+    var cx=trimX+c*trimW;
+    svg.appendChild(el("line",{x1:cx,y1:ty-3,x2:cx,y2:ty+th+3,stroke:PC[PB],"stroke-width":"2.5"}));
+  });
+  if(trimCuts.length<2){
+    var ov=el("rect",{x:trimX,y:ty,width:trimW,height:th,fill:"transparent",cursor:"crosshair"});
+    ov.addEventListener("click",function(ev){
+      ev.stopPropagation();
+      var r=svg.getBoundingClientRect();
+      var frac=(ev.clientX-r.left)/(r.width)*960;
+      var rel=(frac-trimX)/trimW;
+      rel=Math.max(0.05,Math.min(0.95,rel));
+      trimCuts.push(rel);
+      trimCuts.sort(function(a,b){return a-b;});
+      if(trimCuts.length===2&&Math.abs(trimCuts[0]-trimCuts[1])<0.05){trimCuts.pop();}
+      if(trimCuts.length===2){
+        trimPieces=[
+          {left:0,right:trimCuts[0]},
+          {left:trimCuts[0],right:trimCuts[1]},
+          {left:trimCuts[1],right:1}
+        ];
+        step=5;
+        // choice order: PA, then Alice (P0), then PB
+        var order=[PA,0,PB];
+        // if PA is Alice, order is [0, otherOfBobCarol, PB] - but PA can't be 0
+        // PA is whoever took the trimmed main piece (Bob=1 or Carol=2)
+        statusEl.innerHTML="Trimmings divided! Choose order: <strong style='color:"+PC[PA]+"'>"+P[PA]+"</strong> (PA), then <strong style='color:"+PC[0]+"'>Alice</strong>, then <strong style='color:"+PC[PB]+"'>"+P[PB]+"</strong>.";
+        renderStep5();
+        return;
+      }
+      renderStep4();
+    });
+    svg.appendChild(ov);
+  }
+}
+
+function renderStep5(){
+  svg.innerHTML="";
+  // main pieces (small top)
+  var y0=CY;
+  pieces.forEach(function(p,i){
+    var px=CX+p.left*CW,pw=(p.right-p.left)*CW;
+    var r=drawCake(px,y0,pw,CH*0.5,lighten(PC[chosenBy[i]]));
+    r.setAttribute("stroke",PC[chosenBy[i]]);r.setAttribute("opacity","0.5");
+    svg.appendChild(r);
+    var t=el("text",{x:px+pw/2,y:y0+CH*0.3,"class":"sc-name","font-size":"11",fill:PC[chosenBy[i]]});
+    t.textContent=P[chosenBy[i]];
+    svg.appendChild(t);
+  });
+  // trimming sub-pieces
+  var ty=y0+CH+20,th=CH*0.8;
+  var trimX=CX+100,trimW=500;
+  var fills=["#fff3e0","#ffe0b2","#ffcc80"];
+  var trimOrder=[PA,0,PB];
+  var trimChosen=0;
+  for(var i=0;i<3;i++) if(trimChosenBy[i]>=0) trimChosen++;
+  var nextChooser=trimOrder[trimChosen];
+
+  trimPieces.forEach(function(tp,i){
+    var tpx=trimX+tp.left*trimW,tpw=(tp.right-tp.left)*trimW;
+    var chosen=trimChosenBy[i]>=0;
+    var r=el("rect",{x:tpx,y:ty,width:tpw,height:th,fill:chosen?lighten(PC[trimChosenBy[i]]):fills[i],stroke:chosen?PC[trimChosenBy[i]]:"#e65100","stroke-width":chosen?"2.5":"1.5",rx:"4",ry:"4"});
+    svg.appendChild(r);
+    var t=el("text",{x:tpx+tpw/2,y:ty+th/2+4,"class":"sc-label","font-size":"12"});
+    t.textContent=chosen?P[trimChosenBy[i]]:"T"+(i+1);
+    svg.appendChild(t);
+    if(!chosen){
+      var ov=el("rect",{x:tpx,y:ty,width:tpw,height:th,fill:"transparent",cursor:"pointer"});
+      (function(idx){ov.addEventListener("click",function(ev){
+        ev.stopPropagation();
+        trimChosenBy[idx]=nextChooser;
+        trimChosen++;
+        if(trimChosen>=3){
+          step=6;
+          statusEl.innerHTML="<strong style='color:#2e7d32'>Done!</strong> The division is envy-free. Each player has a main piece plus a trimming piece.";
+          renderFinal();
+          return;
+        }
+        var nc=trimOrder[trimChosen];
+        statusEl.innerHTML="<strong style='color:"+PC[nc]+"'>"+P[nc]+"</strong> chooses next from the trimmings.";
+        renderStep5();
+      });})(i);
+      svg.appendChild(ov);
+    }
+  });
+  var il=el("text",{x:trimX,y:ty+th+18,"font-family":"'heliotrope_3',sans-serif","font-size":"12",fill:"#555"});
+  il.textContent="Click a trimming piece for "+P[nextChooser]+" to choose.";
+  svg.appendChild(il);
+}
+
+function renderFinal(){
+  svg.innerHTML="";
+  // show each player's total allocation
+  var py=30;
+  [0,1,2].forEach(function(pi){
+    // main piece
+    var mainIdx=chosenBy.indexOf(pi);
+    var mp=pieces[mainIdx];
+    var mpx=CX+mp.left*CW,mpw=(mp.right-mp.left)*CW;
+    // trimming piece
+    var trimIdx=trimChosenBy.indexOf(pi);
+    var trimX2=CX+100,trimW2=500;
+    var tp=trimPieces[trimIdx];
+    var nameT=el("text",{x:20,y:py+CH*0.35,"font-family":"'heliotrope_3',sans-serif","font-size":"14","font-weight":"bold",fill:PC[pi],"text-anchor":"start"});
+    nameT.textContent=P[pi]+":";
+    svg.appendChild(nameT);
+    // main piece rect
+    var mainR=drawCake(CX+60,py,mpw*0.5,CH*0.6,lighten(PC[pi]));
+    mainR.setAttribute("stroke",PC[pi]);
+    svg.appendChild(mainR);
+    var mt=el("text",{x:CX+60+mpw*0.25,y:py+CH*0.35,"class":"sc-label","font-size":"11"});
+    mt.textContent="main piece";
+    svg.appendChild(mt);
+    // plus
+    var plus=el("text",{x:CX+70+mpw*0.5,y:py+CH*0.35,"font-size":"16",fill:"#333","font-family":"'heliotrope_3',sans-serif"});
+    plus.textContent="+";
+    svg.appendChild(plus);
+    // trimming piece rect
+    var tpw2=(tp.right-tp.left)*180;
+    var tr=el("rect",{x:CX+90+mpw*0.5,y:py,width:Math.max(tpw2,30),height:CH*0.6,fill:lighten(PC[pi]),stroke:PC[pi],"stroke-width":"1.5",rx:"4",ry:"4"});
+    svg.appendChild(tr);
+    var tt=el("text",{x:CX+90+mpw*0.5+Math.max(tpw2,30)/2,y:py+CH*0.35,"class":"sc-label","font-size":"11"});
+    tt.textContent="trimming";
+    svg.appendChild(tt);
+    py+=CH+16;
+  });
+  // summary
+  var sumT=el("text",{x:CX,y:py+20,"font-family":"'heliotrope_3',sans-serif","font-size":"15",fill:"#2e7d32","font-weight":"bold"});
+  sumT.textContent="Envy-free division complete!";
+  svg.appendChild(sumT);
+}
+
+btnNext.disabled=true; // not used in this interactive
+btnReset.addEventListener("click",function(e){e.stopPropagation();trimCuts=[];init();});
+
+init();
+})();
+</script>
+</section></section><section class="stack" data-id="dcd2b092e1b18459ad975bc61970968e"><section data-id="1bd1ba1dafda7bd33f70fb5cad95d64a"><div class="sl-block" data-block-type="text" style="width: 876px; left: 42px; top: 154px; height: auto;" data-name="text-aed0f8" data-block-id="cc6ebf5e4b236c442f20e3b7b8ddcc52"><div class="sl-block-content" data-placeholder-tag="h1" style="z-index: 10; font-size: 120%; padding: 20px; line-height: 1.508;" data-has-line-height="" data-placeholder-text="Text"><h1>divide one cake<br>
 between N people</h1></div></div>
 
 <div class="sl-block" data-block-type="text" data-name="text-64642b" style="height: auto; width: 600px; left: 180px; top: 391px;" data-block-id="c31c8245cabc8b62b2c007bca334ad08"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11; font-size: 160%; color: rgb(106, 168, 79);"><p><em>in an envy-free manner</em></p></div></div></section><section data-id="453f6270b7703b5fed9c519e327a1f41"><div class="sl-block" data-block-type="text" data-name="text-7967d1" data-block-id="c2715f815a40092b6eaffd47763c9ac7" style="height: auto; width: 600px; left: 180px; top: 57.3813px;"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10;" data-fragment-index="0"><p>In the 2010s, several approximation procedures and procedures for special cases were published.</p></div></div>
@@ -414,6 +1065,75 @@ document.getElementById('btn-randomize').addEventListener('click',function(){
 document.getElementById('btn-walk').addEventListener('click',doWalk);
 document.getElementById('btn-reset').addEventListener('click',function(){manual=false;document.getElementById('btn-manual').style.background='';defLabel();upd();});
 defLabel();buildSVG();upd();
+})();
+</script>
+</section><section data-id="sperner-owner-labeling">
+<style>
+#owner-wrap{position:relative;width:960px;height:700px;font-family:'heliotrope_3',sans-serif}
+#owner-title{position:absolute;left:60px;top:30px;font-size:30px;font-weight:bold;color:#222}
+</style>
+<div id="owner-wrap">
+<div id="owner-title">But if the owners were assigned like this...</div>
+<svg id="owner-svg" width="960" height="620" style="position:absolute;top:80px"></svg>
+</div>
+<script>
+(function(){
+var svg=document.getElementById('owner-svg');
+var ns="http://www.w3.org/2000/svg";
+var N=4;
+var top=[380,30],bl=[160,400],br=[600,400];
+function b2c(i,j){var k=N-i-j;return[i/N*top[0]+j/N*bl[0]+k/N*br[0],i/N*top[1]+j/N*bl[1]+k/N*br[1]];}
+
+// Compute vertices
+var pts={};
+for(var i=0;i<=N;i++) for(var j=0;j<=N-i;j++) pts[i+","+j]=b2c(i,j);
+
+// Draw edges
+function ln(p1,p2){
+  var l=document.createElementNS(ns,"line");
+  l.setAttribute("x1",p1[0]);l.setAttribute("y1",p1[1]);
+  l.setAttribute("x2",p2[0]);l.setAttribute("y2",p2[1]);
+  l.setAttribute("stroke","#444");l.setAttribute("stroke-width","1.5");
+  svg.appendChild(l);
+}
+for(var i=0;i<=N;i++) for(var j=0;j<=N-i;j++){
+  var p=pts[i+","+j];
+  if(j+1<=N-i) ln(p,pts[i+","+(j+1)]);
+  if(i+1<=N-j) ln(p,pts[(i+1)+","+j]);
+  if(i+1<=N&&j-1>=0&&(i+1)+(j-1)<=N) ln(p,pts[(i+1)+","+(j-1)]);
+}
+// Outer triangle thicker
+var op=document.createElementNS(ns,"polygon");
+op.setAttribute("points",top[0]+","+top[1]+" "+bl[0]+","+bl[1]+" "+br[0]+","+br[1]);
+op.setAttribute("fill","none");op.setAttribute("stroke","#333");op.setAttribute("stroke-width","2.5");
+svg.appendChild(op);
+
+// Owner labeling: assign A=0, B=1, C=2 to each vertex
+// such that every small triangle has all three owners.
+// Pattern: owner(i,j) = (i + 2*j) mod 3
+// Verify: upward tri (i,j),(i,j+1),(i+1,j): owners (i+2j),(i+2j+2),(i+1+2j) mod 3 = x, x+2, x+1 = all different
+// downward tri (i+1,j),(i,j+1),(i+1,j+1): owners (i+1+2j),(i+2j+2),(i+1+2j+2) mod 3 = x+1, x+2, x mod 3?
+// Let's check: i+1+2j, i+2(j+1)=i+2j+2, (i+1)+2(j+1)=i+2j+3. mod 3: a, a+2, a+3=a. Not all different.
+// Try: owner(i,j) = (2*i + j) mod 3
+// Up tri: (2i+j), (2i+j+1), (2(i+1)+j)=(2i+j+2). mod3: x, x+1, x+2. All different!
+// Down tri: (2(i+1)+j)=2i+j+2, (2i+j+1), (2(i+1)+j+1)=2i+j+3=2i+j mod3. So: x+2, x+1, x. All different!
+
+var labels=["A","B","C"];
+var lColors=["#2e7d32","#2e7d32","#2e7d32"];
+
+for(var i=0;i<=N;i++) for(var j=0;j<=N-i;j++){
+  var p=pts[i+","+j];
+  var owner=(2*i+j)%3;
+  var t=document.createElementNS(ns,"text");
+  t.setAttribute("x",p[0]);t.setAttribute("y",p[1]-10);
+  t.setAttribute("text-anchor","middle");
+  t.setAttribute("font-family","'heliotrope_3',sans-serif");
+  t.setAttribute("font-size","20");
+  t.setAttribute("font-weight","bold");
+  t.setAttribute("fill","#2e7d32");
+  t.textContent=labels[owner];
+  svg.appendChild(t);
+}
 })();
 </script>
 </section><section data-id="sperner-cake-connection">
