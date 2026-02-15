@@ -1,0 +1,2986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Streaming Algorithms: Counting in the Data Firehose</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Overlock:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* Heliotrope font */
+        @font-face {
+            font-family: 'Heliotrope';
+            src: url('../assets/webfonts/heliotrope_3_regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Heliotrope';
+            src: url('../assets/webfonts/heliotrope_3_bold.woff2') format('woff2');
+            font-weight: bold;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Heliotrope';
+            src: url('../assets/webfonts/heliotrope_3_italic.woff2') format('woff2');
+            font-weight: normal;
+            font-style: italic;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Heliotrope';
+            src: url('../assets/webfonts/heliotrope_3_bold_italic.woff2') format('woff2');
+            font-weight: bold;
+            font-style: italic;
+            font-display: swap;
+        }
+    </style>
+
+    <!-- RevealJS CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/white.min.css">
+
+    <!-- KaTeX CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+
+    <style>
+        /* ============================================
+           CLEAN MINIMALIST STYLES - gwern.net inspired
+           ============================================ */
+
+        :root, .reveal {
+            /* Base palette */
+            --bg-main: #f5f5f5;
+            --bg-slide: #ffffff;
+            --text: #222222;
+            --text-primary: #222222;
+            --text-secondary: #666666;
+            --text-light: #666666;
+            --border: #cccccc;
+            --border-dark: #888888;
+            --border-light: #dddddd;
+            --border-medium: #aaaaaa;
+            --error: #c44;
+            --r-main-color: #222222;
+            --r-heading-color: #222222;
+            --r-link-color: #222222;
+            --r-selection-color: #222222;
+
+            /* 7 distinct pastel accent colors */
+            --pastel-blue: #a8d4f0;
+            --pastel-green: #b8e6c1;
+            --pastel-coral: #f5c4c0;
+            --pastel-lavender: #d4c4e8;
+            --pastel-gold: #f5e6a3;
+            --pastel-mint: #a8e6d5;
+            --pastel-peach: #f5d4b8;
+        }
+
+        /* Base reveal overrides */
+        .reveal-viewport {
+            background: var(--bg-main);
+        }
+
+        .reveal {
+            font-family: 'Heliotrope', Georgia, serif;
+            font-size: 20px;
+            color: var(--text);
+        }
+
+        .reveal .slides {
+            text-align: left;
+        }
+
+        /* Slide container with double border */
+        .reveal .slides > section {
+            background: var(--bg-slide);
+            border: 3px double var(--border);
+            padding: 55px 35px 30px 35px;
+            box-sizing: border-box;
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        /* Nested sections (vertical slides) */
+        .reveal .slides section > section {
+            border: none;
+            padding: 40px 0 0 0 !important;
+            background: transparent;
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        /* Ensure all text is dark by default */
+        .reveal .slides section {
+            color: var(--text) !important;
+        }
+        .reveal .slides section p,
+        .reveal .slides section span,
+        .reveal .slides section li,
+        .reveal .slides section strong,
+        .reveal .slides section em,
+        .reveal .slides section div {
+            color: var(--text);
+        }
+
+        /* Ensure fragments are visible */
+        .reveal .slides .fragment,
+        .reveal .slides .fragment * {
+            color: var(--text) !important;
+        }
+
+        /* Exceptions for elements with dark backgrounds */
+        .reveal .slides .btn-primary,
+        .reveal .slides .nav-btn:not(.back),
+        .reveal .slides table th {
+            color: white !important;
+        }
+
+        /* Typography */
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-weight: 700;
+            color: var(--text);
+            text-transform: none;
+            letter-spacing: -0.01em;
+        }
+
+        .reveal h1 {
+            font-size: 1.7em;
+            margin-bottom: 0.3em;
+        }
+
+        .reveal h2 {
+            font-size: 1.25em;
+            margin-bottom: 0.25em;
+            padding-bottom: 0.15em;
+            border-bottom: 1px solid var(--border-dark);
+            display: inline-block;
+        }
+
+        .reveal h3 {
+            font-size: 0.95em;
+            margin-bottom: 0.2em;
+            font-style: italic;
+            color: var(--text-light);
+        }
+
+        .reveal p {
+            color: var(--text);
+            line-height: 1.5;
+            margin-bottom: 0.5em;
+        }
+
+        .reveal ul, .reveal ol {
+            color: var(--text);
+            margin-left: 1em;
+        }
+
+        .reveal li {
+            color: var(--text);
+            margin-bottom: 0.3em;
+            line-height: 1.45;
+        }
+
+        .reveal strong {
+            color: var(--text);
+            font-weight: 700;
+        }
+
+        .reveal em {
+            color: var(--text-light);
+        }
+
+        /* Simple framed boxes */
+        .definition-box, .theorem-box, .algorithm-box, .success-box, .goal-box, .warning-box, .insight-box {
+            background: var(--bg-slide);
+            border: 1px solid var(--border-dark);
+            padding: 10px 14px;
+            margin: 10px 0;
+            max-width: 88%;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .definition-box {
+            border-left: 3px solid var(--pastel-blue);
+        }
+
+        .theorem-box {
+            border-left: 3px solid var(--pastel-green);
+        }
+
+        .algorithm-box {
+            border-left: 3px solid #9b8bb8;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.85em;
+            line-height: 1.6;
+            background: #fafafa;
+        }
+
+        .success-box {
+            border-left: 3px solid var(--pastel-mint);
+        }
+
+        .goal-box {
+            border-left: 3px solid #9b8bb8;
+        }
+
+        .warning-box {
+            border-left: 3px solid var(--pastel-gold);
+        }
+
+        .insight-box {
+            border-left: 3px solid var(--pastel-coral);
+        }
+
+        .algorithm-box .keyword {
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .box-title {
+            font-family: 'Overlock', sans-serif;
+            font-weight: 700;
+            font-size: 0.85em;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Demo containers */
+        .demo-container {
+            background: #fafafa;
+            border: 1px solid var(--border);
+            padding: 10px;
+            margin: 10px 0;
+            max-width: 95%;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .demo-header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--border);
+            gap: 8px;
+        }
+
+        .demo-title {
+            font-family: 'Overlock', sans-serif;
+            font-weight: 700;
+            color: var(--text);
+            font-size: 0.9em;
+        }
+
+        .demo-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .demo-controls label {
+            font-size: 0.75em;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        .demo-controls input {
+            background: white;
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 4px 6px;
+            font-size: 0.8em;
+            width: 50px;
+        }
+
+        .demo-controls input:focus {
+            outline: none;
+            border-color: var(--border-dark);
+        }
+
+        .demo-canvas {
+            background: white;
+            border: 1px solid var(--border);
+            margin: 8px 0;
+            min-height: 200px;
+            max-width: 100%;
+            box-sizing: border-box;
+            overflow: auto;
+        }
+
+        .demo-output {
+            background: #fafafa;
+            border: 1px solid var(--border);
+            padding: 8px;
+            font-size: 0.85em;
+            min-height: 20px;
+            max-height: 100px;
+            overflow-y: auto;
+        }
+
+        /* Buttons */
+        .btn {
+            background: white;
+            border: 1px solid var(--border-dark);
+            color: var(--text);
+            padding: 5px 12px;
+            font-size: 0.75em;
+            cursor: pointer;
+            font-family: 'Overlock', sans-serif;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .btn:hover {
+            background: #f0f0f0;
+        }
+
+        .btn-primary {
+            background: var(--text);
+            color: white !important;
+            border-color: var(--text);
+        }
+
+        .btn-primary:hover {
+            background: #444;
+        }
+
+        .btn-success {
+            background: var(--pastel-green);
+            border-color: #8bc98f;
+        }
+
+        .btn-warning {
+            background: var(--pastel-gold);
+            border-color: #d4c478;
+        }
+
+        .btn-secondary {
+            background: #eeeeee;
+            border-color: var(--border);
+        }
+
+        /* Feedback messages */
+        .feedback-success {
+            background: #f0fff0;
+            border: 1px solid #8bc98f;
+            padding: 6px 10px;
+            font-size: 0.85em;
+        }
+
+        .feedback-error {
+            background: #fff5f5;
+            border: 1px solid #e88;
+            padding: 6px 10px;
+            font-size: 0.85em;
+        }
+
+        .feedback-info {
+            background: #f5faff;
+            border: 1px solid var(--pastel-blue);
+            padding: 6px 10px;
+            font-size: 0.85em;
+        }
+
+        /* Stream visualization */
+        .stream-viz {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            flex-wrap: wrap;
+            padding: 10px;
+            background: #fafafa;
+            border: 1px solid var(--border);
+            margin: 8px 0;
+            max-height: 80px;
+            overflow-y: auto;
+        }
+
+        .stream-element {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: var(--pastel-blue);
+            border: 1px solid #78b4d0;
+            border-radius: 4px;
+            font-size: 0.7em;
+            font-weight: bold;
+        }
+
+        .stream-element.active {
+            background: var(--pastel-coral);
+            border-color: #d89490;
+            transform: scale(1.1);
+        }
+
+        .stream-element.processed {
+            background: var(--pastel-mint);
+            border-color: #78c6a5;
+        }
+
+        /* Buffer visualization */
+        .buffer-viz {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px;
+            background: #fafafa;
+            border: 1px solid var(--border);
+            margin: 8px 0;
+            min-height: 50px;
+        }
+
+        .buffer-element {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 4px 8px;
+            background: var(--pastel-lavender);
+            border: 1px solid #b4a4c8;
+            border-radius: 4px;
+            font-size: 0.75em;
+        }
+
+        .buffer-element .elem-value {
+            font-weight: bold;
+        }
+
+        .buffer-element .elem-prob {
+            font-size: 0.65em;
+            color: var(--text-light);
+        }
+
+        /* Two-column layout */
+        .two-cols {
+            display: flex;
+            gap: 20px;
+        }
+
+        .two-cols > div {
+            flex: 1;
+        }
+
+        /* Stat display */
+        .stat-display {
+            display: flex;
+            gap: 20px;
+            margin: 10px 0;
+        }
+
+        .stat-item {
+            background: #fafafa;
+            border: 1px solid var(--border);
+            padding: 8px 12px;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 0.7em;
+            color: var(--text-light);
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        /* Code display */
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 12px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.75em;
+            line-height: 1.5;
+            overflow-x: auto;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+
+        .code-block .comment {
+            color: #75715e;
+        }
+
+        .code-block .keyword {
+            color: #f92672;
+        }
+
+        .code-block .function {
+            color: #66d9ef;
+        }
+
+        .code-block .string {
+            color: #e6db74;
+        }
+
+        .code-block .number {
+            color: #ae81ff;
+        }
+
+        /* Timeline/history */
+        .history-box {
+            max-height: 150px;
+            overflow-y: auto;
+            font-size: 0.75em;
+            background: #fafafa;
+            border: 1px solid var(--border);
+            padding: 8px;
+        }
+
+        .history-item {
+            padding: 3px 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .history-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Act indicators */
+        .act-label {
+            font-family: 'Overlock', sans-serif;
+            font-size: 0.7em;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-light);
+            margin-bottom: 8px;
+        }
+
+        /* Tables */
+        .reveal table {
+            border-collapse: collapse;
+            margin: 10px 0;
+            font-size: 0.85em;
+        }
+
+        .reveal table th {
+            background: var(--text);
+            color: white !important;
+            padding: 8px 12px;
+            text-align: left;
+            font-family: 'Overlock', sans-serif;
+        }
+
+        .reveal table td {
+            padding: 6px 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .reveal table tr:nth-child(even) {
+            background: #fafafa;
+        }
+
+        /* Bottom navigation */
+        .bottom-nav {
+            position: absolute;
+            bottom: 15px;
+            left: 35px;
+            right: 35px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .nav-btn {
+            font-size: 0.7em;
+            padding: 4px 10px;
+            background: var(--text);
+            color: white !important;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .nav-btn.back {
+            background: transparent;
+            color: var(--text) !important;
+            border: 1px solid var(--border);
+        }
+
+        /* References */
+        .ref-small {
+            font-size: 0.7em;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        /* Highlight animation for demos */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .pulse {
+            animation: pulse 0.5s ease-in-out;
+        }
+
+        /* ============================================
+           ANIMATED MISRA-GRIES DEMO STYLES
+           ============================================ */
+        .mg-game-container {
+            position: relative;
+            width: 100%;
+            max-width: 95%;
+            height: 340px;
+            overflow: hidden;
+            box-sizing: border-box;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(88, 166, 255, 0.15), transparent), #0d1117;
+            color: #e6edf3;
+            font-family: 'Overlock', sans-serif;
+        }
+
+        .mg-setup-panel {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 22px;
+            box-sizing: border-box;
+            background: rgba(13, 17, 23, 0.9);
+            z-index: 20;
+            overflow: auto;
+        }
+
+        .mg-setup-panel h3 {
+            margin: 0;
+            color: #dbe8ff !important;
+            font-size: 1.2em;
+            font-family: 'EB Garamond', Georgia, serif;
+            font-style: normal;
+        }
+
+        .mg-setup-panel label {
+            margin: 0;
+            color: #9fb2cc !important;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .mg-setup-panel input[type="number"] {
+            width: 70px;
+            padding: 6px 10px;
+            font-size: 1em;
+            text-align: center;
+            border: 1px solid #3a4553;
+            border-radius: 6px;
+            color: #e6edf3;
+            background: #161b22;
+            margin-bottom: 0;
+        }
+
+        .mg-k-slider-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 4px;
+        }
+
+        .mg-k-slider-row input[type="range"] {
+            width: 180px;
+            accent-color: #58a6ff;
+            cursor: pointer;
+        }
+
+        .mg-k-slider-row .mg-k-val {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #79c0ff !important;
+            min-width: 24px;
+            text-align: center;
+        }
+
+        .mg-stream-mode {
+            display: flex;
+            gap: 16px;
+            font-size: 0.8em;
+            color: #9fb2cc;
+        }
+
+        .mg-stream-mode label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin: 0;
+            cursor: pointer;
+            color: #9fb2cc !important;
+        }
+
+        .mg-custom-stream-wrap {
+            width: min(560px, 92%);
+            display: none;
+            margin-top: 4px;
+        }
+
+        .mg-custom-stream-wrap.visible {
+            display: block;
+        }
+
+        .mg-custom-stream-wrap textarea {
+            width: 100%;
+            min-height: 58px;
+            resize: vertical;
+            padding: 8px 10px;
+            box-sizing: border-box;
+            border-radius: 6px;
+            border: 1px solid #3a4553;
+            background: #161b22;
+            color: #e6edf3;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.78em;
+            line-height: 1.35;
+        }
+
+        .mg-custom-stream-help {
+            margin-top: 5px;
+            font-size: 0.7em;
+            color: #92a3b8;
+        }
+
+        .mg-setup-panel .btn-start {
+            background: linear-gradient(135deg, #58a6ff, #1f6feb);
+            color: white !important;
+            border: 0;
+            padding: 8px 22px;
+            font-size: 0.9em;
+            font-family: 'Overlock', sans-serif;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .mg-setup-panel .btn-start:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(88, 166, 255, 0.35);
+        }
+
+        #mg-game-area {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            padding: 10px 12px 6px;
+            box-sizing: border-box;
+            overflow: hidden;
+            gap: 4px;
+        }
+
+        #mg-game-area.mg-game-area-hidden {
+            display: none;
+        }
+
+        .mg-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+            gap: 12px;
+        }
+
+        .mg-reset-btn button {
+            background: transparent;
+            border: 1px solid #3a4553;
+            color: #9fb2cc !important;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.72em;
+            transition: border-color 0.2s ease, color 0.2s ease;
+        }
+
+        .mg-reset-btn button:hover {
+            border-color: #ff7b72;
+            color: #e6edf3 !important;
+        }
+
+        .mg-status-bar {
+            color: #9fb2cc !important;
+            font-size: 0.72em;
+            text-align: right;
+            line-height: 1.35;
+            white-space: nowrap;
+        }
+
+        .mg-slots-area {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            flex-shrink: 0;
+            min-height: 74px;
+            overflow: hidden;
+            padding: 2px;
+        }
+
+        .mg-slot {
+            width: 54px;
+            height: 68px;
+            border-radius: 8px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #161b22;
+            border: 2px dashed #4b5564;
+            transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+            overflow: hidden;
+        }
+
+        .mg-slot.occupied {
+            border-style: solid;
+            border-color: #58a6ff;
+            background: #212b38;
+        }
+
+        .mg-slot.bounce-target {
+            transform: scale(1.08);
+            box-shadow: 0 0 16px rgba(255, 107, 107, 0.5);
+        }
+
+        .mg-slot-value {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #79c0ff !important;
+            line-height: 1;
+        }
+
+        .mg-slot-count {
+            margin-top: 4px;
+            font-size: 0.68em;
+            color: #a8b6c8 !important;
+        }
+
+        .mg-slot-empty {
+            font-size: 0.68em;
+            color: #8b949e !important;
+        }
+
+        .mg-ticker-zone {
+            position: relative;
+            border: 1px solid #3a4553;
+            border-radius: 8px;
+            background: #0b1118;
+            min-height: 66px;
+            padding: 10px;
+            box-sizing: border-box;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .mg-ticker-track {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 0;
+            box-sizing: border-box;
+            transform: translateX(0);
+            overflow: hidden;
+        }
+
+        .mg-ticker-element {
+            flex-shrink: 0;
+            width: 34px;
+            height: 36px;
+            border-radius: 6px;
+            border: 1px solid #313b48;
+            background: #1b2430;
+            color: #9fb2cc !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85em;
+            font-weight: 700;
+            box-sizing: border-box;
+        }
+
+        .mg-current-frame {
+            position: absolute;
+            left: 50%;
+            bottom: 10px;
+            transform: translateX(-50%);
+            width: 42px;
+            height: 44px;
+            border: 3px solid #ff6b6b;
+            border-radius: 8px;
+            box-sizing: border-box;
+            z-index: 20;
+            pointer-events: none;
+            background: transparent;
+            box-shadow: 0 0 20px rgba(255, 107, 107, 0.25);
+        }
+
+        .mg-current-ghost {
+            position: absolute;
+            width: 42px;
+            height: 44px;
+            border: 3px solid #3fb950;
+            border-radius: 8px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85em;
+            font-weight: 700;
+            color: #56d364 !important;
+            background: rgba(63, 185, 80, 0.16);
+            box-shadow: 0 0 20px rgba(63, 185, 80, 0.35);
+            z-index: 120;
+            pointer-events: none;
+            box-sizing: border-box;
+        }
+
+        .mg-action-log {
+            min-height: 18px;
+            color: #a8b6c8 !important;
+            font-size: 0.74em;
+            text-align: center;
+            font-style: italic;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            flex-shrink: 0;
+            padding: 0 4px;
+        }
+
+        .mg-controls {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+            padding: 2px 0;
+        }
+
+        .mg-controls button {
+            padding: 7px 14px;
+            border-radius: 6px;
+            border: 1px solid #3a4553;
+            cursor: pointer;
+            font-size: 0.76em;
+            font-weight: 700;
+            color: #e6edf3 !important;
+            background: #1b2430;
+            transition: all 0.15s ease;
+        }
+
+        #mg-play {
+            background: linear-gradient(135deg, #3fb950, #2ea043);
+            border: 0;
+            color: white !important;
+        }
+
+        #mg-pause {
+            background: #d29922;
+            border: 0;
+            color: #0d1117 !important;
+        }
+
+        #mg-step-btn, #mg-step-back {
+            background: #1b2430;
+        }
+
+        .mg-controls button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- ================================================
+                 TITLE SLIDE
+                 ================================================ -->
+            <section>
+                <h1>Streaming Algorithms</h1>
+                <h3>Counting in the Data Firehose</h3>
+                <p style="margin-top: 2em;">
+                    A deep dive into approximation algorithms for massive data streams,<br>
+                    featuring the elegant CVM algorithm for counting distinct elements.
+                </p>
+                <div style="margin-top: 3em; font-size: 0.85em; color: var(--text-light);">
+                    <p><em>Based on:</em> Chakraborty, Vinodchandran, and Meel. "Distinct Elements in Streams: An Algorithm for the (Text) Book." ESA 2022.</p>
+                </div>
+            </section>
+
+            <!-- ================================================
+                 ACT I: THE STREAMING WORLD
+                 ================================================ -->
+            <section>
+                <section>
+                    <div class="act-label">Act I</div>
+                    <h1>The Streaming World</h1>
+                    <p style="margin-top: 1em; font-size: 1.1em;">
+                        Why can't we just store everything?
+                    </p>
+                </section>
+
+                <!-- Why Streaming? -->
+                <section>
+                    <h2>The Data Firehose</h2>
+                    <p>Imagine you're an engineer at Hotstar during an IPL final...</p>
+
+                    <div class="fragment" style="margin-top: 1em;">
+                        <div class="definition-box">
+                            <div class="box-title">The Challenge</div>
+                            <ul style="margin: 0;">
+                                <li><strong>Network packets:</strong> Millions per second at a router</li>
+                                <li><strong>Click streams:</strong> Every user interaction on a major website</li>
+                                <li><strong>IoT sensors:</strong> Temperature, pressure, motion across thousands of devices</li>
+                                <li><strong>Financial transactions:</strong> Stock trades, payment processing</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="fragment" style="margin-top: 1em;">
+                        <div class="warning-box">
+                            <div class="box-title">The Constraints</div>
+                            <ul style="margin: 0;">
+                                <li><strong>One pass:</strong> Data arrives once and is gone forever</li>
+                                <li><strong>Small memory:</strong> Can't store the entire stream</li>
+                                <li><strong>Real-time:</strong> Must answer queries instantly</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Streaming Model Formal -->
+                <section>
+                    <h2>The Streaming Model</h2>
+
+                    <div class="definition-box">
+                        <div class="box-title">Definition: Data Stream</div>
+                        <p>A <strong>data stream</strong> is a sequence \(\langle a_1, a_2, \ldots, a_m \rangle\) where:</p>
+                        <ul style="margin: 0;">
+                            <li>Each \(a_i \in [n] = \{1, 2, \ldots, n\}\) is an element from a universe</li>
+                            <li>Elements arrive one at a time</li>
+                            <li>We can only process each element once (no random access)</li>
+                        </ul>
+                    </div>
+
+                    <div class="fragment" style="margin-top: 1em;">
+                        <div class="goal-box">
+                            <div class="box-title">Goal</div>
+                            <p>Compute statistics about the stream using space \(O(\text{polylog}(m, n))\) — <em>exponentially</em> less than storing everything!</p>
+                        </div>
+                    </div>
+
+                    <div class="fragment" style="margin-top: 1em;">
+                        <p><strong>Key trade-off:</strong> We sacrifice exactness for space efficiency. We compute <em>approximate</em> answers with <em>high probability</em>.</p>
+                    </div>
+                </section>
+
+                <!-- A Sampler of Problems -->
+                <section>
+                    <h2>A Sampler of Streaming Problems</h2>
+                    <p>Here's a taste of what we can solve efficiently in the streaming model:</p>
+
+                    <table style="width: 88%; margin-top: 1em;">
+                        <thead>
+                            <tr>
+                                <th>Problem</th>
+                                <th>Question</th>
+                                <th>Application</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="fragment">
+                                <td><strong>Heavy Hitters</strong></td>
+                                <td>Which items appear most frequently?</td>
+                                <td>Trending hashtags, DDoS detection</td>
+                            </tr>
+                            <tr class="fragment">
+                                <td><strong>Quantiles</strong></td>
+                                <td>What's the median? 95th percentile?</td>
+                                <td>Latency monitoring, salary analysis</td>
+                            </tr>
+                            <tr class="fragment">
+                                <td><strong>Frequency Moments</strong></td>
+                                <td>How "spread out" is the data?</td>
+                                <td>Entropy estimation, anomaly detection</td>
+                            </tr>
+                            <tr class="fragment">
+                                <td><strong>Distinct Elements</strong></td>
+                                <td>How many unique items?</td>
+                                <td>Unique visitors, cardinality estimation</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- Heavy Hitters: Misra-Gries -->
+                <section>
+                    <h2>Heavy Hitters: Misra-Gries in 3 Minutes</h2>
+
+                    <div class="definition-box">
+                        <div class="box-title">Problem</div>
+                        <p>Find all elements that appear more than \(m/k\) times in a stream of length \(m\).</p>
+                    </div>
+
+                    <div class="fragment" style="margin-top: 0.5em;">
+                        <div class="algorithm-box">
+                            <div class="box-title">Misra-Gries Algorithm (1982)</div>
+                            <span class="keyword">Initialize:</span> Empty dictionary D with at most k-1 entries<br><br>
+                            <span class="keyword">For each</span> element e in stream:<br>
+                            &nbsp;&nbsp;<span class="keyword">if</span> e in D: D[e] += 1<br>
+                            &nbsp;&nbsp;<span class="keyword">else if</span> |D| &lt; k-1: D[e] = 1<br>
+                            &nbsp;&nbsp;<span class="keyword">else:</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for each</span> key in D: D[key] -= 1<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;Remove all keys with count 0<br><br>
+                            <span class="keyword">Return:</span> Keys in D
+                        </div>
+                    </div>
+
+                    <div class="fragment" style="margin-top: 0.5em;">
+                        <div class="success-box">
+                            <strong>Space:</strong> \(O(k \log m)\) &nbsp;|&nbsp; <strong>Guarantee:</strong> Never misses a heavy hitter!
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Interactive Misra-Gries Demo -->
+                <section>
+                    <h2>Interactive: Misra-Gries Demo</h2>
+
+                    <div class="mg-game-container" id="mg-game">
+                        <!-- Setup Panel (shown initially) -->
+                        <div class="mg-setup-panel" id="mg-setup">
+                            <h3>Misra-Gries Heavy Hitters</h3>
+                            <label>Choose k:</label>
+                            <div class="mg-k-slider-row">
+                                <span style="font-size:0.75em; color:#8b949e !important;">2</span>
+                                <input type="range" id="mg-k-input" min="2" max="10" value="4">
+                                <span style="font-size:0.75em; color:#8b949e !important;">10</span>
+                                <span class="mg-k-val" id="mg-k-val-display">4</span>
+                            </div>
+                            <p style="font-size: 0.8em; color: #c9d1d9 !important; margin-bottom: 12px;">
+                                k−1 = <span id="mg-slots-preview" style="color: #79c0ff !important; font-weight: 700;">3</span> slots to track heavy hitters
+                            </p>
+                            <div class="mg-stream-mode">
+                                <label><input type="radio" name="mg-stream-mode" value="random" checked> Random stream</label>
+                                <label><input type="radio" name="mg-stream-mode" value="custom"> Custom stream</label>
+                            </div>
+                            <div class="mg-custom-stream-wrap" id="mg-custom-stream-wrap">
+                                <textarea id="mg-custom-stream-input" placeholder="Example: 1, 2, 2, 5, 7, 7, 7, 3"></textarea>
+                                <div class="mg-custom-stream-help">Comma-separated numbers. n is set from how many values you provide.</div>
+                            </div>
+                            <button class="btn-start" id="mg-start-btn">Start Simulation</button>
+                        </div>
+
+                        <!-- Game Area (hidden initially) -->
+                        <div id="mg-game-area" class="mg-game-area-hidden">
+                            <div class="mg-header">
+                                <div class="mg-reset-btn">
+                                    <button id="mg-reset">Reset</button>
+                                </div>
+                                <div class="mg-status-bar">
+                                    <div>Processed: <span id="mg-processed">0</span> / <span id="mg-total">100</span></div>
+                                    <div>k = <span id="mg-k-display">4</span> (slots: <span id="mg-slots-display">3</span>)</div>
+                                </div>
+                            </div>
+
+                            <!-- Slots area -->
+                            <div class="mg-slots-area" id="mg-slots"></div>
+
+                            <div class="mg-ticker-zone">
+                                <div class="mg-current-frame" id="mg-current-frame"></div>
+                                <div class="mg-ticker-track" id="mg-ticker"></div>
+                            </div>
+
+                            <!-- Action log -->
+                            <div class="mg-action-log" id="mg-action-log">Press Play or Step to begin.</div>
+
+                            <!-- Controls -->
+                            <div class="mg-controls">
+                                <button id="mg-play" title="Auto-play">Autoplay</button>
+                            </div>
+                            <div class="mg-controls">
+                                <button id="mg-step-back" title="Step back">◀ Back</button>
+                                <button id="mg-pause" title="Pause" disabled>Pause</button>
+                                <button id="mg-step-btn" title="Step forward">Step ▶</button>
+                            </div>
+                        </div>
+                        <div class="mg-current-ghost" id="mg-current-ghost"></div>
+                    </div>
+                </section>
+
+                <!-- The (ε, δ) Framework -->
+                <section style="overflow: hidden;">
+                    <h2>The \((\varepsilon, \delta)\)-Approximation Framework</h2>
+
+                    <p>The common thread across all streaming algorithms:</p>
+
+                    <div class="definition-box" style="margin-top: 0.8em;">
+                        <div class="box-title">Definition: \((\varepsilon, \delta)\)-Approximation</div>
+                        <p>An algorithm provides an \((\varepsilon, \delta)\)-approximation for quantity \(Q\) if:</p>
+                        $$\Pr\left[ (1-\varepsilon)Q \leq \hat{Q} \leq (1+\varepsilon)Q \right] \geq 1 - \delta$$
+                        <p>where \(\hat{Q}\) is the algorithm's estimate.</p>
+                    </div>
+
+                    <div class="two-cols fragment" style="margin-top: 0.8em; align-items: stretch; max-width: 88%;">
+                        <div style="flex: 1; min-width: 0;">
+                            <div class="insight-box" style="max-width: 100%; height: 100%; margin: 0; box-sizing: border-box;">
+                                <div class="box-title">\(\varepsilon\) = Accuracy</div>
+                                <p>How close are we to the true answer?<br>
+                                Smaller \(\varepsilon\) = more accurate.</p>
+                            </div>
+                        </div>
+                        <div style="flex: 1; min-width: 0;">
+                            <div class="insight-box" style="max-width: 100%; height: 100%; margin: 0; box-sizing: border-box;">
+                                <div class="box-title">\(\delta\) = Confidence</div>
+                                <p>How likely is the guarantee to hold?<br>
+                                Smaller \(\delta\) = more confident.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fragment" style="margin-top: 0.8em;">
+                        <p><strong>Typical setting:</strong> \(\varepsilon = 0.01\) (1% error), \(\delta = 0.01\) (99% confidence)</p>
+                    </div>
+                </section>
+            </section>
+
+            <!-- ================================================
+                 ACT II: DEEP DIVE - DISTINCT ELEMENTS
+                 ================================================ -->
+            <section>
+                <section>
+                    <div class="act-label">Act II</div>
+                    <h1>Deep Dive: Counting Distinct Elements</h1>
+                    <p style="margin-top: 1em; font-size: 1.1em;">
+                        The \(F_0\) problem and the elegant CVM algorithm
+                    </p>
+                </section>
+
+                <!-- The F0 Problem: Interactive -->
+                <section>
+                    <h2>The Distinct Elements Problem</h2>
+
+                    <div class="definition-box">
+                        <div class="box-title">Problem: \(F_0\) Estimation</div>
+                        <p>Given a stream \(\langle a_1, a_2, \ldots, a_m \rangle\) with elements from \([n]\),<br>
+                        estimate \(F_0\) = the number of <strong>distinct</strong> elements in the stream.</p>
+                    </div>
+
+                    <div style="margin-top: 0.8em;">
+                        <div class="demo-container" style="max-width: 88%; padding: 12px 14px;">
+                            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                                <label style="font-size: 0.8em; font-weight: 600; color: var(--text); white-space: nowrap;">Stream:</label>
+                                <input type="text" id="f0-stream-input" value="3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5"
+                                    style="flex: 1; min-width: 200px; padding: 6px 10px; font-size: 0.85em; font-family: Consolas, Monaco, monospace; border: 1px solid var(--border); border-radius: 4px; background: white; color: var(--text);">
+                                <button class="btn btn-primary" id="f0-compute" style="white-space: nowrap;">Compute F₀</button>
+                            </div>
+                            <div id="f0-result" style="margin-top: 10px; font-size: 0.85em; min-height: 20px;"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- The F0 Problem: Why Hard -->
+                <section>
+                    <h2>The Distinct Elements Problem</h2>
+
+                    <div class="definition-box">
+                        <div class="box-title">Problem: \(F_0\) Estimation</div>
+                        <p>Given a stream \(\langle a_1, a_2, \ldots, a_m \rangle\) with elements from \([n]\),<br>
+                        estimate \(F_0\) = the number of <strong>distinct</strong> elements in the stream.</p>
+                    </div>
+
+                    <div class="fragment" style="margin-top: 0.8em;">
+                        <div class="warning-box">
+                            <div class="box-title">Why is this hard?</div>
+                            <p>The naïve approach: Store all elements seen so far.</p>
+                            <p><strong>Space needed:</strong> \(O(F_0 \cdot \log n)\) bits — potentially \(O(n)\)!</p>
+                            <p>Can we do <em>exponentially</em> better?</p>
+                        </div>
+                    </div>
+
+                    <div class="fragment" style="margin-top: 0.8em;">
+                        <div class="success-box">
+                            <strong>Spoiler:</strong> Yes! The CVM algorithm uses only \(O\left(\frac{1}{\varepsilon^2} \log \frac{1}{\delta} \cdot (\log n + \log m)\right)\) bits.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Core Idea: Sampling Intuition -->
+                <section style="overflow: hidden;">
+                    <h2>Core Idea: Sampling</h2>
+
+                    <div class="insight-box" style="margin-top: 0.5em;">
+                        <div class="box-title">Key Insight</div>
+                        <p>If we pick every ball in a bin with probability \(p\) and end up with \(k\) balls in our bucket,
+                        then \(k/p\) is a good estimate of the number of balls in the bin.</p>
+                    </div>
+
+                    <div class="demo-container" style="max-width: 88%; margin-top: 0.8em; padding: 10px 14px;">
+                        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px;">
+                            <label style="font-size: 0.78em; font-weight: 600; white-space: nowrap;">Balls in bin:</label>
+                            <input type="range" id="sampling-n" min="10" max="200" value="80" style="width: 110px; accent-color: #58a6ff;">
+                            <span id="sampling-n-val" style="font-size: 0.85em; font-weight: 700; min-width: 28px;">80</span>
+                            <label style="font-size: 0.78em; font-weight: 600; white-space: nowrap; margin-left: 10px;">p =</label>
+                            <input type="range" id="sampling-p" min="5" max="100" value="30" style="width: 110px; accent-color: #58a6ff;">
+                            <span id="sampling-p-val" style="font-size: 0.85em; font-weight: 700; min-width: 36px;">0.30</span>
+                            <button class="btn btn-primary" id="sampling-go" style="white-space: nowrap;">Sample!</button>
+                        </div>
+                        <div id="sampling-bin" style="display:flex; flex-wrap:wrap; gap:3px; padding:6px; background:#fafafa; border:1px solid var(--border); border-radius:4px; min-height:36px; max-height: 90px; overflow-y: auto;"></div>
+                        <div id="sampling-result" style="margin-top: 8px; font-size: 0.82em; min-height: 18px;"></div>
+                    </div>
+                </section>
+
+                <!-- NaiveSampler: Interactive -->
+                <section style="overflow: hidden;">
+                    <h2>NaiveSampler</h2>
+
+                    <div class="algorithm-box" style="font-size: 0.8em; line-height: 1.5; padding: 8px 12px;">
+                        <div class="box-title">Algorithm: NaiveSampler</div>
+                        <span class="keyword">Input:</span> Stream \(\mathcal{D} = \langle a_1, a_2, \ldots, a_m \rangle\), probability \(p\)<br>
+                        <span class="keyword">Initialize:</span> \(\mathcal{B} \leftarrow \emptyset\)<br>
+                        <span class="keyword">For</span> \(i = 1\) to \(m\):<br>
+                        &nbsp;&nbsp;With probability \(p\), \(\mathcal{B} \leftarrow \mathcal{B} \cup \{a_i\}\)<br>
+                        <span class="keyword">Return:</span> \(|\mathcal{B}| / p\)
+                    </div>
+
+                    <div class="demo-container" style="max-width: 88%; margin-top: 0.6em; padding: 10px 14px;">
+                        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 6px;">
+                            <label style="font-size: 0.75em; font-weight: 600; white-space: nowrap;">Stream:</label>
+                            <input type="text" id="naive-stream" value="1, 1, 2, 1, 4, 1, 2, 1"
+                                style="flex:1; min-width:140px; padding:5px 8px; font-size:0.8em; font-family:Consolas,Monaco,monospace; border:1px solid var(--border); border-radius:4px; background:white; color:var(--text);">
+                            <label style="font-size: 0.75em; font-weight: 600; white-space: nowrap;">p:</label>
+                            <input type="range" id="naive-p" min="10" max="100" value="50" style="width:80px; accent-color:#58a6ff;">
+                            <span id="naive-p-val" style="font-size:0.8em; font-weight:700; min-width:30px;">0.50</span>
+                            <button class="btn btn-primary" id="naive-run" style="white-space:nowrap; font-size:0.75em;">Run</button>
+                            <button class="btn" id="naive-step" style="white-space:nowrap; font-size:0.75em;">Step</button>
+                            <button class="btn" id="naive-reset" style="white-space:nowrap; font-size:0.75em;">Reset</button>
+                        </div>
+                        <div id="naive-viz" style="display:flex; flex-wrap:wrap; gap:4px; padding:4px; background:#fafafa; border:1px solid var(--border); border-radius:4px; min-height:28px; max-height:50px; overflow-y:auto;"></div>
+                        <div id="naive-log" style="font-size:0.75em; margin-top:5px; min-height:16px; color:var(--text-light); font-style:italic;"></div>
+                        <div style="display:flex; gap:16px; margin-top:4px; align-items:flex-start;">
+                            <div style="flex:1;">
+                                <div style="font-size:0.72em; font-weight:600; margin-bottom:3px;">Bucket \(\mathcal{B}\):</div>
+                                <div id="naive-bucket" style="display:flex; flex-wrap:wrap; gap:3px; padding:4px; background:#f5faff; border:1px solid var(--pastel-blue); border-radius:4px; min-height:24px; max-height:40px; overflow-y:auto;"></div>
+                            </div>
+                            <div id="naive-result" style="font-size:0.8em; min-width:180px; padding-top:14px;"></div>
+                        </div>
+                    </div>
+
+                    <div class="fragment" style="margin-top: 0.6em;">
+                        <div class="warning-box" style="font-size: 0.9em;">
+                            <div class="box-title">Problem</div>
+                            <p>Repeated elements inflate \(|\mathcal{B}|\) — elements appearing more often are more likely to be sampled!</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Fixed Sampler: Interactive -->
+                <section style="overflow: hidden;">
+                    <h2>The Fix: Throw It Away First</h2>
+
+                    <div class="algorithm-box" style="font-size: 0.8em; line-height: 1.5; padding: 8px 12px;">
+                        <div class="box-title">Algorithm: Sampler (Fixed)</div>
+                        <span class="keyword">Input:</span> Stream \(\mathcal{D} = \langle a_1, a_2, \ldots, a_m \rangle\), probability \(p\)<br>
+                        <span class="keyword">Initialize:</span> \(\mathcal{B} \leftarrow \emptyset\)<br>
+                        <span class="keyword">For</span> \(i = 1\) to \(m\):<br>
+                        &nbsp;&nbsp;\(\mathcal{B} \leftarrow \mathcal{B} \setminus \{a_i\}\) <span style="color: var(--text-light);">// throw it away</span><br>
+                        &nbsp;&nbsp;With probability \(p\), \(\mathcal{B} \leftarrow \mathcal{B} \cup \{a_i\}\)<br>
+                        <span class="keyword">Return:</span> \(|\mathcal{B}| / p\)
+                    </div>
+
+                    <div class="demo-container" style="max-width: 88%; margin-top: 0.6em; padding: 10px 14px;">
+                        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 6px;">
+                            <label style="font-size: 0.75em; font-weight: 600; white-space: nowrap;">Stream:</label>
+                            <input type="text" id="fixed-stream" value="1, 1, 2, 1, 4, 1, 2, 1"
+                                style="flex:1; min-width:140px; padding:5px 8px; font-size:0.8em; font-family:Consolas,Monaco,monospace; border:1px solid var(--border); border-radius:4px; background:white; color:var(--text);">
+                            <label style="font-size: 0.75em; font-weight: 600; white-space: nowrap;">p:</label>
+                            <input type="range" id="fixed-p" min="10" max="100" value="50" style="width:80px; accent-color:#58a6ff;">
+                            <span id="fixed-p-val" style="font-size:0.8em; font-weight:700; min-width:30px;">0.50</span>
+                            <button class="btn btn-primary" id="fixed-run" style="white-space:nowrap; font-size:0.75em;">Run</button>
+                            <button class="btn" id="fixed-step" style="white-space:nowrap; font-size:0.75em;">Step</button>
+                            <button class="btn" id="fixed-reset" style="white-space:nowrap; font-size:0.75em;">Reset</button>
+                        </div>
+                        <div id="fixed-viz" style="display:flex; flex-wrap:wrap; gap:4px; padding:4px; background:#fafafa; border:1px solid var(--border); border-radius:4px; min-height:28px; max-height:50px; overflow-y:auto;"></div>
+                        <div id="fixed-log" style="font-size:0.75em; margin-top:5px; min-height:16px; color:var(--text-light); font-style:italic;"></div>
+                        <div style="display:flex; gap:16px; margin-top:4px; align-items:flex-start;">
+                            <div style="flex:1;">
+                                <div style="font-size:0.72em; font-weight:600; margin-bottom:3px;">Bucket \(\mathcal{B}\):</div>
+                                <div id="fixed-bucket" style="display:flex; flex-wrap:wrap; gap:3px; padding:4px; background:#f0fff0; border:1px solid #8bc98f; border-radius:4px; min-height:24px; max-height:40px; overflow-y:auto;"></div>
+                            </div>
+                            <div id="fixed-result" style="font-size:0.8em; min-width:180px; padding-top:14px;"></div>
+                        </div>
+                    </div>
+
+                    <div class="fragment" style="margin-top: 0.6em;">
+                        <div class="success-box" style="font-size: 0.9em;">
+                            <div class="box-title">Observation</div>
+                            <p>Each distinct element \(x\) is in \(\mathcal{B}\) with probability exactly \(p\), independent of how many times it appeared.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Analysis of Fixed-Rate Sampling -->
+                <section>
+                    <h2>Fixed-Rate Sampling: Analysis</h2>
+
+                    <div class="insight-box">
+                        <div class="box-title">Idea</div>
+                        <p>Sample each element with probability \(p\). If we see \(|S|\) distinct elements in our sample,<br>
+                        estimate \(F_0 \approx |S| / p\).</p>
+                    </div>
+
+                    <div class="fragment" style="margin-top: 1em;">
+                        <p><strong>Analysis:</strong> Let \(X_i = 1\) if the \(i\)-th distinct element is sampled.</p>
+                        <ul>
+                            <li>\(\mathbb{E}[|S|] = p \cdot F_0\)</li>
+                            <li>By Chernoff bounds, if \(p \cdot F_0\) is large enough, \(|S|/p\) is concentrated around \(F_0\)</li>
+                        </ul>
+                    </div>
+
+                    <div class="fragment" style="margin-top: 1em;">
+                        <div class="warning-box">
+                            <div class="box-title">The Problem</div>
+                            <p>To get a \((1 \pm \varepsilon)\)-approximation, we need \(p \cdot F_0 = \Omega(1/\varepsilon^2)\).</p>
+                            <p>But we don't know \(F_0\) in advance — that's what we're trying to compute!</p>
+                            <ul>
+                                <li>If \(p\) is too small: sample might be empty</li>
+                                <li>If \(p\) is too large: sample overflows our memory</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- The Adaptive Fix -->
+                <section>
+                    <h2>The Fix: Adaptive Sampling</h2>
+
+                    <div class="success-box">
+                        <div class="box-title">Key Insight</div>
+                        <p>Start with \(p = 1\) (keep everything). When the sample gets too large, <strong>subsample by half</strong> and halve \(p\).</p>
+                    </div>
+
+                    <div class="fragment" style="margin-top: 1em;">
+                        <div class="theorem-box">
+                            <div class="box-title">The Invariant</div>
+                            <p>At all times, every distinct element seen so far is in our sample <strong>independently</strong> with probability \(p\).</p>
+                        </div>
+                    </div>
+
+                    <div class="fragment" style="margin-top: 1em;">
+                        <p><strong>Why does subsampling preserve the invariant?</strong></p>
+                        <ul>
+                            <li>Before subsampling: each distinct element in sample w.p. \(p\)</li>
+                            <li>Subsampling: keep each element w.p. \(1/2\)</li>
+                            <li>After: each distinct element in sample w.p. \(p/2\) ✓</li>
+                        </ul>
+                    </div>
+
+                    <div class="fragment" style="margin-top: 1em;">
+                        <p>This is the essence of the <strong>CVM algorithm</strong> (Chakraborty-Vinodchandran-Meel, ESA 2022).</p>
+                    </div>
+                </section>
+
+                <!-- The CVM Algorithm -->
+                <section>
+                    <h2>The CVM Algorithm</h2>
+
+                    <div class="algorithm-box">
+                        <div class="box-title">Algorithm: CVM Distinct Elements</div>
+                        <span class="keyword">Input:</span> Stream \(\langle a_1, \ldots, a_m \rangle\), buffer size \(s\)<br>
+                        <span class="keyword">Initialize:</span> Buffer \(X \leftarrow \emptyset\), probability \(p \leftarrow 1\)<br><br>
+
+                        <span class="keyword">For each</span> element \(a\) in stream:<br>
+                        &nbsp;&nbsp;<span class="keyword">if</span> \(a \in X\): remove \(a\) from \(X\)  <span style="color: var(--text-light);">// Re-roll the dice</span><br>
+                        &nbsp;&nbsp;<span class="keyword">if</span> random() \(< p\): add \(a\) to \(X\)  <span style="color: var(--text-light);">// Keep with prob p</span><br><br>
+
+                        &nbsp;&nbsp;<span class="keyword">while</span> \(|X| \geq s\):  <span style="color: var(--text-light);">// Buffer full? Subsample!</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;\(X \leftarrow\) subsample(\(X\), 1/2)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;\(p \leftarrow p/2\)<br><br>
+
+                        <span class="keyword">Return:</span> \(|X| / p\)
+                    </div>
+
+                    <div class="fragment" style="margin-top: 0.8em;">
+                        <div class="insight-box">
+                            <strong>That's it!</strong> The entire algorithm is about 10 lines. No hash functions, no complex data structures.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Why Remove Before Re-adding? -->
+                <section>
+                    <h2>A Subtle Point: Why Remove First?</h2>
+
+                    <p>When element \(a\) arrives and \(a \in X\), why do we remove it before possibly re-adding?</p>
+
+                    <div class="fragment" style="margin-top: 1em;">
+                        <div class="warning-box">
+                            <div class="box-title">The Issue</div>
+                            <p>If we just kept \(a\) when it's already in \(X\), the probability that \(a\) is in \(X\) would depend on how many times we've seen \(a\).</p>
+                            <p>This breaks the independence property!</p>
+                        </div>
+                    </div>
+
+                    <div class="fragment" style="margin-top: 1em;">
+                        <div class="success-box">
+                            <div class="box-title">The Fix</div>
+                            <p>By always "re-rolling" — removing and then adding with probability \(p\) — we ensure:</p>
+                            <p style="text-align: center;"><em>Each distinct element is in \(X\) with probability exactly \(p\), independent of history.</em></p>
+                        </div>
+                    </div>
+
+                    <p class="fragment" style="margin-top: 1em;">This is the key to the simple analysis!</p>
+                </section>
+
+                <!-- Interactive CVM Demo -->
+                <section>
+                    <h2>Interactive: CVM Algorithm Demo</h2>
+
+                    <div class="demo-container">
+                        <div class="demo-header">
+                            <span class="demo-title">CVM Distinct Element Counter</span>
+                            <div class="demo-controls">
+                                <label>Buffer size:</label>
+                                <input type="number" id="cvm-buffer-size" value="8" min="4" max="16" style="width: 40px;">
+                                <button class="btn btn-primary" id="cvm-step">Step</button>
+                                <button class="btn btn-success" id="cvm-run">Run All</button>
+                                <button class="btn" id="cvm-reset">Reset</button>
+                                <button class="btn btn-warning" id="cvm-new-stream">New Stream</button>
+                            </div>
+                        </div>
+
+                        <div class="two-cols">
+                            <div>
+                                <p style="font-size: 0.75em; margin: 3px 0;">Stream (remaining):</p>
+                                <div id="cvm-stream" class="stream-viz" style="max-height: 60px;"></div>
+
+                                <p style="font-size: 0.75em; margin: 3px 0;">Buffer X (max size s):</p>
+                                <div id="cvm-buffer" class="buffer-viz" style="min-height: 45px;"></div>
+                            </div>
+                            <div>
+                                <div class="stat-display" style="flex-wrap: wrap;">
+                                    <div class="stat-item">
+                                        <div class="stat-label">p (prob)</div>
+                                        <div class="stat-value" id="cvm-p">1</div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div class="stat-label">|X|</div>
+                                        <div class="stat-value" id="cvm-size">0</div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div class="stat-label">Estimate</div>
+                                        <div class="stat-value" id="cvm-estimate">0</div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div class="stat-label">True F₀</div>
+                                        <div class="stat-value" id="cvm-true">?</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="cvm-output" class="demo-output" style="font-size: 0.75em;">Click "Step" to process elements one by one, or "Run All" to see the final result.</div>
+                    </div>
+                </section>
+
+                <!-- The Proof: Overview -->
+                <section>
+                    <h2>The Analysis: Overview</h2>
+
+                    <p>We need to prove two things:</p>
+
+                    <div class="theorem-box" style="margin-top: 1em;">
+                        <div class="box-title">Theorem (CVM, 2022)</div>
+                        <p>With buffer size \(s = O\left(\frac{1}{\varepsilon^2} \log \frac{1}{\delta}\right)\), the CVM algorithm:</p>
+                        <ol>
+                            <li><strong>Never overflows:</strong> The buffer size stays below \(s\) (except momentarily)</li>
+                            <li><strong>Is accurate:</strong> With probability \(\geq 1 - \delta\), the estimate \(\hat{F}_0 = |X|/p\) satisfies:
+                            $$(1 - \varepsilon)F_0 \leq \hat{F}_0 \leq (1 + \varepsilon)F_0$$</li>
+                        </ol>
+                    </div>
+
+                    <div class="fragment" style="margin-top: 1em;">
+                        <p><strong>Key tools:</strong></p>
+                        <ul>
+                            <li>The invariant: each distinct element is in \(X\) independently w.p. \(p\)</li>
+                            <li>Chernoff bounds for concentration</li>
+                            <li>Union bound over failure events</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- The Proof: Invariant -->
+                <section>
+                    <h2>The Invariant</h2>
+
+                    <div class="theorem-box">
+                        <div class="box-title">Lemma (The Key Invariant)</div>
+                        <p>At all times during the algorithm, for the current values of \(X\) and \(p\):</p>
+                        <p style="text-align: center;"><em>Each distinct element seen so far is in \(X\) independently with probability \(p\).</em></p>
+                    </div>
+
+                    <div class="fragment" style="margin-top: 1em;">
+                        <p><strong>Proof by induction:</strong></p>
+                        <ul>
+                            <li><strong>Base:</strong> Initially, \(X = \emptyset\) and \(p = 1\). Vacuously true.</li>
+                        </ul>
+                    </div>
+
+                    <div class="fragment">
+                        <ul>
+                            <li><strong>New element \(a\) arrives (not seen before):</strong><br>
+                            We add \(a\) to \(X\) with probability \(p\). Independence preserved. ✓</li>
+                        </ul>
+                    </div>
+
+                    <div class="fragment">
+                        <ul>
+                            <li><strong>Repeated element \(a\) arrives:</strong><br>
+                            Remove \(a\) from \(X\), then add with probability \(p\).<br>
+                            Result: \(a\) is in \(X\) with probability \(p\), independent of history. ✓</li>
+                        </ul>
+                    </div>
+
+                    <div class="fragment">
+                        <ul>
+                            <li><strong>Subsampling:</strong><br>
+                            Each element in \(X\) kept with probability \(1/2\), and \(p \leftarrow p/2\).<br>
+                            New probability: \(p \cdot (1/2) = p/2\). Independence preserved by independence of coin flips. ✓</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- The Proof: Concentration -->
+                <section>
+                    <h2>The Accuracy Guarantee</h2>
+
+                    <p>Given the invariant, \(|X|\) is the sum of \(F_0\) independent Bernoulli(\(p\)) random variables.</p>
+
+                    <div class="fragment" style="margin-top: 0.5em;">
+                        <p>\(\mathbb{E}[|X|] = p \cdot F_0\)</p>
+                    </div>
+
+                    <div class="fragment" style="margin-top: 0.5em;">
+                        <div class="theorem-box">
+                            <div class="box-title">Chernoff Bound</div>
+                            <p>For sum of independent Bernoulli r.v.s with mean \(\mu\):</p>
+                            $$\Pr[|X - \mu| > \varepsilon \mu] < 2\exp\left(-\frac{\varepsilon^2 \mu}{3}\right)$$
+                        </div>
+                    </div>
+
+                    <div class="fragment" style="margin-top: 0.5em;">
+                        <p>At the end, \(\mu = p \cdot F_0\). We want the estimate \(|X|/p\) to be within \((1 \pm \varepsilon)F_0\).</p>
+                        <p>This happens when \(|X|\) is within \((1 \pm \varepsilon) \cdot p \cdot F_0\).</p>
+                    </div>
+
+                    <div class="fragment" style="margin-top: 0.5em;">
+                        <p>Failure probability: \(2\exp\left(-\frac{\varepsilon^2 \cdot p \cdot F_0}{3}\right)\)</p>
+                        <p>If \(p \cdot F_0 \geq \frac{3}{\varepsilon^2} \ln(2/\delta)\), failure probability \(\leq \delta\). ✓</p>
+                    </div>
+                </section>
+
+                <!-- The Proof: Buffer Size -->
+                <section>
+                    <h2>Why the Buffer Doesn't Overflow</h2>
+
+                    <p>We need \(p \cdot F_0\) to be large enough for accuracy. But if it's too large, the buffer overflows!</p>
+
+                    <div class="fragment" style="margin-top: 1em;">
+                        <div class="insight-box">
+                            <div class="box-title">Key Observation</div>
+                            <p>After subsampling, \(\mathbb{E}[|X|] = p \cdot F_0\).</p>
+                            <p>The buffer size \(s\) is chosen so that with high probability, \(|X|\) stays close to its expectation.</p>
+                        </div>
+                    </div>
+
+                    <div class="fragment" style="margin-top: 1em;">
+                        <p>If \(s = c \cdot \frac{1}{\varepsilon^2} \log(1/\delta)\) for suitable constant \(c\):</p>
+                        <ul>
+                            <li>When \(|X| \geq s\), we subsample</li>
+                            <li>After subsampling, \(\mathbb{E}[|X|] = s/2\)</li>
+                            <li>By Chernoff, \(|X|\) unlikely to immediately overflow again</li>
+                        </ul>
+                    </div>
+
+                    <div class="fragment" style="margin-top: 1em;">
+                        <div class="success-box">
+                            <p>A union bound over all \(O(\log m)\) possible values of \(p\) gives the final guarantee.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Putting It Together -->
+                <section>
+                    <h2>The Complete Picture</h2>
+
+                    <div class="theorem-box">
+                        <div class="box-title">Theorem (Complete Statement)</div>
+                        <p>The CVM algorithm with buffer size</p>
+                        $$s = O\left(\frac{1}{\varepsilon^2} \log\frac{1}{\delta} + \log n\right)$$
+                        <p>uses \(O(s \cdot (\log n + \log m))\) bits of space and returns an estimate \(\hat{F}_0\) such that with probability at least \(1 - \delta\):</p>
+                        $$(1 - \varepsilon)F_0 \leq \hat{F}_0 \leq (1 + \varepsilon)F_0$$
+                    </div>
+
+                    <div class="fragment" style="margin-top: 1em;">
+                        <div class="success-box">
+                            <div class="box-title">Why This Is Remarkable</div>
+                            <ul style="margin: 0;">
+                                <li>No hash functions needed (unlike Flajolet-Martin, HyperLogLog)</li>
+                                <li>Proof uses only Chernoff bounds — accessible to undergraduates!</li>
+                                <li>Near-optimal space complexity</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Multiple Runs Visualization -->
+                <section>
+                    <h2>Accuracy Across Multiple Runs</h2>
+
+                    <div class="demo-container">
+                        <div class="demo-header">
+                            <span class="demo-title">Monte Carlo Simulation of CVM</span>
+                            <div class="demo-controls">
+                                <label>True F₀:</label>
+                                <input type="number" id="mc-f0" value="100" min="10" max="500" style="width: 50px;">
+                                <label>Buffer:</label>
+                                <input type="number" id="mc-buffer" value="20" min="5" max="50" style="width: 40px;">
+                                <label>Runs:</label>
+                                <input type="number" id="mc-runs" value="50" min="10" max="200" style="width: 45px;">
+                                <button class="btn btn-primary" id="mc-go">Simulate</button>
+                            </div>
+                        </div>
+
+                        <div id="mc-chart" class="demo-canvas" style="min-height: 220px;"></div>
+
+                        <div id="mc-stats" class="demo-output"></div>
+                    </div>
+
+                    <p class="ref-small" style="margin-top: 0.5em;">Each dot represents one run of CVM. The horizontal band shows the \((1 \pm \varepsilon)\) range.</p>
+                </section>
+            </section>
+
+            <!-- ================================================
+                 ACT III: THE BIG PICTURE
+                 ================================================ -->
+            <section>
+                <section>
+                    <div class="act-label">Act III</div>
+                    <h1>The Big Picture</h1>
+                    <p style="margin-top: 1em; font-size: 1.1em;">
+                        Context, applications, and what's next
+                    </p>
+                </section>
+
+                <!-- Historical Context -->
+                <section>
+                    <h2>The Research Landscape</h2>
+
+                    <p>The distinct elements problem has a rich 40-year history:</p>
+
+                    <table style="width: 100%; margin-top: 1em; font-size: 0.9em;">
+                        <thead>
+                            <tr>
+                                <th>Year</th>
+                                <th>Algorithm</th>
+                                <th>Key Innovation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="fragment">
+                                <td>1983</td>
+                                <td><strong>Flajolet-Martin</strong></td>
+                                <td>Hash + count trailing zeros</td>
+                            </tr>
+                            <tr class="fragment">
+                                <td>1996</td>
+                                <td><strong>AMS</strong> (Alon-Matias-Szegedy)</td>
+                                <td>Frequency moments framework</td>
+                            </tr>
+                            <tr class="fragment">
+                                <td>2007</td>
+                                <td><strong>HyperLogLog</strong></td>
+                                <td>Near-optimal, practical</td>
+                            </tr>
+                            <tr class="fragment">
+                                <td>2010</td>
+                                <td><strong>Kane-Nelson-Woodruff</strong></td>
+                                <td>Optimal space lower bound</td>
+                            </tr>
+                            <tr class="fragment">
+                                <td>2022</td>
+                                <td><strong>CVM</strong></td>
+                                <td>Simple + teachable + near-optimal</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="fragment" style="margin-top: 1em;">
+                        <div class="insight-box">
+                            <p>CVM doesn't improve the space bound, but it <em>simplifies</em> the algorithm and proof dramatically. Donald Knuth called it "a real gem."</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Streaming in the Wild -->
+                <section>
+                    <h2>Streaming in the Wild</h2>
+
+                    <p>Where are these algorithms actually used?</p>
+
+                    <div class="two-cols" style="margin-top: 1em;">
+                        <div>
+                            <div class="success-box">
+                                <div class="box-title">HyperLogLog</div>
+                                <ul style="margin: 0; font-size: 0.9em;">
+                                    <li><strong>Redis:</strong> PFADD, PFCOUNT commands</li>
+                                    <li><strong>BigQuery:</strong> APPROX_COUNT_DISTINCT</li>
+                                    <li><strong>Druid:</strong> Cardinality aggregation</li>
+                                    <li><strong>Presto:</strong> approx_distinct()</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="success-box">
+                                <div class="box-title">Count-Min Sketch</div>
+                                <ul style="margin: 0; font-size: 0.9em;">
+                                    <li><strong>Network monitoring:</strong> Traffic analysis</li>
+                                    <li><strong>NLP:</strong> Word frequency estimation</li>
+                                    <li><strong>Databases:</strong> Query optimization</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fragment" style="margin-top: 1em;">
+                        <div class="definition-box">
+                            <div class="box-title">Apache DataSketches</div>
+                            <p>Open-source library implementing streaming algorithms: HLL, KLL (quantiles), Theta (set operations), Frequent Items, and more.</p>
+                            <p><a href="https://datasketches.apache.org/" style="color: var(--text);">datasketches.apache.org</a></p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Connections -->
+                <section>
+                    <h2>Connections Outward</h2>
+
+                    <p>Streaming algorithms connect to many areas of TCS:</p>
+
+                    <div class="two-cols" style="margin-top: 1em;">
+                        <div>
+                            <div class="insight-box">
+                                <div class="box-title">Communication Complexity</div>
+                                <p>Lower bounds for streaming often come from communication complexity.</p>
+                                <p>Example: \(F_0\) needs \(\Omega(\log n)\) bits — proved via indexing!</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="insight-box">
+                                <div class="box-title">Sketching & Dimensionality Reduction</div>
+                                <p>Random projections, JL lemma, compressed sensing — all related ideas.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="two-cols fragment" style="margin-top: 0.8em;">
+                        <div>
+                            <div class="insight-box">
+                                <div class="box-title">Property Testing</div>
+                                <p>Testing properties with sublinear samples. Related query models.</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="insight-box">
+                                <div class="box-title">Online Algorithms</div>
+                                <p>Making irrevocable decisions with limited information.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Open Problems -->
+                <section>
+                    <h2>What's Still Open?</h2>
+
+                    <p>Streaming is an active research area. Some open directions:</p>
+
+                    <div class="definition-box fragment" style="margin-top: 0.8em;">
+                        <div class="box-title">Multi-Pass Algorithms</div>
+                        <p>What if we can make 2 or 3 passes over the data? Can we do better?</p>
+                    </div>
+
+                    <div class="definition-box fragment" style="margin-top: 0.5em;">
+                        <div class="box-title">Sliding Windows</div>
+                        <p>Only count elements from the last \(W\) time steps. The "forgetting" makes things harder!</p>
+                    </div>
+
+                    <div class="definition-box fragment" style="margin-top: 0.5em;">
+                        <div class="box-title">Distributed Streams</div>
+                        <p>Data arrives at multiple sites. How do we coordinate with minimal communication?</p>
+                    </div>
+
+                    <div class="definition-box fragment" style="margin-top: 0.5em;">
+                        <div class="box-title">Adversarial Streams</div>
+                        <p>What if the stream is chosen adversarially based on our random bits? Differential privacy helps!</p>
+                    </div>
+                </section>
+
+                <!-- Summary -->
+                <section>
+                    <h2>Summary</h2>
+
+                    <div class="success-box">
+                        <div class="box-title">Key Takeaways</div>
+                        <ol style="margin: 0;">
+                            <li class="fragment"><strong>The streaming model</strong> captures real constraints: one pass, limited memory, real-time.</li>
+                            <li class="fragment"><strong>Approximate answers with high probability</strong> are often good enough — and achievable!</li>
+                            <li class="fragment"><strong>The CVM algorithm</strong> counts distinct elements using just sampling + adaptive thresholding.</li>
+                            <li class="fragment"><strong>The analysis</strong> uses only Chernoff bounds — undergraduate-accessible!</li>
+                            <li class="fragment"><strong>Space complexity:</strong> \(O\left(\frac{1}{\varepsilon^2} \log \frac{1}{\delta} \cdot \log n\right)\) — exponentially better than storing everything.</li>
+                        </ol>
+                    </div>
+
+                    <div class="fragment" style="margin-top: 1em;">
+                        <p><strong>References:</strong></p>
+                        <ul class="ref-small" style="margin: 0;">
+                            <li>Chakraborty, Vinodchandran, Meel. "Distinct Elements in Streams: An Algorithm for the (Text) Book." ESA 2022.</li>
+                            <li>Knuth. "The CVM Algorithm for Estimating Distinct Elements in Streams." 2024.</li>
+                            <li>Muthukrishnan. "Data Streams: Algorithms and Applications." NOW Publishers, 2005.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Q&A -->
+                <section>
+                    <h1>Questions?</h1>
+                    <p style="margin-top: 2em;">Let's discuss!</p>
+                    <div style="margin-top: 3em;">
+                        <p class="ref-small">Slides available at: [your URL here]</p>
+                        <p class="ref-small">Jupyter notebook with implementations: <code>streaming_algorithms.ipynb</code></p>
+                    </div>
+                </section>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- RevealJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+
+    <!-- KaTeX -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+
+    <script>
+        // Initialize Reveal.js
+        Reveal.initialize({
+            hash: true,
+            slideNumber: 'c/t',
+            progress: true,
+            center: false,
+            transition: 'none',
+            width: 1100,
+            height: 700,
+            margin: 0.04
+        });
+
+        // Render KaTeX
+        document.addEventListener('DOMContentLoaded', function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '\\(', right: '\\)', display: false},
+                    {left: '\\[', right: '\\]', display: true}
+                ],
+                throwOnError: false
+            });
+        });
+
+        // ========================================
+        // ANIMATED MISRA-GRIES DEMO
+        // ========================================
+        (function() {
+            const DEFAULT_STREAM_LENGTH = 100;
+            const MIN_VAL = 1;
+            const MAX_VAL = 9;
+            const TICKER_VISIBLE = 15;
+            const TICKER_HALF = Math.floor(TICKER_VISIBLE / 2);
+
+            let k = 4;
+            let numSlots = 3;
+            let stream = [];
+            let streamLength = DEFAULT_STREAM_LENGTH;
+            let streamIndex = 0;
+            let slots = [];
+            let history = []; // snapshots for step-back
+            let isPlaying = false;
+            let playInterval = null;
+            let isAnimating = false;
+
+            const gameContainer = document.getElementById('mg-game');
+            const setupPanel = document.getElementById('mg-setup');
+            const gameArea = document.getElementById('mg-game-area');
+            const kInput = document.getElementById('mg-k-input');
+            const slotsPreview = document.getElementById('mg-slots-preview');
+            const streamModeInputs = document.querySelectorAll('input[name="mg-stream-mode"]');
+            const customStreamWrap = document.getElementById('mg-custom-stream-wrap');
+            const customStreamInput = document.getElementById('mg-custom-stream-input');
+            const startBtn = document.getElementById('mg-start-btn');
+            const resetBtn = document.getElementById('mg-reset');
+            const playBtn = document.getElementById('mg-play');
+            const pauseBtn = document.getElementById('mg-pause');
+            const stepBtn = document.getElementById('mg-step-btn');
+            const stepBackBtn = document.getElementById('mg-step-back');
+            const slotsContainer = document.getElementById('mg-slots');
+            const tickerTrack = document.getElementById('mg-ticker');
+            const currentFrame = document.getElementById('mg-current-frame');
+            const currentGhost = document.getElementById('mg-current-ghost');
+            const actionLog = document.getElementById('mg-action-log');
+            const processedDisplay = document.getElementById('mg-processed');
+            const totalDisplay = document.getElementById('mg-total');
+            const kDisplay = document.getElementById('mg-k-display');
+            const slotsDisplay = document.getElementById('mg-slots-display');
+
+            function randomInt(min, max) {
+                return min + Math.floor(Math.random() * (max - min + 1));
+            }
+
+            function generateRandomStream() {
+                stream = [];
+                for (let i = 0; i < DEFAULT_STREAM_LENGTH; i++) {
+                    stream.push(randomInt(MIN_VAL, MAX_VAL));
+                }
+                streamLength = stream.length;
+            }
+
+            function parseCustomStream(input) {
+                const items = input.split(',').map(s => s.trim()).filter(Boolean);
+                if (items.length === 0) {
+                    return { ok: false, message: 'Please enter at least one number for a custom stream.' };
+                }
+                const values = [];
+                for (const item of items) {
+                    const num = Number(item);
+                    if (!Number.isFinite(num)) {
+                        return { ok: false, message: `Invalid number in custom stream: "${item}"` };
+                    }
+                    values.push(Math.trunc(num));
+                }
+                return { ok: true, values };
+            }
+
+            function getCurrentValue() {
+                if (streamLength === 0 || streamIndex >= streamLength) return null;
+                return stream[streamIndex];
+            }
+
+            function log(msg) {
+                actionLog.textContent = msg;
+            }
+
+            function renderSlots() {
+                slotsContainer.innerHTML = '';
+                for (let i = 0; i < numSlots; i++) {
+                    const slotDiv = document.createElement('div');
+                    slotDiv.className = 'mg-slot';
+                    slotDiv.id = `mg-slot-${i}`;
+                    if (i < slots.length) {
+                        const entry = slots[i];
+                        slotDiv.classList.add('occupied');
+                        slotDiv.innerHTML = `<div class="mg-slot-value">${entry.value}</div><div class="mg-slot-count">x${entry.count}</div>`;
+                    } else {
+                        slotDiv.innerHTML = '<div class="mg-slot-empty">empty</div>';
+                    }
+                    slotsContainer.appendChild(slotDiv);
+                }
+            }
+
+            function renderTicker() {
+                tickerTrack.innerHTML = '';
+                for (let offset = -TICKER_HALF; offset <= TICKER_HALF; offset++) {
+                    const absoluteIndex = streamIndex + offset;
+                    const cell = document.createElement('div');
+                    cell.className = 'mg-ticker-element';
+                    if (absoluteIndex < 0 || absoluteIndex >= streamLength) {
+                        cell.textContent = '';
+                        cell.style.opacity = '0.25';
+                    } else {
+                        cell.textContent = stream[absoluteIndex];
+                    }
+                    if (offset === 0 && absoluteIndex < streamLength) {
+                        cell.style.fontWeight = '800';
+                    }
+                    tickerTrack.appendChild(cell);
+                }
+            }
+
+            // Reveal.js applies CSS transform:scale() to slides.
+            // getBoundingClientRect() returns SCALED screen coords,
+            // but position:absolute left/top uses UNSCALED container coords.
+            // We must divide by the scale factor.
+            function getScale() {
+                return gameContainer.getBoundingClientRect().width / gameContainer.offsetWidth;
+            }
+
+            function localPos(el) {
+                const s = getScale();
+                const gameRect = gameContainer.getBoundingClientRect();
+                const elRect = el.getBoundingClientRect();
+                return {
+                    left: (elRect.left - gameRect.left) / s,
+                    top: (elRect.top - gameRect.top) / s,
+                    width: elRect.width / s,
+                    height: elRect.height / s
+                };
+            }
+
+            function setGhostAtFrame(value) {
+                const fp = localPos(currentFrame);
+                const ghostW = 42;
+                const ghostH = 44;
+                currentGhost.textContent = String(value);
+                currentGhost.style.display = 'flex';
+                currentGhost.style.left = `${fp.left + (fp.width - ghostW) / 2}px`;
+                currentGhost.style.top = `${fp.top + (fp.height - ghostH) / 2}px`;
+                currentGhost.style.transition = 'none';
+            }
+
+            function hideGhost() {
+                currentGhost.style.display = 'none';
+                currentGhost.style.transition = 'none';
+                currentGhost.textContent = '';
+            }
+
+            function animateToSlot(slotIndex, onDone) {
+                isAnimating = true;
+                const value = getCurrentValue();
+                setGhostAtFrame(value);
+                const slotEl = document.getElementById(`mg-slot-${slotIndex}`);
+                if (!slotEl) {
+                    hideGhost();
+                    isAnimating = false;
+                    onDone();
+                    return;
+                }
+                const sp = localPos(slotEl);
+                const ghostW = 42;
+                const ghostH = 44;
+                const targetLeft = sp.left + (sp.width - ghostW) / 2;
+                const targetTop = sp.top + (sp.height - ghostH) / 2;
+
+                requestAnimationFrame(() => {
+                    currentGhost.style.transition = 'all 0.45s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                    currentGhost.style.left = `${targetLeft}px`;
+                    currentGhost.style.top = `${targetTop}px`;
+                });
+
+                setTimeout(() => {
+                    hideGhost();
+                    isAnimating = false;
+                    onDone();
+                }, 470);
+            }
+
+            function animateBounce(onDone) {
+                isAnimating = true;
+                const value = getCurrentValue();
+                setGhostAtFrame(value);
+                const slotEls = slotsContainer.querySelectorAll('.mg-slot');
+                const ghostW = 42;
+                const ghostH = 44;
+
+                let delay = 0;
+                slotEls.forEach(slot => {
+                    setTimeout(() => {
+                        const sp = localPos(slot);
+                        slot.classList.add('bounce-target');
+                        currentGhost.style.transition = 'all 0.22s ease';
+                        currentGhost.style.left = `${sp.left + (sp.width - ghostW) / 2}px`;
+                        currentGhost.style.top = `${sp.top + (sp.height - ghostH) / 2}px`;
+                        setTimeout(() => slot.classList.remove('bounce-target'), 220);
+                    }, delay);
+                    delay += 240;
+                });
+
+                setTimeout(() => {
+                    hideGhost();
+                    isAnimating = false;
+                    onDone();
+                }, delay + 260);
+            }
+
+            function stopAtEnd() {
+                isPlaying = false;
+                if (playInterval) clearInterval(playInterval);
+                playInterval = null;
+                playBtn.disabled = true;
+                pauseBtn.disabled = true;
+                stepBtn.disabled = true;
+                stepBackBtn.disabled = history.length === 0;
+                log('End of stream reached.');
+            }
+
+            function advanceStream() {
+                streamIndex += 1;
+                processedDisplay.textContent = String(Math.min(streamIndex, streamLength));
+                stepBackBtn.disabled = history.length === 0;
+                if (streamIndex >= streamLength) {
+                    stopAtEnd();
+                    return;
+                }
+                renderTicker();
+            }
+
+            function saveSnapshot() {
+                history.push({
+                    streamIndex,
+                    slots: slots.map(s => ({ ...s }))
+                });
+            }
+
+            function stepBack() {
+                if (isAnimating || history.length === 0) return;
+                const snapshot = history.pop();
+                streamIndex = snapshot.streamIndex;
+                slots = snapshot.slots;
+                processedDisplay.textContent = String(streamIndex);
+                renderSlots();
+                renderTicker();
+                // Re-enable controls if we were at end
+                playBtn.disabled = false;
+                pauseBtn.disabled = true;
+                stepBtn.disabled = false;
+                stepBackBtn.disabled = history.length === 0;
+                log(`Stepped back to position ${streamIndex}.`);
+            }
+
+            function processStep() {
+                if (isAnimating || streamIndex >= streamLength) return;
+                saveSnapshot();
+                const value = getCurrentValue();
+                const matchIndex = slots.findIndex(s => s.value === value);
+                const hasEmptySlot = slots.length < numSlots;
+
+                if (matchIndex >= 0) {
+                    log(`"${value}" matches slot -> ${slots[matchIndex].count + 1}`);
+                    animateToSlot(matchIndex, () => {
+                        slots[matchIndex].count += 1;
+                        renderSlots();
+                        advanceStream();
+                    });
+                } else if (hasEmptySlot) {
+                    const emptyIndex = slots.length;
+                    log(`"${value}" -> new slot (count 1)`);
+                    animateToSlot(emptyIndex, () => {
+                        slots.push({ value, count: 1 });
+                        renderSlots();
+                        advanceStream();
+                    });
+                } else {
+                    log(`"${value}" -> no match, decrement all slots`);
+                    animateBounce(() => {
+                        for (let i = 0; i < slots.length; i++) slots[i].count -= 1;
+                        slots = slots.filter(s => s.count > 0);
+                        renderSlots();
+                        advanceStream();
+                    });
+                }
+            }
+
+            function startPlay() {
+                if (isPlaying || streamIndex >= streamLength) return;
+                isPlaying = true;
+                playBtn.disabled = true;
+                pauseBtn.disabled = false;
+                playInterval = setInterval(() => {
+                    if (!isAnimating) processStep();
+                }, 800);
+            }
+
+            function stopPlay() {
+                isPlaying = false;
+                if (playInterval) clearInterval(playInterval);
+                playInterval = null;
+                if (streamIndex < streamLength) {
+                    playBtn.disabled = false;
+                    pauseBtn.disabled = true;
+                }
+            }
+
+            function initGame() {
+                k = Math.max(2, Math.min(10, parseInt(kInput.value, 10) || 4));
+                numSlots = k - 1;
+                kDisplay.textContent = String(k);
+                slotsDisplay.textContent = String(numSlots);
+
+                const mode = Array.from(streamModeInputs).find(input => input.checked)?.value || 'random';
+                if (mode === 'custom') {
+                    const parsed = parseCustomStream(customStreamInput.value);
+                    if (!parsed.ok) {
+                        alert(parsed.message);
+                        return;
+                    }
+                    stream = parsed.values;
+                    streamLength = stream.length;
+                } else {
+                    generateRandomStream();
+                }
+
+                slots = [];
+                history = [];
+                streamIndex = 0;
+                isPlaying = false;
+                isAnimating = false;
+                if (playInterval) clearInterval(playInterval);
+                playInterval = null;
+
+                totalDisplay.textContent = String(streamLength);
+                processedDisplay.textContent = '0';
+                renderSlots();
+                renderTicker();
+                hideGhost();
+                log('Ready. Press Autoplay or Step.');
+
+                setupPanel.style.display = 'none';
+                gameArea.classList.remove('mg-game-area-hidden');
+                playBtn.disabled = false;
+                pauseBtn.disabled = true;
+                stepBtn.disabled = false;
+                stepBackBtn.disabled = true;
+            }
+
+            function resetGame() {
+                stopPlay();
+                hideGhost();
+                setupPanel.style.display = 'flex';
+                gameArea.classList.add('mg-game-area-hidden');
+            }
+
+            const kValDisplay = document.getElementById('mg-k-val-display');
+            kInput.addEventListener('input', () => {
+                const val = parseInt(kInput.value, 10) || 4;
+                slotsPreview.textContent = String(Math.max(1, val - 1));
+                if (kValDisplay) kValDisplay.textContent = String(val);
+            });
+
+            streamModeInputs.forEach(input => {
+                input.addEventListener('change', () => {
+                    const mode = Array.from(streamModeInputs).find(i => i.checked)?.value || 'random';
+                    customStreamWrap.classList.toggle('visible', mode === 'custom');
+                });
+            });
+
+            startBtn.addEventListener('click', initGame);
+            resetBtn.addEventListener('click', resetGame);
+            playBtn.addEventListener('click', startPlay);
+            pauseBtn.addEventListener('click', stopPlay);
+            stepBtn.addEventListener('click', () => {
+                if (!isAnimating && streamIndex < streamLength) processStep();
+            });
+            stepBackBtn.addEventListener('click', () => {
+                stepBack();
+            });
+
+            slotsPreview.textContent = String(Math.max(1, (parseInt(kInput.value, 10) || 4) - 1));
+        })();
+
+        // ========================================
+        // F0 INTERACTIVE WIDGET
+        // ========================================
+        (function() {
+            const input = document.getElementById('f0-stream-input');
+            const btn = document.getElementById('f0-compute');
+            const result = document.getElementById('f0-result');
+
+            function compute() {
+                const raw = input.value.trim();
+                if (!raw) {
+                    result.innerHTML = '<span style="color: var(--error);">Please enter a comma-separated list of numbers.</span>';
+                    return;
+                }
+                const items = raw.split(',').map(s => s.trim()).filter(Boolean);
+                const nums = [];
+                for (const item of items) {
+                    const n = Number(item);
+                    if (!Number.isFinite(n)) {
+                        result.innerHTML = `<span style="color: var(--error);">Invalid entry: "${item}"</span>`;
+                        return;
+                    }
+                    nums.push(Math.trunc(n));
+                }
+                if (nums.length === 0) {
+                    result.innerHTML = '<span style="color: var(--error);">Empty stream.</span>';
+                    return;
+                }
+                const distinct = [...new Set(nums)].sort((a, b) => a - b);
+                const f0 = distinct.length;
+                const m = nums.length;
+
+                // Build visual stream
+                let streamHTML = '<div style="display:flex; flex-wrap:wrap; gap:4px; margin: 6px 0;">';
+                nums.forEach(v => {
+                    streamHTML += `<span class="stream-element">${v}</span>`;
+                });
+                streamHTML += '</div>';
+
+                // Build distinct set
+                let distinctHTML = '<div style="display:flex; flex-wrap:wrap; gap:4px; margin: 6px 0;">';
+                distinct.forEach(v => {
+                    distinctHTML += `<span class="stream-element" style="background: var(--pastel-green); border-color: #8bc98f;">${v}</span>`;
+                });
+                distinctHTML += '</div>';
+
+                result.innerHTML =
+                    `<p style="margin:4px 0;"><strong>Stream</strong> (m = ${m}):</p>` + streamHTML +
+                    `<p style="margin:4px 0;"><strong>Distinct elements</strong>:</p>` + distinctHTML +
+                    `<p style="margin:6px 0 0;"><strong>F₀ = ${f0}</strong></p>`;
+            }
+
+            btn.addEventListener('click', compute);
+            input.addEventListener('keydown', e => { if (e.key === 'Enter') compute(); });
+
+            // Run on load with default value
+            compute();
+        })();
+
+        // ========================================
+        // SAMPLING INTUITION DEMO
+        // ========================================
+        (function() {
+            const nSlider = document.getElementById('sampling-n');
+            const pSlider = document.getElementById('sampling-p');
+            const nVal = document.getElementById('sampling-n-val');
+            const pVal = document.getElementById('sampling-p-val');
+            const goBtn = document.getElementById('sampling-go');
+            const binEl = document.getElementById('sampling-bin');
+            const resultEl = document.getElementById('sampling-result');
+
+            nSlider.addEventListener('input', () => { nVal.textContent = nSlider.value; });
+            pSlider.addEventListener('input', () => { pVal.textContent = (parseInt(pSlider.value) / 100).toFixed(2); });
+
+            function runSample() {
+                const n = parseInt(nSlider.value);
+                const p = parseInt(pSlider.value) / 100;
+                binEl.innerHTML = '';
+
+                const picked = [];
+                for (let i = 1; i <= n; i++) {
+                    const isPicked = Math.random() < p;
+                    if (isPicked) picked.push(i);
+                    const dot = document.createElement('span');
+                    dot.style.cssText = `display:inline-block; width:16px; height:16px; border-radius:50%; border:1px solid; font-size:0; line-height:16px; text-align:center; transition: all 0.3s;`;
+                    if (isPicked) {
+                        dot.style.background = 'var(--pastel-green)';
+                        dot.style.borderColor = '#6ab070';
+                    } else {
+                        dot.style.background = '#e8e8e8';
+                        dot.style.borderColor = '#ccc';
+                    }
+                    binEl.appendChild(dot);
+                }
+
+                const k = picked.length;
+                const estimate = k / p;
+                const error = n > 0 ? Math.abs(estimate - n) / n * 100 : 0;
+
+                resultEl.innerHTML =
+                    `<strong>Bin:</strong> ${n} balls &nbsp;|&nbsp; ` +
+                    `<strong>p</strong> = ${p.toFixed(2)} &nbsp;|&nbsp; ` +
+                    `<span style="color: var(--pastel-green); filter: brightness(0.6);"><strong>Picked (k):</strong> ${k}</span> &nbsp;|&nbsp; ` +
+                    `<strong>Estimate (k/p):</strong> ${estimate.toFixed(1)} &nbsp;|&nbsp; ` +
+                    `<strong>Error:</strong> ${error.toFixed(1)}%`;
+            }
+
+            goBtn.addEventListener('click', runSample);
+            runSample();
+        })();
+
+        // ========================================
+        // NAIVE SAMPLER DEMO
+        // ========================================
+        (function() {
+            const streamInput = document.getElementById('naive-stream');
+            const pSlider = document.getElementById('naive-p');
+            const pValEl = document.getElementById('naive-p-val');
+            const runBtn = document.getElementById('naive-run');
+            const stepBtn = document.getElementById('naive-step');
+            const resetBtn = document.getElementById('naive-reset');
+            const vizEl = document.getElementById('naive-viz');
+            const bucketEl = document.getElementById('naive-bucket');
+            const resultEl = document.getElementById('naive-result');
+            const logEl = document.getElementById('naive-log');
+
+            let stream = [];
+            let idx = 0;
+            let bucket = new Set();
+            let p = 0.5;
+
+            pSlider.addEventListener('input', () => {
+                pValEl.textContent = (parseInt(pSlider.value) / 100).toFixed(2);
+            });
+
+            function parseStream() {
+                return streamInput.value.split(',').map(s => s.trim()).filter(Boolean).map(Number).filter(Number.isFinite).map(Math.trunc);
+            }
+
+            function resetState() {
+                stream = parseStream();
+                p = parseInt(pSlider.value) / 100;
+                idx = 0;
+                bucket = new Set();
+                renderAll();
+                resultEl.innerHTML = '';
+                logEl.innerHTML = 'Press <strong>Step</strong> to process one element.';
+            }
+
+            function renderAll() {
+                vizEl.innerHTML = '';
+                stream.forEach((v, i) => {
+                    const el = document.createElement('span');
+                    el.className = 'stream-element';
+                    el.textContent = v;
+                    if (i < idx) { el.style.background = 'var(--pastel-mint)'; el.style.borderColor = '#78c6a5'; el.style.opacity = '0.5'; }
+                    if (i === idx) { el.style.background = 'var(--pastel-coral)'; el.style.borderColor = '#d89490'; }
+                    vizEl.appendChild(el);
+                });
+                bucketEl.innerHTML = '';
+                if (bucket.size === 0) {
+                    bucketEl.innerHTML = '<span style="color:var(--text-light); font-size:0.75em;">empty</span>';
+                } else {
+                    [...bucket].sort((a,b) => a-b).forEach(v => {
+                        const el = document.createElement('span');
+                        el.className = 'stream-element';
+                        el.style.background = 'var(--pastel-blue)';
+                        el.style.borderColor = '#78b4d0';
+                        el.textContent = v;
+                        bucketEl.appendChild(el);
+                    });
+                }
+            }
+
+            function showResult() {
+                const trueF0 = new Set(stream).size;
+                const estimate = bucket.size / p;
+                resultEl.innerHTML =
+                    `<strong>|B|</strong> = ${bucket.size}<br>` +
+                    `<strong>Estimate</strong> = ${estimate.toFixed(1)}<br>` +
+                    `<strong>True F₀</strong> = ${trueF0}`;
+            }
+
+            function doStep() {
+                if (idx >= stream.length) { showResult(); logEl.innerHTML = '<strong>Done!</strong> Stream exhausted.'; return; }
+                const a = stream[idx];
+                const coin = Math.random();
+                const won = coin < p;
+                if (won) bucket.add(a);
+                const icon = won ? '✅' : '❌';
+                logEl.innerHTML = `Element <strong>${a}</strong>: flipped coin (p = ${p.toFixed(2)}) → ${icon} ${won ? '<span style="color:#2e7d32;">heads — added to B</span>' : '<span style="color:#c44;">tails — not added</span>'}`;
+                idx++;
+                renderAll();
+                if (idx >= stream.length) showResult();
+            }
+
+            function runAll() {
+                resetState();
+                while (idx < stream.length) {
+                    const a = stream[idx];
+                    if (Math.random() < p) bucket.add(a);
+                    idx++;
+                }
+                renderAll();
+                showResult();
+                logEl.innerHTML = '<strong>Done!</strong> Ran all elements.';
+            }
+
+            runBtn.addEventListener('click', runAll);
+            stepBtn.addEventListener('click', doStep);
+            resetBtn.addEventListener('click', resetState);
+            resetState();
+        })();
+
+        // ========================================
+        // FIXED SAMPLER DEMO
+        // ========================================
+        (function() {
+            const streamInput = document.getElementById('fixed-stream');
+            const pSlider = document.getElementById('fixed-p');
+            const pValEl = document.getElementById('fixed-p-val');
+            const runBtn = document.getElementById('fixed-run');
+            const stepBtn = document.getElementById('fixed-step');
+            const resetBtn = document.getElementById('fixed-reset');
+            const vizEl = document.getElementById('fixed-viz');
+            const bucketEl = document.getElementById('fixed-bucket');
+            const resultEl = document.getElementById('fixed-result');
+            const logEl = document.getElementById('fixed-log');
+
+            let stream = [];
+            let idx = 0;
+            let bucket = new Set();
+            let p = 0.5;
+
+            pSlider.addEventListener('input', () => {
+                pValEl.textContent = (parseInt(pSlider.value) / 100).toFixed(2);
+            });
+
+            function parseStream() {
+                return streamInput.value.split(',').map(s => s.trim()).filter(Boolean).map(Number).filter(Number.isFinite).map(Math.trunc);
+            }
+
+            function resetState() {
+                stream = parseStream();
+                p = parseInt(pSlider.value) / 100;
+                idx = 0;
+                bucket = new Set();
+                renderAll();
+                resultEl.innerHTML = '';
+                logEl.innerHTML = 'Press <strong>Step</strong> to process one element.';
+            }
+
+            function renderAll() {
+                vizEl.innerHTML = '';
+                stream.forEach((v, i) => {
+                    const el = document.createElement('span');
+                    el.className = 'stream-element';
+                    el.textContent = v;
+                    if (i < idx) { el.style.background = 'var(--pastel-mint)'; el.style.borderColor = '#78c6a5'; el.style.opacity = '0.5'; }
+                    if (i === idx) { el.style.background = 'var(--pastel-coral)'; el.style.borderColor = '#d89490'; }
+                    vizEl.appendChild(el);
+                });
+                bucketEl.innerHTML = '';
+                if (bucket.size === 0) {
+                    bucketEl.innerHTML = '<span style="color:var(--text-light); font-size:0.75em;">empty</span>';
+                } else {
+                    [...bucket].sort((a,b) => a-b).forEach(v => {
+                        const el = document.createElement('span');
+                        el.className = 'stream-element';
+                        el.style.background = 'var(--pastel-green)';
+                        el.style.borderColor = '#8bc98f';
+                        el.textContent = v;
+                        bucketEl.appendChild(el);
+                    });
+                }
+            }
+
+            function showResult() {
+                const trueF0 = new Set(stream).size;
+                const estimate = bucket.size / p;
+                resultEl.innerHTML =
+                    `<strong>|B|</strong> = ${bucket.size}<br>` +
+                    `<strong>Estimate</strong> = ${estimate.toFixed(1)}<br>` +
+                    `<strong>True F₀</strong> = ${trueF0}`;
+            }
+
+            function doStep() {
+                if (idx >= stream.length) { showResult(); logEl.innerHTML = '<strong>Done!</strong> Stream exhausted.'; return; }
+                const a = stream[idx];
+                const wasInBucket = bucket.has(a);
+                bucket.delete(a);  // throw it away first
+                const coin = Math.random();
+                const won = coin < p;
+                if (won) bucket.add(a);
+                const icon = won ? '✅' : '❌';
+                let msg = `Element <strong>${a}</strong>: `;
+                if (wasInBucket) msg += '<span style="color:#c44;">removed from B</span> → ';
+                msg += `flipped coin (p = ${p.toFixed(2)}) → ${icon} ${won ? '<span style="color:#2e7d32;">heads — added to B</span>' : '<span style="color:#c44;">tails — not added</span>'}`;
+                logEl.innerHTML = msg;
+                idx++;
+                renderAll();
+                if (idx >= stream.length) showResult();
+            }
+
+            function runAll() {
+                resetState();
+                while (idx < stream.length) {
+                    const a = stream[idx];
+                    bucket.delete(a);
+                    if (Math.random() < p) bucket.add(a);
+                    idx++;
+                }
+                renderAll();
+                showResult();
+                logEl.innerHTML = '<strong>Done!</strong> Ran all elements.';
+            }
+
+            runBtn.addEventListener('click', runAll);
+            stepBtn.addEventListener('click', doStep);
+            resetBtn.addEventListener('click', resetState);
+            resetState();
+        })();
+
+        // ========================================
+        // CVM DEMO
+        // ========================================
+        (function() {
+            let cvmStream = [];
+            let cvmIndex = 0;
+            let cvmBuffer = new Set();
+            let cvmP = 1;
+            let cvmBufferSize = 8;
+            let cvmTrueF0 = 0;
+
+            function generateStream() {
+                const stream = [];
+                const numDistinct = Math.floor(Math.random() * 15) + 10; // 10-25 distinct
+                const elements = [];
+                for (let i = 1; i <= numDistinct; i++) {
+                    elements.push(i);
+                }
+                // Generate stream with repetitions
+                for (let i = 0; i < 50 + Math.floor(Math.random() * 30); i++) {
+                    const idx = Math.floor(Math.random() * elements.length);
+                    stream.push(elements[idx]);
+                }
+                return stream;
+            }
+
+            function renderCvmStream() {
+                const container = document.getElementById('cvm-stream');
+                container.innerHTML = '';
+                for (let i = cvmIndex; i < Math.min(cvmIndex + 20, cvmStream.length); i++) {
+                    const div = document.createElement('div');
+                    div.className = 'stream-element';
+                    if (i === cvmIndex) div.classList.add('active');
+                    div.textContent = cvmStream[i];
+                    container.appendChild(div);
+                }
+                if (cvmIndex >= cvmStream.length) {
+                    container.innerHTML = '<span style="color: var(--text-light);">Stream exhausted</span>';
+                }
+            }
+
+            function renderCvmBuffer() {
+                const container = document.getElementById('cvm-buffer');
+                container.innerHTML = '';
+                if (cvmBuffer.size === 0) {
+                    container.innerHTML = '<span style="color: var(--text-light); font-size: 0.8em;">Empty</span>';
+                    return;
+                }
+                cvmBuffer.forEach(elem => {
+                    const div = document.createElement('div');
+                    div.className = 'buffer-element';
+                    div.innerHTML = `<span class="elem-value">${elem}</span>`;
+                    container.appendChild(div);
+                });
+            }
+
+            function updateCvmStats() {
+                document.getElementById('cvm-p').textContent = cvmP.toFixed(4);
+                document.getElementById('cvm-size').textContent = cvmBuffer.size;
+                const estimate = cvmP > 0 ? Math.round(cvmBuffer.size / cvmP) : 0;
+                document.getElementById('cvm-estimate').textContent = estimate;
+                if (cvmIndex >= cvmStream.length) {
+                    document.getElementById('cvm-true').textContent = cvmTrueF0;
+                }
+            }
+
+            function cvmStep() {
+                cvmBufferSize = parseInt(document.getElementById('cvm-buffer-size').value) || 8;
+
+                if (cvmIndex >= cvmStream.length) {
+                    const estimate = cvmP > 0 ? Math.round(cvmBuffer.size / cvmP) : 0;
+                    document.getElementById('cvm-output').innerHTML =
+                        `<strong>Done!</strong> Estimate: ${estimate}, True F₀: ${cvmTrueF0}, Error: ${Math.abs(estimate - cvmTrueF0)} (${(100 * Math.abs(estimate - cvmTrueF0) / cvmTrueF0).toFixed(1)}%)`;
+                    return;
+                }
+
+                const elem = cvmStream[cvmIndex];
+                let action = `Processing element ${elem}: `;
+
+                // Remove if present (re-roll)
+                if (cvmBuffer.has(elem)) {
+                    cvmBuffer.delete(elem);
+                    action += `removed from buffer, `;
+                }
+
+                // Add with probability p
+                if (Math.random() < cvmP) {
+                    cvmBuffer.add(elem);
+                    action += `added (coin flip success), `;
+                } else {
+                    action += `not added (coin flip failed), `;
+                }
+
+                // Subsample if needed
+                while (cvmBuffer.size >= cvmBufferSize) {
+                    const newBuffer = new Set();
+                    cvmBuffer.forEach(e => {
+                        if (Math.random() < 0.5) newBuffer.add(e);
+                    });
+                    cvmBuffer = newBuffer;
+                    cvmP /= 2;
+                    action += `SUBSAMPLE! p now ${cvmP.toFixed(4)}, `;
+                }
+
+                cvmIndex++;
+                renderCvmStream();
+                renderCvmBuffer();
+                updateCvmStats();
+                document.getElementById('cvm-output').textContent = action;
+            }
+
+            function cvmReset() {
+                cvmIndex = 0;
+                cvmBuffer = new Set();
+                cvmP = 1;
+                cvmBufferSize = parseInt(document.getElementById('cvm-buffer-size').value) || 8;
+                cvmTrueF0 = new Set(cvmStream).size;
+                renderCvmStream();
+                renderCvmBuffer();
+                updateCvmStats();
+                document.getElementById('cvm-true').textContent = '?';
+                document.getElementById('cvm-output').textContent =
+                    `Stream has ${cvmStream.length} elements. Click "Step" to process one at a time.`;
+            }
+
+            function cvmNewStream() {
+                cvmStream = generateStream();
+                cvmReset();
+            }
+
+            function cvmRunAll() {
+                const interval = setInterval(() => {
+                    if (cvmIndex >= cvmStream.length) {
+                        clearInterval(interval);
+                        const estimate = cvmP > 0 ? Math.round(cvmBuffer.size / cvmP) : 0;
+                        document.getElementById('cvm-output').innerHTML =
+                            `<strong>Done!</strong> Estimate: ${estimate}, True F₀: ${cvmTrueF0}, Error: ${Math.abs(estimate - cvmTrueF0)} (${(100 * Math.abs(estimate - cvmTrueF0) / cvmTrueF0).toFixed(1)}%)`;
+                        return;
+                    }
+                    cvmStep();
+                }, 100);
+            }
+
+            document.getElementById('cvm-step').addEventListener('click', cvmStep);
+            document.getElementById('cvm-reset').addEventListener('click', cvmReset);
+            document.getElementById('cvm-run').addEventListener('click', cvmRunAll);
+            document.getElementById('cvm-new-stream').addEventListener('click', cvmNewStream);
+
+            cvmStream = generateStream();
+            cvmReset();
+        })();
+
+        // ========================================
+        // MONTE CARLO SIMULATION
+        // ========================================
+        (function() {
+            function runCVM(stream, bufferSize) {
+                let buffer = new Set();
+                let p = 1;
+
+                for (const elem of stream) {
+                    if (buffer.has(elem)) buffer.delete(elem);
+                    if (Math.random() < p) buffer.add(elem);
+
+                    while (buffer.size >= bufferSize) {
+                        const newBuffer = new Set();
+                        buffer.forEach(e => {
+                            if (Math.random() < 0.5) newBuffer.add(e);
+                        });
+                        buffer = newBuffer;
+                        p /= 2;
+                    }
+                }
+
+                return p > 0 ? buffer.size / p : 0;
+            }
+
+            function generateStreamForMC(f0, length) {
+                const elements = [];
+                for (let i = 1; i <= f0; i++) elements.push(i);
+                const stream = [];
+                for (let i = 0; i < length; i++) {
+                    stream.push(elements[Math.floor(Math.random() * f0)]);
+                }
+                return stream;
+            }
+
+            function runSimulation() {
+                const trueF0 = parseInt(document.getElementById('mc-f0').value) || 100;
+                const bufferSize = parseInt(document.getElementById('mc-buffer').value) || 20;
+                const numRuns = parseInt(document.getElementById('mc-runs').value) || 50;
+                const streamLength = trueF0 * 5;
+
+                const estimates = [];
+                for (let i = 0; i < numRuns; i++) {
+                    const stream = generateStreamForMC(trueF0, streamLength);
+                    estimates.push(runCVM(stream, bufferSize));
+                }
+
+                // Simple ASCII-style chart
+                const chartContainer = document.getElementById('mc-chart');
+                const width = 850;
+                const height = 200;
+                const margin = 30;
+
+                const minEst = Math.min(...estimates);
+                const maxEst = Math.max(...estimates);
+                const range = maxEst - minEst || 1;
+
+                let svg = `<svg width="${width}" height="${height}" style="background: white;">`;
+
+                // Draw target band (±10% around true F0)
+                const eps = 0.1;
+                const lowBand = trueF0 * (1 - eps);
+                const highBand = trueF0 * (1 + eps);
+                const yScale = (val) => height - margin - ((val - minEst * 0.9) / (maxEst * 1.1 - minEst * 0.9)) * (height - 2 * margin);
+
+                svg += `<rect x="${margin}" y="${yScale(highBand)}" width="${width - 2*margin}" height="${yScale(lowBand) - yScale(highBand)}" fill="rgba(184, 230, 193, 0.3)" stroke="none"/>`;
+
+                // Draw true F0 line
+                svg += `<line x1="${margin}" y1="${yScale(trueF0)}" x2="${width - margin}" y2="${yScale(trueF0)}" stroke="#2e7d32" stroke-width="2" stroke-dasharray="5,5"/>`;
+
+                // Draw points
+                estimates.forEach((est, i) => {
+                    const x = margin + (i / (numRuns - 1)) * (width - 2 * margin);
+                    const y = yScale(est);
+                    const inBand = est >= lowBand && est <= highBand;
+                    const color = inBand ? '#3498db' : '#e74c3c';
+                    svg += `<circle cx="${x}" cy="${y}" r="4" fill="${color}" opacity="0.7"/>`;
+                });
+
+                // Labels
+                svg += `<text x="${width - margin - 5}" y="${yScale(trueF0) - 5}" fill="#2e7d32" font-size="12" text-anchor="end">True F₀ = ${trueF0}</text>`;
+                svg += `<text x="${margin + 5}" y="${height - 5}" fill="#666" font-size="11">Run #</text>`;
+
+                svg += '</svg>';
+                chartContainer.innerHTML = svg;
+
+                // Stats
+                const mean = estimates.reduce((a, b) => a + b, 0) / numRuns;
+                const inBandCount = estimates.filter(e => e >= lowBand && e <= highBand).length;
+                const mse = estimates.reduce((acc, e) => acc + (e - trueF0) ** 2, 0) / numRuns;
+
+                document.getElementById('mc-stats').innerHTML =
+                    `<strong>Results:</strong> Mean estimate: ${mean.toFixed(1)} | ` +
+                    `Within ±10%: ${inBandCount}/${numRuns} (${(100 * inBandCount / numRuns).toFixed(0)}%) | ` +
+                    `RMSE: ${Math.sqrt(mse).toFixed(1)} | ` +
+                    `Relative error: ${(100 * Math.abs(mean - trueF0) / trueF0).toFixed(1)}%`;
+            }
+
+            document.getElementById('mc-go').addEventListener('click', runSimulation);
+
+            // Run initial simulation
+            setTimeout(runSimulation, 500);
+        })();
+    </script>
+</body>
+</html>
