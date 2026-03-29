@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+	<html class="sl-root decks export offline loaded">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, minimal-ui">
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<link rel="manifest" href='data:application/manifest+json,{"display": "standalone", "name": "Personal Website Workshop"}' />
+		<title>Personal Website Workshop</title>
+
+
+		<link rel="stylesheet" type="text/css" href="lib/offline-v2.css">
+
+
+
+		<!-- User CSS -->
+		<style id="user-css-output" type="text/css">
+			@font-face {
+				font-family: 'Heliotrope';
+				src: url('../assets/webfonts/heliotrope_3_regular.woff2') format('woff2');
+				font-weight: normal;
+				font-style: normal;
+				font-display: swap;
+			}
+			@font-face {
+				font-family: 'Heliotrope';
+				src: url('../assets/webfonts/heliotrope_3_bold.woff2') format('woff2');
+				font-weight: bold;
+				font-style: normal;
+				font-display: swap;
+			}
+			@font-face {
+				font-family: 'Heliotrope';
+				src: url('../assets/webfonts/heliotrope_3_italic.woff2') format('woff2');
+				font-weight: normal;
+				font-style: italic;
+				font-display: swap;
+			}
+			@font-face {
+				font-family: 'Heliotrope';
+				src: url('../assets/webfonts/heliotrope_3_bold_italic.woff2') format('woff2');
+				font-weight: bold;
+				font-style: italic;
+				font-display: swap;
+			}
+.reveal {
+  
+}
+.reveal .slides h1,
+.reveal .slides h2,
+.reveal .slides h3,
+.reveal body,
+.reveal p,
+.reveal a {
+  font-family: 'Heliotrope', Georgia, serif;
+}
+.reveal .slides section.smallcaps h3 {
+  font-family: 'Heliotrope', Georgia, serif !important;
+}
+.reveal .slides section.orangebg {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.com/svgjs' width='1440' height='560' preserveAspectRatio='none' viewBox='0 0 1440 560'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1028%26quot%3b)' fill='none'%3e%3cpath d='M475.74044379896577 225.40414810920913L441.1427629386578 346.06060006484523 561.799214894294 380.65828092515324 596.3968957546019 260.0018289695171z' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float3'%3e%3c/path%3e%3cpath d='M921.5310494686497 462.8832866466635L982.9050782486223 522.1514973041693 1042.1732889061282 460.77746852419665 980.7992601261554 401.50925786669086z' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M790.9452368231106 478.57390729473013L817.1642472029883 365.0068963866835 703.5972362949417 338.78788600680565 677.3782259150639 452.3548969148523z' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M611.1846938119692 385.49896792551704L562.9564817674883 301.96525430627094 479.42276814824226 350.19346635075175 527.6509801927231 433.72717996999785z' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M581.5020782144692 232.79480174338443L469.52211238508266 138.83245371670176 375.5597643584 250.81241954608828 487.5397301877865 344.77476757277094z' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M426.9163558163354 107.41941717033569L335.1977796315499 238.4071189298619 466.1854813910761 330.1256951146474 557.9040575758615 199.13799335512118z' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M186.27450367911317 57.642116616997086L74.71780156285094 177.272033360021 194.34771830587482 288.8287354762832 305.90442042213704 169.19881873325932z' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1028'%3e%3crect width='1440' height='560' fill='white'%3e%3c/rect%3e%3c/mask%3e%3cstyle%3e %40keyframes float1 %7b 0%25%7btransform: translate(0%2c 0)%7d 50%25%7btransform: translate(-10px%2c 0)%7d 100%25%7btransform: translate(0%2c 0)%7d %7d .triangle-float1 %7b animation: float1 5s infinite%3b %7d %40keyframes float2 %7b 0%25%7btransform: translate(0%2c 0)%7d 50%25%7btransform: translate(-5px%2c -5px)%7d 100%25%7btransform: translate(0%2c 0)%7d %7d .triangle-float2 %7b animation: float2 4s infinite%3b %7d %40keyframes float3 %7b 0%25%7btransform: translate(0%2c 0)%7d 50%25%7btransform: translate(0%2c -10px)%7d 100%25%7btransform: translate(0%2c 0)%7d %7d .triangle-float3 %7b animation: float3 6s infinite%3b %7d %3c/style%3e%3c/defs%3e%3c/svg%3e");
+}
+.reveal .slides section.hw h3 {
+  font-family: 'Heliotrope', Georgia, serif !important;
+  text-transform: capitalize !important;
+  font-size: 1.5em;
+}
+
+		</style>
+	</head>
+	<body class="reveal-viewport theme-font-overpass2 theme-color-white-blue">
+		<div class="reveal">
+			<div class="slides">
+				<section class="stack" data-id="f9054cad0b79ab712b1edc82d70d33e4"><section data-id="cc53b79a2a21c8b8fa3627ee9d4921c4"><div class="sl-block" data-block-type="text" style="width: 768px; left: 80px; top: 210px; height: auto;" data-block-id="f74526a9d3b3a01b0c60b343d486fa89">
+							<div class="sl-block-content" style="text-align: left; font-size: 90%; line-height: 1.469;" data-has-line-heightdata-has-letter-spacing="" data-placeholder-tag="p" data-placeholder-text="Text" data-has-line-height="">
+<h1>Personal website Building</h1>
+
+<p><em><span style="font-size:1.4em">a hands-on workshop</span></em></p>
+
+<p> </p>
+
+<p> </p>
+
+<p>Anveshanam Club - Research Society IITGN</p>
+
+<p>6th and 7th April 2024</p>
+</div>
+						</div></section><section data-background-color="rgb(229, 230, 226)" data-id="00b135fdcfbcf26ae4ab8d2454f18bb2">
+
+
+<div class="sl-block" data-block-type="text" style="width: 800px; left: 80px; top: 90.5px; height: auto;" data-name="text-c29943" data-block-id="f2fe30665ed528bfeaadca31741cdd72"><div class="sl-block-content" data-placeholder-tag="h2" style="text-align: left; z-index: 10;" data-placeholder-text="Text">
+<h2><strong>Index</strong></h2>
+</div></div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="line" style="width: auto; height: auto; left: 80px; top: 141px;" data-name="line-79aed3" data-block-id="637fabdb62b2d3fa74812dcef2a7f961"><div class="sl-block-content" data-line-x1="0" data-line-y1="0" data-line-x2="106.61835748792271" data-line-y2="0" data-line-color="#000000" data-line-start-type="none" data-line-end-type="none" style="z-index: 16;" data-line-width="4px"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveaspectratio="xMidYMid" width="106.61835748792271" height="1" viewbox="0 0 106.61835748792271 1"><line stroke="rgba(0,0,0,0)" stroke-width="15" x1="0" y1="0" x2="106.61835748792271" y2="0"></line><line class="line-element" stroke="#000000" stroke-width="4" x1="0" y1="0" x2="106.61835748792271" y2="0"></line></svg></div></div>
+<div class="sl-block sl-block-group" data-block-type="group" data-name="group-4cebe8" style="height: auto;" data-block-id="a2df6b78945cce0e66927dd773a12421"><div class="sl-block-content sl-block-group-content" style="transform-origin: 326px 239.5px; z-index: 11; transition-duration: 0.6s; transition-delay: 0.4s;" data-animation-type="slide-left">
+<div class="sl-block" data-block-type="text" style="width: 510px; left: 71px; top: 206px; height: auto;" data-name="text-c5947b" data-block-id="d60a1de6ec3d04bdc369e827481021a2"><a class="sl-block-style" style="z-index: 14;" href="#/our-services"><div class="sl-block-content" data-placeholder-tag="p" style="text-align: left; z-index: 14; font-size: 110%; border-width: 4px; line-height: 1.17; border-color: rgb(0, 0, 0); padding: 10px; color: rgb(0, 0, 0);" data-has-line-height="" data-placeholder-text="Text"><p>Intro: What, Why, How</p></div></a></div>
+<div class="sl-block" data-block-type="line" data-name="line-29000e" style="width: auto; height: auto; min-width: 0px; min-height: 0px; left: 83px; top: 272px;" data-block-id="aae7cfa320ecb3be59ae5d35c07dc34f"><a class="sl-block-content" data-line-x1="0" data-line-y1="0" data-line-x2="433" data-line-y2="0" data-line-color="#222222" data-line-start-type="none" data-line-end-type="line-arrow" style="z-index: 15;" data-line-width="4px" href="#/our-services"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveaspectratio="xMidYMid" width="433" height="1" viewbox="0 0 433 1"><line stroke="rgba(0,0,0,0)" stroke-width="15" x1="0" y1="0" x2="430" y2="0"></line><line class="line-element" stroke="#222222" stroke-width="4" x1="0" y1="0" x2="430" y2="0"></line><path style="fill: rgba(0,0,0,0);" stroke="#222222" stroke-width="4" transform="translate(430,0) rotate(90)" d="M 9 9 L 0 0 L -9 9"></path></svg></a></div>
+</div></div>
+<div class="sl-block sl-block-group" data-block-type="group" style="height: auto;" data-name="group-6497f2" data-block-id="56bec5d2e6a9a45d773ec111df53141f"><div class="sl-block-content sl-block-group-content" style="transform-origin: 326px 341px; z-index: 17; transition-duration: 0.6s; transition-delay: 0.5s;" data-animation-type="slide-left">
+<div class="sl-block" data-block-type="text" style="width: 510px; left: 71px; top: 309px; height: auto;" data-name="text-7aea17" data-block-id="8f6c97da94fae6384b6a2fe322eb5635"><a class="sl-block-style" style="z-index: 20;" href="#/process"><div class="sl-block-content" data-placeholder-tag="p" style="text-align: left; z-index: 20; font-size: 110%; border-width: 4px; line-height: 1.17; border-color: rgb(0, 0, 0); padding: 10px; color: rgb(0, 0, 0);" data-has-line-height="" data-placeholder-text="Text"><p>(Some of) my Favorite Websites</p></div></a></div>
+<div class="sl-block" data-block-type="line" style="width: auto; height: auto; min-width: 0px; min-height: 0px; left: 83px; top: 372px;" data-name="line-674866" data-block-id="fdda9da058669250314201d7a1398263"><a class="sl-block-content" data-line-x1="0" data-line-y1="0" data-line-x2="433" data-line-y2="0" data-line-color="#222222" data-line-start-type="none" data-line-end-type="line-arrow" style="z-index: 21;" data-line-width="4px" href="#/process"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveaspectratio="xMidYMid" width="433" height="1" viewbox="0 0 433 1"><line stroke="rgba(0,0,0,0)" stroke-width="15" x1="0" y1="0" x2="430" y2="0"></line><line class="line-element" stroke="#222222" stroke-width="4" x1="0" y1="0" x2="430" y2="0"></line><path style="fill: rgba(0,0,0,0);" stroke="#222222" stroke-width="4" transform="translate(430,0) rotate(90)" d="M 9 9 L 0 0 L -9 9"></path></svg></a></div>
+</div></div>
+<div class="sl-block sl-block-group" data-block-type="group" style="height: auto;" data-name="group-eacb85" data-block-id="daedd590068993e68bc1a8175d902fc7"><div class="sl-block-content sl-block-group-content" style="transform-origin: 326px 447px; z-index: 22; transition-duration: 0.6s; transition-delay: 0.6s;" data-animation-type="slide-left">
+<div class="sl-block" data-block-type="text" style="width: 510px; left: 71px; top: 415px; height: auto;" data-name="text-71eca7" data-block-id="7c0141e68e70f3070eb25baf00577cb0"><a class="sl-block-style" style="z-index: 25;" href="#/team"><div class="sl-block-content" data-placeholder-tag="p" style="text-align: left; z-index: 25; font-size: 110%; border-width: 4px; line-height: 1.17; border-color: rgb(0, 0, 0); padding: 10px; color: rgb(0, 0, 0);" data-has-line-height="" data-placeholder-text="Text"><p>Workflows and Options</p></div></a></div>
+<div class="sl-block" data-block-type="line" style="width: auto; height: auto; min-width: 0px; min-height: 0px; left: 83px; top: 478px;" data-name="line-f42094" data-block-id="e01b89058543fa2e1a34a4cf1341500c"><a class="sl-block-content" data-line-x1="0" data-line-y1="0" data-line-x2="433" data-line-y2="0" data-line-color="#222222" data-line-start-type="none" data-line-end-type="line-arrow" style="z-index: 26;" data-line-width="4px" href="#/team"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveaspectratio="xMidYMid" width="433" height="1" viewbox="0 0 433 1"><line stroke="rgba(0,0,0,0)" stroke-width="15" x1="0" y1="0" x2="430" y2="0"></line><line class="line-element" stroke="#222222" stroke-width="4" x1="0" y1="0" x2="430" y2="0"></line><path style="fill: rgba(0,0,0,0);" stroke="#222222" stroke-width="4" transform="translate(430,0) rotate(90)" d="M 9 9 L 0 0 L -9 9"></path></svg></a></div>
+</div></div>
+<div class="sl-block sl-block-group" data-block-type="group" style="height: auto;" data-name="group-3745a8" data-block-id="14fb1c5e72ddd076b9d2b374f543d75d"><div class="sl-block-content sl-block-group-content" style="transform-origin: 326px 560px; z-index: 27; transition-duration: 0.6s; transition-delay: 0.7s;" data-animation-type="slide-left">
+<div class="sl-block" data-block-type="text" style="width: 510px; left: 71px; top: 528px; height: auto;" data-name="text-515ed0" data-block-id="190a06a0d290006a1631b81e57e7eda5"><a class="sl-block-style" style="z-index: 30;" href="#/our-clients"><div class="sl-block-content" data-placeholder-tag="p" style="text-align: left; z-index: 30; font-size: 110%; border-width: 4px; line-height: 1.17; border-color: rgb(0, 0, 0); padding: 10px; color: rgb(0, 0, 0);" data-has-line-height="" data-placeholder-text="Text"><p>Let's Make a Website</p></div></a></div>
+<div class="sl-block" data-block-type="line" style="width: auto; height: auto; min-width: 0px; min-height: 0px; left: 83px; top: 591px;" data-name="line-edd75d" data-block-id="1503146103468f136ea65ba147a3eb59"><a class="sl-block-content" data-line-x1="0" data-line-y1="0" data-line-x2="433" data-line-y2="0" data-line-color="#222222" data-line-start-type="none" data-line-end-type="line-arrow" style="z-index: 31;" data-line-width="4px" href="#/our-clients"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveaspectratio="xMidYMid" width="433" height="1" viewbox="0 0 433 1"><line stroke="rgba(0,0,0,0)" stroke-width="15" x1="0" y1="0" x2="430" y2="0"></line><line class="line-element" stroke="#222222" stroke-width="4" x1="0" y1="0" x2="430" y2="0"></line><path style="fill: rgba(0,0,0,0);" stroke="#222222" stroke-width="4" transform="translate(430,0) rotate(90)" d="M 9 9 L 0 0 L -9 9"></path></svg></a></div>
+</div></div></section></section><section class="stack" data-id="9ca07eaf4c0fde27e4d73c3e073f47e9"><section data-id="a14e972be1fc9ebfe195f7b9c11d6ed8"><div class="sl-block" data-block-type="text" style="width: 768px; left: 80px; top: 210px; height: auto;" data-block-id="523993cb7f40f8d8c86a9f54a1c13738">
+							<div class="sl-block-content" style="text-align: left; font-size: 90%; line-height: 1.469; z-index: 10;" data-has-line-heightdata-has-letter-spacing="" data-placeholder-tag="p" data-placeholder-text="Text" data-has-line-height="">
+<h1>Part i.</h1>
+
+<h1>what, why, and how.</h1>
+</div>
+						</div></section><section data-id="fe90a494eb2cb28629eeed4c1fe91d22"><div class="sl-block" data-block-type="text" style="width: 768px; left: 80px; top: 210px; height: auto;" data-block-id="f3bc125287cc590fb41aafbbefb5ed17">
+							<div class="sl-block-content" style="text-align: left; font-size: 90%; line-height: 1.469; z-index: 10; color: rgb(120, 102, 250);" data-has-line-heightdata-has-letter-spacing="" data-placeholder-tag="p" data-placeholder-text="Text" data-has-line-height="">
+<h1><span style="color:#000000">Part i.</span></h1>
+
+<h1>what<span style="color:#000000">, why, and how.</span>
+</h1>
+</div>
+						</div></section><section data-id="a48eacfc883b968ab819baca4baebe73"><div class="sl-block" data-block-type="shape" data-name="shape-51e9bc" data-block-id="452f8ca4331219bd4f0e25cbdd8de263" style="width: 800px; height: 560px; left: 80px; top: 70px;"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgba(0, 0, 0, 0)" data-shape-stretch="true" style="z-index: 10;" data-shape-corner-radius="21px" data-shape-stroke-color="#000000" data-shape-stroke-width="1px"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 800 560"><defs><clippath id="shape-mask-1-1712358433990"><rect width="800" height="560" rx="21" ry="21" fill="rgba(0, 0, 0, 0)" stroke="#000000" stroke-width="2"></rect></clippath></defs><rect width="800" height="560" rx="21" ry="21" class="shape-element" fill="rgba(0, 0, 0, 0)" stroke="#000000" stroke-width="2" clip-path="url(#shape-mask-1-1712358433990)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-033175" data-block-id="d90bdbe5d6179415c89df24f54852847" style="height: auto; width: 600px; left: 180px; top: 140px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;"><p>...your own corner of the internet</p></div></div></section><section data-id="91f67c8a7045b3746ee4df5936c17afb"><div class="sl-block" data-block-type="shape" data-name="shape-51e9bc" style="width: 800px; height: 560px; left: 80px; top: 70px;" data-block-id="f8723e53f652391afef33f8767dac472"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgba(0, 0, 0, 0)" data-shape-stretch="true" style="z-index: 10;" data-shape-corner-radius="21px" data-shape-stroke-color="#000000" data-shape-stroke-width="1px"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 800 560"><defs><clippath id="shape-mask-2-1712358461268"><rect width="800" height="560" rx="21" ry="21" fill="rgba(0, 0, 0, 0)" stroke="#000000" stroke-width="2"></rect></clippath></defs><rect width="800" height="560" rx="21" ry="21" class="shape-element" fill="rgba(0, 0, 0, 0)" stroke="#000000" stroke-width="2" clip-path="url(#shape-mask-2-1712358461268)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-033175" style="height: auto; width: 600px; left: 180px; top: 140px;" data-block-id="7ead2ea878e6d6d705d28deb1055e038"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;"><p>...your own corner of the internet</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 180px; top: 226px;" data-block-id="cb9339bd1e4a11265d97ab4f23bd6811" data-name="text-a01f8b"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; color: rgb(204, 65, 37);"><p>as opposed to:</p></div></div></section><section data-id="02d8a543498791aa590e3bd7666060f5"><div class="sl-block" data-block-type="shape" data-name="shape-51e9bc" style="width: 800px; height: 560px; left: 80px; top: 70px;" data-block-id="6c067adee1b8817c0e02de40b26b7970"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgba(0, 0, 0, 0)" data-shape-stretch="true" style="z-index: 10;" data-shape-corner-radius="21px" data-shape-stroke-color="#000000" data-shape-stroke-width="1px"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 800 560"><defs><clippath id="shape-mask-3-1712358472227"><rect width="800" height="560" rx="21" ry="21" fill="rgba(0, 0, 0, 0)" stroke="#000000" stroke-width="2"></rect></clippath></defs><rect width="800" height="560" rx="21" ry="21" class="shape-element" fill="rgba(0, 0, 0, 0)" stroke="#000000" stroke-width="2" clip-path="url(#shape-mask-3-1712358472227)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-033175" style="height: auto; width: 600px; left: 180px; top: 140px;" data-block-id="4b7886cdf2312aaca2b3266197a99582"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;"><p>...your own corner of the internet</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 180px; top: 226px;" data-name="text-a01f8b" data-block-id="b028bd9ad3d09607bf4a953c2f90f5f7"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; color: rgb(204, 65, 37);"><p>as opposed to:</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 180px; top: 332px;" data-block-id="f7e25bf63d49ea301f1535a8ebc08bcd" data-name="text-8f528c"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13;"><p>Medium, Substack, Blogger, Wordpress, etc.</p></div></div></section><section data-id="3b1e0991ba9ff94d4816d10a9d666fcb"><div class="sl-block" data-block-type="shape" data-name="shape-51e9bc" style="width: 800px; height: 560px; left: 80px; top: 70px;" data-block-id="2c6ff8f6170f8d9b9067b346a8e3689b"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgba(0, 0, 0, 0)" data-shape-stretch="true" style="z-index: 10;" data-shape-corner-radius="21px" data-shape-stroke-color="#000000" data-shape-stroke-width="1px"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 800 560"><defs><clippath id="shape-mask-4-1712358491533"><rect width="800" height="560" rx="21" ry="21" fill="rgba(0, 0, 0, 0)" stroke="#000000" stroke-width="2"></rect></clippath></defs><rect width="800" height="560" rx="21" ry="21" class="shape-element" fill="rgba(0, 0, 0, 0)" stroke="#000000" stroke-width="2" clip-path="url(#shape-mask-4-1712358491533)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-033175" style="height: auto; width: 600px; left: 180px; top: 140px;" data-block-id="8caf6d66cc4c6e3889644cbfe8a60332"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;"><p>...your own corner of the internet</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 180px; top: 226px;" data-name="text-a01f8b" data-block-id="9c71ba8c45843667fcaf0b51c5fcb28a"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; color: rgb(204, 65, 37);"><p>as opposed to:</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 180px; top: 332px;" data-name="text-8f528c" data-block-id="4d5b9f13ebe501c3e7cccccfefe6435e"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13;"><p>Medium, Substack, Blogger, Wordpress, etc.</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 180px; top: 402px;" data-block-id="eda0d8d2e141e6c65392ff1405392ab6" data-name="text-8625ec"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14;"><p>LinkedIn, Youtube, Instagram, Facebook, X, etc.</p></div></div></section><section data-id="fba708020a661def05d682ab89e3eb53"><div class="sl-block" data-block-type="shape" data-name="shape-51e9bc" style="width: 800px; height: 560px; left: 80px; top: 70px;" data-block-id="68838c4028e250b2559b9ae7bebe210c"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgba(0, 0, 0, 0)" data-shape-stretch="true" style="z-index: 10;" data-shape-corner-radius="21px" data-shape-stroke-color="#000000" data-shape-stroke-width="1px"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 800 560"><defs><clippath id="shape-mask-5-1712358524639"><rect width="800" height="560" rx="21" ry="21" fill="rgba(0, 0, 0, 0)" stroke="#000000" stroke-width="2"></rect></clippath></defs><rect width="800" height="560" rx="21" ry="21" class="shape-element" fill="rgba(0, 0, 0, 0)" stroke="#000000" stroke-width="2" clip-path="url(#shape-mask-5-1712358524639)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-033175" style="height: auto; width: 600px; left: 180px; top: 140px;" data-block-id="97e20577d848d26f7b9b3944d2397970"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;"><p>...your own corner of the internet</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 180px; top: 226px;" data-name="text-a01f8b" data-block-id="1fc041bdbed0d6adaba2100cd068107f"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; color: rgb(204, 65, 37);"><p>as opposed to:</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 180px; top: 332px;" data-name="text-8f528c" data-block-id="ef5df0f880ca1a3e044b84a2b709c6ea"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13;"><p>Medium, Substack, Blogger, Wordpress, etc.</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 180px; top: 402px;" data-name="text-8625ec" data-block-id="c0ee2990617b215ef94ebbfb3b87b432"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14;"><p>LinkedIn, Youtube, Instagram, Facebook, X, etc.</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 696px; left: 132px; top: 472px;" data-name="text-9b6cb6" data-block-id="aa2a949c3052086cad65c4f883a4ccea"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 15;"><p>ResearchGate, Academia.edu, Google Scholar, ORCID etc.</p></div></div></section><section data-id="00d4076c22e8ef0c278991e4c7195b62"><div class="sl-block" data-block-type="shape" data-name="shape-51e9bc" style="width: 800px; height: 560px; left: 80px; top: 70px;" data-block-id="bf868939b8bcd29344b55c37fb3d6299"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgba(0, 0, 0, 0)" data-shape-stretch="true" style="z-index: 10;" data-shape-corner-radius="21px" data-shape-stroke-color="#000000" data-shape-stroke-width="1px"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 800 560"><defs><clippath id="shape-mask-6-1712358594380"><rect width="800" height="560" rx="21" ry="21" fill="rgba(0, 0, 0, 0)" stroke="#000000" stroke-width="2"></rect></clippath></defs><rect width="800" height="560" rx="21" ry="21" class="shape-element" fill="rgba(0, 0, 0, 0)" stroke="#000000" stroke-width="2" clip-path="url(#shape-mask-6-1712358594380)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-033175" style="height: auto; width: 600px; left: 180px; top: 140px;" data-block-id="3e4d1b8b43a130609a657030aba66a76"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;"><p>...your own corner of the internet</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 180px; top: 226px;" data-name="text-a01f8b" data-block-id="482e29f3a6bfa4f11c1c753efea8332c"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; color: rgb(204, 65, 37);"><p>as opposed to:</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 180px; top: 332px;" data-name="text-8f528c" data-block-id="51faea4c19a2e54e3798243335f72916"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13;"><p>Medium, Substack, Blogger, Wordpress, etc.</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 180px; top: 402px;" data-name="text-8625ec" data-block-id="dc0b2e83075262e772966ebbb397ca3e"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14;"><p>LinkedIn, Youtube, Instagram, Facebook, X, etc.</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 696px; left: 132px; top: 472px;" data-name="text-9b6cb6" data-block-id="312f9efac552ae640da9c452cd9371e6"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 15;"><p>ResearchGate, Academia.edu, Google Scholar, ORCID etc.</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 712px; left: 124px; top: 542px;" data-block-id="35a10be148d5e8fa33031974d5ccb22c" data-name="text-69da5a"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 16;"><p>Github profile, Goodreads profile, etc.</p></div></div></section><section data-id="09dc7c8522e652629d978aa7fdc04ec9"><div class="sl-block" data-block-type="shape" data-name="shape-51e9bc" style="width: 800px; height: 560px; left: 80px; top: 70px;" data-block-id="878d2822ba537c3771bac08e6b0d560d"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgba(0, 0, 0, 0)" data-shape-stretch="true" style="z-index: 10;" data-shape-corner-radius="21px" data-shape-stroke-color="#000000" data-shape-stroke-width="1px"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 800 560"><defs><clippath id="shape-mask-7-1712358710534"><rect width="800" height="560" rx="21" ry="21" fill="rgba(0, 0, 0, 0)" stroke="#000000" stroke-width="2"></rect></clippath></defs><rect width="800" height="560" rx="21" ry="21" class="shape-element" fill="rgba(0, 0, 0, 0)" stroke="#000000" stroke-width="2" clip-path="url(#shape-mask-7-1712358710534)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-033175" style="height: auto; width: 600px; left: 180px; top: 140px;" data-block-id="ccff018b9b5c4c2f756fb1df1f82b9ab"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;"><p>...your own corner of the internet</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 180px; top: 226px;" data-name="text-a01f8b" data-block-id="3abfb131f5e5f7bc398949aefb127f2e"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; color: rgb(204, 65, 37);">
+<p>as opposed to your digital footprint across</p>
+
+<p>other platforms.</p>
+</div></div></section><section data-id="53a9ecc382c40f9d9f1274d12a3d7306"><div class="sl-block" data-block-type="shape" data-name="shape-51e9bc" style="width: 800px; height: 560px; left: 80px; top: 70px;" data-block-id="5190d8ac891ddf51698afd3fd450bd7c"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgba(0, 0, 0, 0)" data-shape-stretch="true" style="z-index: 10;" data-shape-corner-radius="21px" data-shape-stroke-color="#000000" data-shape-stroke-width="1px"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 800 560"><defs><clippath id="shape-mask-8-1712358732164"><rect width="800" height="560" rx="21" ry="21" fill="rgba(0, 0, 0, 0)" stroke="#000000" stroke-width="2"></rect></clippath></defs><rect width="800" height="560" rx="21" ry="21" class="shape-element" fill="rgba(0, 0, 0, 0)" stroke="#000000" stroke-width="2" clip-path="url(#shape-mask-8-1712358732164)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-033175" style="height: auto; width: 600px; left: 180px; top: 140px;" data-block-id="3a085e2810009edf494fecdb0ea357c2"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;"><p>...your own corner of the internet</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 180px; top: 226px;" data-name="text-a01f8b" data-block-id="72b583d3c5c0b36332c790c4a47e1e38"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; color: rgb(204, 65, 37);">
+<p>as opposed to your digital footprint across</p>
+
+<p>other platforms.</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 180px; top: 350px;" data-block-id="40613ec7409d7433dadae712cd3a2c81" data-name="text-22867e"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; color: rgb(204, 65, 37);">
+<p><span style="color:#000080">Your website could potentially</span></p>
+
+<p><span style="color:#000080"><em>curate</em></span></p>
+
+<p><span style="color:#000080">content from your overall digital presence.</span></p>
+</div></div></section><section data-id="7888c7a585ec6156478353432e3af461"><div class="sl-block" data-block-type="shape" data-name="shape-51e9bc" style="width: 800px; height: 560px; left: 80px; top: 70px;" data-block-id="a048a5e1c8e7c341fe5578f40c0f9b93"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgba(0, 0, 0, 0)" data-shape-stretch="true" style="z-index: 10;" data-shape-corner-radius="21px" data-shape-stroke-color="#000000" data-shape-stroke-width="1px"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 800 560"><defs><clippath id="shape-mask-9-1712358761422"><rect width="800" height="560" rx="21" ry="21" fill="rgba(0, 0, 0, 0)" stroke="#000000" stroke-width="2"></rect></clippath></defs><rect width="800" height="560" rx="21" ry="21" class="shape-element" fill="rgba(0, 0, 0, 0)" stroke="#000000" stroke-width="2" clip-path="url(#shape-mask-9-1712358761422)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-033175" style="height: auto; width: 600px; left: 180px; top: 140px;" data-block-id="6df4ea749218559c4af976bef1d050bd"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;"><p>...your own corner of the internet</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 180px; top: 226px;" data-name="text-a01f8b" data-block-id="c7943ee15700a1ba3a2afd1776443cbd"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; color: rgb(204, 65, 37);">
+<p>as opposed to your digital footprint across</p>
+
+<p>other platforms.</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 180px; top: 350px;" data-name="text-22867e" data-block-id="3733d6fb793d59ea4879cc522be91916"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; color: rgb(204, 65, 37);">
+<p><span style="color:#000080">Your website could potentially</span></p>
+
+<p><span style="color:#000080"><em>curate</em></span></p>
+
+<p><span style="color:#000080">content from your overall digital presence.</span></p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 180px; top: 517px;" data-block-id="1529116b9a3334de18915e29695e13c8" data-name="text-34a7a5"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14; color: rgb(78, 153, 7);"><p><em>But it is your space to design, evolve and control.</em></p></div></div></section><section data-id="8314e44e9a49fa82ac7845cdbd2b8f0d"><div class="sl-block" data-block-type="shape" data-name="shape-51e9bc" style="width: 800px; height: 560px; left: 80px; top: 70px;" data-block-id="fc34faeef1538e6ae68ca2e123715458"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgba(0, 0, 0, 0)" data-shape-stretch="true" style="z-index: 10;" data-shape-corner-radius="21px" data-shape-stroke-color="#000000" data-shape-stroke-width="1px"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 800 560"><defs><clippath id="shape-mask-10-1712358831300"><rect width="800" height="560" rx="21" ry="21" fill="rgba(0, 0, 0, 0)" stroke="#000000" stroke-width="2"></rect></clippath></defs><rect width="800" height="560" rx="21" ry="21" class="shape-element" fill="rgba(0, 0, 0, 0)" stroke="#000000" stroke-width="2" clip-path="url(#shape-mask-10-1712358831300)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="image" data-name="image-5c1a47" data-block-id="95a5cb038476775701c12016bcbbef71" style="width: 811px; height: 560.796px; left: 74.5px; top: 69.204px; min-width: 1px; min-height: 1px;"><div class="sl-block-content" style="z-index: 11;"><img class="" data-natural-width="1233" data-natural-height="855" data-crop-x="0.014303" data-crop-y="0.015464" data-crop-width="0.966627" data-crop-height="0.963918" style="left: -12px; top: -9px; width: 839px; height: 582px;" data-lazy-loaded="" data-src="website/95c14e25bcab375a7815b81dd8689fb7.png"></div></div></section><section data-id="5cd48368466525bef2c3451b8d8f2bf4"><div class="sl-block" data-block-type="text" style="width: 768px; left: 80px; top: 210px; height: auto;" data-block-id="226a86e88bf226d1241e08edd3088217">
+							<div class="sl-block-content" style="text-align: left; font-size: 90%; line-height: 1.469; z-index: 10; color: rgb(120, 102, 250);" data-has-line-heightdata-has-letter-spacing="" data-placeholder-tag="p" data-placeholder-text="Text" data-has-line-height="">
+<h1><span style="color:#000000">Part i.</span></h1>
+
+<h1>
+<span style="color:#000000">what, </span>why<span style="color:#000000">, and how.</span>
+</h1>
+</div>
+						</div></section><section data-id="4bbe97203b2bdf7be235b88379310286"><div class="sl-block" data-block-type="text" data-name="text-39ebb8" data-block-id="a87ac4baf917c0225d48cc10d822d956" style="height: auto; width: 325px; left: 317.5px; top: 70px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;"><h2>I already have...</h2></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-deaddd" data-block-id="8e1b415464ba327cedba9075ea6cbc24" style="height: auto; width: 336px; left: 312px; top: 143.5px;"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: center; line-height: 1.482; font-size: 88%;" data-has-line-height="" data-fragment-index="0"><p>Here's what you <em>don't have.</em></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 426px; left: 261.375px; top: 251.5px;" data-block-id="3d58c10f52722900e0ecc04981a30c3e" data-name="text-371a21"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14; text-align: center; line-height: 1.482; color: rgb(120, 63, 4);" data-has-line-height="" data-fragment-index="1"><p>Control over layout, style, content</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 336px; left: 306.375px; top: 388px;" data-block-id="0daced8f34411c7c452a278778b580ba" data-name="text-fc8496"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 15; text-align: center; line-height: 1.482; color: rgb(204, 65, 37);" data-has-line-height="" data-fragment-index="2"><p>Future-proofness</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 578px; left: 196.375px; top: 429px;" data-block-id="db8c0ded84ef0ab2490c109baddd3cc4" data-name="text-368514"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 16; text-align: center; line-height: 0.806;" data-has-line-height="" data-fragment-index="2"><p><em><span style="font-size:0.7em">Entire platforms fade out: e.g, Myspace, Orkut, Google+</span></em><br>
+<em><span style="font-size:0.7em">Also, terms and conditions evolve!</span></em></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 569px; left: 189.875px; top: 571px;" data-block-id="225f208a0b74bf461dcd347d89e7e88e" data-name="text-fc8df5"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 17; text-align: center; line-height: 0.806;" data-has-line-height="" data-fragment-index="3"><p><em><span style="font-size:0.7em">Having an easy-to-share URL is nicer than a bunch of social media links,<br>
+although solutions like linktree mitigate this to some extent.</span></em></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 577.5px; left: 185.625px; top: 292.5px;" data-block-id="26feccb9ecb41f69a09d5b9352c514c8" data-name="text-df0c30"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 18; text-align: center; line-height: 0.806;" data-has-line-height="" data-fragment-index="1"><p><em><span style="font-size:0.7em">Different platforms have varying degrees of </span></em><em><span style="font-size:0.7em">customization, but most have choices made for you; and free platforms are often ad-supported.</span></em></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 336px; left: 306.375px; top: 530px;" data-block-id="34d5c60bb2e4fb68d13099dc017cae71" data-name="text-cef276"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 21; text-align: center; line-height: 1.482; color: rgb(230, 145, 56);" data-has-line-height="" data-fragment-index="3"><p>Visibility</p></div></div></section><section data-id="76603cf3598ba0efceddbd5297d44a7f"><div class="sl-block" data-block-type="text" style="height: auto; width: 325px; left: 323px; top: 70px;" data-name="text-91e447" data-block-id="d29b314932f8aa4b9375e4f079cacb37"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;"><h2>I don't need...</h2></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 336px; left: 312px; top: 150.5px;" data-name="text-9f5661" data-block-id="78319a7cad83c339ac494075104c5d5a"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 20; text-align: center; line-height: 1.482; font-size: 88%;" data-has-line-height="" data-fragment-index="0"><p>Maybe, but...</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 336px; left: 306.5px; top: 250.5px;" data-name="text-550391" data-block-id="9a102cb71af2b6501043961f8b072a57"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 21; text-align: center; line-height: 1.482; color: rgb(60, 120, 216);" data-has-line-height="" data-fragment-index="1"><p>Notes to self</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 593px; left: 183.5px; top: 291.5px;" data-name="text-7f8b12" data-block-id="63232cf769263d9d71300ac2ae129edb"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 22; text-align: center; line-height: 0.806;" data-has-line-height="" data-fragment-index="1"><p><span style="font-size:19.6px"><em>Even with a target audience of one,</em></span><br>
+<span style="font-size:19.6px"><em>a website can be really useful for locating your own stuff :)</em></span></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 336px; left: 312px; top: 387px;" data-name="text-67878e" data-block-id="e7d55f9f9d5b2d041691c88b428933c2"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 23; text-align: center; line-height: 1.482; color: rgb(106, 168, 79);" data-has-line-height="" data-fragment-index="2"><p>Being Findable</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 497px; left: 231.5px; top: 428px;" data-name="text-a8d06e" data-block-id="2263f4603a052a48345f42861f3446d2"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 24; text-align: center; line-height: 0.806;" data-has-line-height="" data-fragment-index="2"><p><span style="font-size:19.6px"><em>If your work benefits from collaboration and outreach,<br>
+a website is a great way to establish some visibility.</em></span><br>
+ </p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 336px; left: 312px; top: 529px;" data-name="text-f0b3ce" data-block-id="9b8b7579c841b8db58cefde7f2f68643"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 25; text-align: center; line-height: 1.482; color: rgb(142, 124, 195);" data-has-line-height="" data-fragment-index="3"><p>Efficiency</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 709px; left: 125.5px; top: 570px;" data-name="text-0da527" data-block-id="05561509784c22784924fe01563da0f3"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 26; text-align: center; line-height: 0.806;" data-has-line-height="" data-fragment-index="3"><p><span style="font-size:19.6px"><em>If you find yourself explaining the same thing more than once or twice,<br>
+put it up for broader reach and easier responses to future queries.</em></span></p></div></div></section><section data-id="209328f93e6be0ce20e1ccae10ca9f7c"><div class="sl-block" data-block-type="text" style="width: 768px; left: 80px; top: 210px; height: auto;" data-block-id="8593dbfcd6fbc7f44fcb272c42d6b866">
+							<div class="sl-block-content" style="text-align: left; font-size: 90%; line-height: 1.469; z-index: 10; color: rgb(120, 102, 250);" data-has-line-heightdata-has-letter-spacing="" data-placeholder-tag="p" data-placeholder-text="Text" data-has-line-height="">
+<h1><span style="color:#000000">Part i.</span></h1>
+
+<h1>
+<span style="color:#000000">what, why, and </span>how<span style="color:#000000">.</span>
+</h1>
+</div>
+						</div></section><section data-id="5fbf8b6f49218a78bb133a6448875c3f"><div class="sl-block" data-block-type="text" data-name="text-dfa328" data-block-id="78d31575b24c7f93638b67f1f1f45c26" style="height: auto; width: 600px; left: 180px; top: 52px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10; line-height: 1.677;" data-has-line-height="">
+<p>A website typically uses:</p>
+
+<p><br>
+<strong>HTML</strong> (structured content),<br>
+<strong>CSS</strong> (drives the look and feel), &amp;<br>
+<strong>JS</strong> (functionality).</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 828px; left: 66px; top: 388px;" data-name="text-ed4736" data-block-id="32a16da85f75075dcdeb848b91f41ab0"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11; line-height: 1.677;" data-has-line-height="" data-fragment-index="0">
+<p>A website is placed on a server that an address (the URL).<br>
+<br>
+When a client (a web browser) pings the URL,<br>
+the server processes the website as appropriate and sends it over.</p>
+
+<p>The client understands HTML/CSS/JS and renders it for the user.</p>
+</div></div></section><section data-id="c61261220fa1b329306bf9371c5bd68d"><div class="sl-block" data-block-type="text" data-name="text-dfa328" style="height: auto; width: 600px; left: 180px; top: 52px;" data-block-id="3afe5a54194673c03c3700df17bfb7a1"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10; line-height: 1.677;" data-has-line-height="">
+<p>A website typically uses:</p>
+
+<p><br>
+<strong>HTML</strong> (structured content),<br>
+<strong>CSS</strong> (drives the look and feel), &amp;<br>
+<strong>JS</strong> (functionality).</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 728px; left: 116px; top: 374px;" data-name="text-9eeaa3" data-block-id="018b3ccac799dafe6bd68ee44c9f98bb"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;" data-fragment-index="0">
+<p><span style="color:#FFA07A"><em>(oversimplification alert)</em></span><br>
+<br>
+Two broad categories based on whether</p>
+
+<p>the heavy-lifting <span>is done:<br>
+<br>
+on the server-</span><span>side (LAMP-stack, often use databases)</span></p>
+
+<p>or the client-side (JAM-stack, usually file-based static sites).</p>
+</div></div></section><section data-id="1e185de46ce21f992b4840e0d2c7c401"><div class="sl-block" data-block-type="text" data-name="text-dfa328" style="height: auto; width: 600px; left: 180px; top: 52px;" data-block-id="a9dbfb314f6a87298b68a3ce8275d6d7"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10; line-height: 1.677;" data-has-line-height="">
+<p>A website typically uses:</p>
+
+<p><br>
+<strong>HTML</strong> (structured content),<br>
+<strong>CSS</strong> (drives the look and feel), &amp;<br>
+<strong>JS</strong> (functionality).</p>
+</div></div>
+<div class="sl-block" data-block-type="text" data-name="text-e84328" data-block-id="d966fa91dff00033e1fcbc20d83f4f48" style="height: auto; width: 600px; left: 180px; top: 350px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;">
+<p>There are services that present a convenient UI</p>
+
+<p>to create a website</p>
+
+<p>and take care of generating the HTML/CSS/JS;</p>
+
+<p> </p>
+
+<p>and they also generate a URL for us to use.</p>
+
+<p> </p>
+
+<p><span style="color:#006400">Google Sites · Notion</span></p>
+</div></div></section><section data-id="bd8bb16e203efb5013150b4c3bf7ba19"><div class="sl-block" data-block-type="text" data-name="text-dfa328" style="height: auto; width: 600px; left: 180px; top: 52px;" data-block-id="fdfd7c5fecf16e9d064719dffedbffc2"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10; line-height: 1.677;" data-has-line-height="">
+<p>A website typically uses:</p>
+
+<p><br>
+<strong>HTML</strong> (structured content),<br>
+<strong>CSS</strong> (drives the look and feel), &amp;<br>
+<strong>JS</strong> (functionality).</p>
+</div></div>
+<div class="sl-block" data-block-type="text" data-name="text-e84328" style="height: auto; width: 816px; left: 72px; top: 350px;" data-block-id="03c6685943af1865d95929c753942f7c"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;">
+<p><span>We can also make our own<br>
+HTML/CSS/JS</span></p>
+
+<p><span>(usually from a template)</span></p>
+
+<p> </p>
+
+<p>and <em>host </em>it with a service provider:<br>
+they will also generate a URL.</p>
+
+<p> </p>
+
+<p><span style="color:#0000CD">Netlify · Github Pages</span></p>
+</div></div></section><section data-id="8af2bc5d51c2c17137ddfe9ea071a025"><div class="sl-block" data-block-type="shape" data-name="shape-971f9b" style="width: 196px; height: 158px; left: 240px; top: 382px;" data-block-id="e83af4a9da89fc118513fde2c962ba6a"><div class="sl-block-content fragment fade-out" data-shape-type="rect" data-shape-fill-color="rgb(255, 255, 255)" data-shape-stretch="true" style="z-index: 11;" data-fragment-index="0"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 196 158"><rect width="196" height="158" rx="0" ry="0" class="shape-element" fill="rgb(255, 255, 255)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="image" data-name="image-906f97" style="width: 743.936px; height: 518px; left: 94.032px; top: 91px; min-width: 1px; min-height: 1px;" data-block-id="2ce2d86a31086e4fa5f30149e539d44f"><div class="sl-block-content" style="z-index: 10;"><img class="" data-natural-width="945" data-natural-height="658" data-lazy-loaded="" data-src="website/4eccdadf2973495fcadb9eadc083539c.png"></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 196px; height: 158px; left: 533px; top: 122px;" data-block-id="bf1a8c2dea87cc6a6f2182e43cd62bb9" data-name="shape-f468c8"><div class="sl-block-content fragment fade-out" data-shape-type="rect" data-shape-fill-color="rgb(255, 255, 255)" data-shape-stretch="true" style="z-index: 12;" data-fragment-index="1"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 196 158"><rect width="196" height="158" rx="0" ry="0" class="shape-element" fill="rgb(255, 255, 255)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 196px; height: 158px; left: 524px; top: 382px;" data-block-id="a9990005502de090aa199bdffbb8014c" data-name="shape-fde98f"><div class="sl-block-content fragment fade-out" data-shape-type="rect" data-shape-fill-color="rgb(255, 255, 255)" data-shape-stretch="true" style="z-index: 13;" data-fragment-index="3"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 196 158"><rect width="196" height="158" rx="0" ry="0" class="shape-element" fill="rgb(255, 255, 255)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 196px; height: 158px; left: 247px; top: 122px;" data-block-id="f35ee5fec73e348725071bc4654ed0fb" data-name="shape-a7007f"><div class="sl-block-content fragment fade-out" data-shape-type="rect" data-shape-fill-color="rgb(255, 255, 255)" data-shape-stretch="true" style="z-index: 14;" data-fragment-index="2"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 196 158"><rect width="196" height="158" rx="0" ry="0" class="shape-element" fill="rgb(255, 255, 255)"></rect></svg></div></div></section><section data-id="fcc78e87141450e2683797d7660c6933"><div class="sl-block" data-block-type="text" data-name="text-24bd78" style="height: auto; width: 720px; left: 80px; top: 226.75px;" data-block-id="042e3c8c305af69dc1ccc65b02dff415"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10;" data-fragment-index="0"><p style="text-align:left">Notes on things you are processing<br>
+<em>books, courses, papers, podcasts, talks, etc.</em></p></div></div>
+<div class="sl-block" data-block-type="text" style="width: 768px; left: 80px; top: 84.5px; height: auto;" data-block-id="6490385f7dea9ee52e40bd6f3886b737" data-name="text-3cde1f">
+							<div class="sl-block-content" style="text-align: left; font-size: 110%; line-height: 1.469; z-index: 11; color: rgb(61, 133, 198);" data-has-line-heightdata-has-letter-spacing="" data-placeholder-tag="p" data-placeholder-text="Text" data-has-line-height=""><h3>Content ideas</h3></div>
+						</div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 768px; left: 80px; top: 365.25px;" data-block-id="c546c25fb49cccc99685afd6e7a46500" data-name="text-0e8c6a"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;" data-fragment-index="1"><p style="text-align:left">Share things you are creating<br>
+<em><span>posters, papers, code, talk slides, blogs, etc.<br>
+also poems, stories, photographs, performances, and so on.</span></em></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 706px; left: 80px; top: 540.25px;" data-block-id="9a13e6a9682511feda2df48c543b9648" data-name="text-01c065"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13;" data-fragment-index="2"><p style="text-align:left"><span>Lists of things you appreciate<br>
+<em>movies, music, puzzles, cartoons, blogs, etc.</em></span></p></div></div></section><section data-id="3e15a8dcd4c2bb5114986d7c8ad49e70"><div class="sl-block" data-block-type="text" data-name="text-24bd78" style="height: auto; width: 720px; left: 80px; top: 195.5px;" data-block-id="18c1c5c93e72f9887917f6582a931a56"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10;" data-fragment-index="0">
+<p style="text-align:left">Document learning journeys<br>
+<em>e.g: 30 days of code</em></p>
+
+<p style="text-align:left"><em>See: <a href="https://doingitinpublic.com/" target="_blank">Doing it in Public</a></em></p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 768px; left: 80px; top: 84.5px; height: auto;" data-name="text-3cde1f" data-block-id="0052aba92300018c1c01e79951271a90">
+							<div class="sl-block-content" style="text-align: left; font-size: 110%; line-height: 1.469; z-index: 11; color: rgb(61, 133, 198);" data-has-line-heightdata-has-letter-spacing="" data-placeholder-tag="p" data-placeholder-text="Text" data-has-line-height=""><h3>Content ideas</h3></div>
+						</div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 768px; left: 80px; top: 343.5px;" data-name="text-0e8c6a" data-block-id="636621964a955259b9ea909071a45cf2"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;" data-fragment-index="1">
+<p style="text-align:left">A <strong>now</strong> page<br>
+<em>Reflecting on what you are up to of late</em></p>
+
+<p style="text-align:left"><em>See: <a href="https://sive.rs/nowff" target="_blank">the now page movement</a></em></p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 706px; left: 80px; top: 491.5px;" data-name="text-01c065" data-block-id="265160c1194aa98773f5d87a7b8f785c"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13;" data-fragment-index="2">
+<p style="text-align:left">Recent/Latest News</p>
+
+<p style="text-align:left"><em>having a generally up-to-date website is a good practice,<br>
+and a news section is an easy way of demonstrating that the website is actively maintained.</em></p>
+</div></div></section></section><section class="stack" data-id="6257e1082d93c9cc30bc70c2da847220"><section data-id="d9ae76582d3b8eb717844fd9c42183a4"><div class="sl-block" data-block-type="text" style="width: 768px; left: 80px; top: 210px; height: auto;" data-block-id="9732a3c39b81eba208044bcd8a85903a">
+							<div class="sl-block-content" style="text-align: left; font-size: 90%; line-height: 1.469; z-index: 10;" data-has-line-heightdata-has-letter-spacing="" data-placeholder-tag="p" data-placeholder-text="Text" data-has-line-height="">
+<h1>Part II.</h1>
+
+<h1>(some of) My favorite websites</h1>
+</div>
+						</div></section><section data-id="5bf00ece2c17fcca10ff8271b9763c47"><div class="sl-block" data-block-type="iframe" data-name="iframe-301ce0" style="width: 905px; height: 637px; left: 27.5px; top: 31.5px;" data-block-id="b837d03f0674b18a33a41198b05c7c23"><div class="sl-block-content" style="z-index: 10;"><iframe allow="fullscreen; autoplay; accelerometer; geolocation; gyroscope; camera; encrypted-media; microphone; midi" data-src="https://www.philchodrow.prof/" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock allow-presentation"></iframe></div></div></section><section data-id="b1282dafba362b9996d12409b3e7e8b4"><div class="sl-block" data-block-type="iframe" data-name="iframe-301ce0" data-block-id="9840033ed3162dde4e8c2379273f96b6" style="width: 905px; height: 637px; left: 27.5px; top: 31.5px;"><div class="sl-block-content" style="z-index: 10;"><iframe allow="fullscreen; autoplay; accelerometer; geolocation; gyroscope; camera; encrypted-media; microphone; midi" data-src="https://vaishs.github.io/" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock allow-presentation"></iframe></div></div></section><section data-id="3c7cb9206c6cff8ab9071f336576d889"><div class="sl-block" data-block-type="iframe" data-name="iframe-301ce0" style="width: 905px; height: 637px; left: 27.5px; top: 31.5px;" data-block-id="8a9e3441bcac143740cea4e6cedfe1fb"><div class="sl-block-content" style="z-index: 10;"><iframe allow="fullscreen; autoplay; accelerometer; geolocation; gyroscope; camera; encrypted-media; microphone; midi" data-src="https://rohitvaish.in/" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock allow-presentation"></iframe></div></div></section><section data-id="bd28f2f4360d1c1cca2a5c601fa32f9b"><div class="sl-block" data-block-type="iframe" data-name="iframe-301ce0" style="width: 905px; height: 637px; left: 27.5px; top: 31.5px;" data-block-id="239545205633b5681cc6be4e636b0dbc"><div class="sl-block-content" style="z-index: 10;"><iframe allow="fullscreen; autoplay; accelerometer; geolocation; gyroscope; camera; encrypted-media; microphone; midi" data-src="https://gwern.net/" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock allow-presentation"></iframe></div></div></section><section data-id="74c71cf51e15c94be2bce6c6b45a4ee3"><div class="sl-block" data-block-type="iframe" data-name="iframe-301ce0" style="width: 905px; height: 637px; left: 27.5px; top: 31.5px;" data-block-id="78c916063302c20976edcdcd3a915bb2"><div class="sl-block-content" style="z-index: 10;"><iframe allow="fullscreen; autoplay; accelerometer; geolocation; gyroscope; camera; encrypted-media; microphone; midi" data-src="https://michaelnielsen.org/" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock allow-presentation"></iframe></div></div></section><section data-id="dbf5f5baa71774861d5232920cf9391e"><div class="sl-block" data-block-type="text" data-name="text-944a8e" data-block-id="a53c648f1c09a8b7cf941ba4a8e486d6" style="height: auto; width: 600px; left: 180px; top: 332px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10;"><p><a href="http://bactra.org/" target="_blank">http://bactra.org/</a></p></div></div></section><section data-id="dc082fdbae7be93b8cc4e42067aa2508"></section></section><section class="stack" data-id="44f825ee9615f69fe770d4583a5d817d"><section data-id="d6ac3b9a994a6a026b80d5242b365ec1"><div class="sl-block" data-block-type="text" style="width: 768px; left: 80px; top: 210px; height: auto;" data-block-id="d93d30fd06abc2a4aa33fcd0cff28b37">
+							<div class="sl-block-content" style="text-align: left; font-size: 90%; line-height: 1.469; z-index: 10;" data-has-line-heightdata-has-letter-spacing="" data-placeholder-tag="p" data-placeholder-text="Text" data-has-line-height="">
+<h1>Part III.</h1>
+
+<h1>Workflows and options</h1>
+</div>
+						</div></section><section data-id="ead7b82979eab39a82d5a9cd9a019560"><div class="sl-block" data-block-type="image" data-name="image-2d2cdf" data-block-id="1d56d31740a653ac45c33f7f54860b69" style="width: 743.936px; height: 518px; left: 121.032px; top: 120px; min-width: 1px; min-height: 1px;"><div class="sl-block-content" style="z-index: 10;"><img class="" data-natural-width="945" data-natural-height="658" data-lazy-loaded="" data-src="website/b0ccf18784bb3062c0e143dd6c76f462.png"></div></div>
+<div class="sl-block" data-block-type="shape" data-name="shape-971f9b" data-block-id="f8f921f5cc2a31cd883ebba18931626e" style="width: 623px; height: 398px; left: 228px; top: 151px;"><div class="sl-block-content fragment fade-out" data-shape-type="rect" data-shape-fill-color="rgb(255, 255, 255)" data-shape-stretch="true" style="z-index: 11;" data-fragment-index="0"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 623 398"><rect width="623" height="398" rx="0" ry="0" class="shape-element" fill="rgb(255, 255, 255)"></rect></svg></div></div></section><section data-id="fa720ed9c72ab481193d6845605d68ba"><div class="sl-block" data-block-type="line" data-name="line-69f6d2" data-block-id="76652c550b70cff947ef01b986a78005" style="width: auto; height: auto; min-width: 0px; min-height: 0px; left: 480px; top: 0px;"><div class="sl-block-content" data-line-x1="0" data-line-y1="700" data-line-x2="0" data-line-y2="0" data-line-color="#000000" data-line-start-type="none" data-line-end-type="none" style="z-index: 10;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveaspectratio="xMidYMid" width="1" height="700" viewbox="0 0 1 700"><line stroke="rgba(0,0,0,0)" stroke-width="15" x1="0" y1="700" x2="0" y2="0"></line><line class="line-element" stroke="#000000" stroke-width="2" x1="0" y1="700" x2="0" y2="0"></line></svg></div></div>
+<div class="sl-block" data-block-type="line" style="width: auto; height: auto; min-width: 0px; min-height: 0px; left: 0px; top: 140px;" data-block-id="56f1190f15c609c17c039a1634260fa9" data-name="line-3d846e"><div class="sl-block-content" data-line-x1="960" data-line-y1="0" data-line-x2="0" data-line-y2="0" data-line-color="#000000" data-line-start-type="none" data-line-end-type="none" style="z-index: 11;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveaspectratio="xMidYMid" width="960" height="1" viewbox="0 0 960 1"><line stroke="rgba(0,0,0,0)" stroke-width="15" x1="960" y1="0" x2="0" y2="0"></line><line class="line-element" stroke="#000000" stroke-width="2" x1="960" y1="0" x2="0" y2="0"></line></svg></div></div>
+<div class="sl-block" data-block-type="text" data-name="text-24bd78" data-block-id="8861034f515c611650f0742db117e6ff" style="height: auto; width: 371px; left: 54.5px; top: 210px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; color: rgb(106, 168, 79);"><p>Low-initial-effort,<br>
+potential long-term cost</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 371px; left: 534.5px; top: 210px;" data-block-id="56340ce38e51491032afeafb94cf13b8" data-name="text-8a9238"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; color: rgb(78, 153, 7);"><p>Google Sites, Notion,<br>
+WiX, SquareSpace, etc.</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 371px; left: 54.5px; top: 352px;" data-block-id="53cd097f892e77b530d08eebc78ffd3d" data-name="text-d9c664"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14; color: rgb(61, 133, 198);"><p>Intermediate-initial-effort,<br>
+robust for non-fancy setups</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 371px; left: 536px; top: 352px;" data-block-id="d531fb3c9cf8d43d58f3c5a5c24d0784" data-name="text-33c799"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 15; color: rgb(61, 133, 198);"><p><span>Setup a HTML + CSS + JS site<br>
+and upload it</span></p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 371px; left: 54.5px; top: 547px;" data-block-id="7c1fcab0d27b19ffa42939ec7dc9e721" data-name="text-b5c12e"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 16; color: rgb(103, 78, 167);"><p>Intermediate-initial-effort,<br>
+reasonably future-proof</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 371px; left: 534.5px; top: 509.5px;" data-block-id="c78b1d9c0ec0db3c7b80498377679218" data-name="text-8562d6"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 17; font-size: 93%; color: rgb(103, 78, 167);">
+<p><span>SSGs: Quarto, Hugo, GatsbyJS,</span></p>
+
+<p><span>11ty, etc.</span></p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 371px; left: 54.5px; top: 52px;" data-block-id="c184370bcd0ab5ddde35b02f1fd83dcc" data-name="text-0e5158"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 18;"><p>Effort v. Benefits</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 371px; left: 534.5px; top: 52px;" data-block-id="5cbd8173319c41fac46704fe239ce450" data-name="text-bc6c1b"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 19;"><p>Options</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 371px; left: 534.5px; top: 606px;" data-block-id="66877a321c35c8f2f4b34beaaab694b1" data-name="text-1bc3e6"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 20; font-size: 93%; color: rgb(103, 78, 167);"><p><span>CMSes: Wordpress, Webflow, Ghost, Drupal, etc.</span></p></div></div></section><section data-id="b154b88490f9ab428733a5d262e5d7f4"><div class="sl-block" data-block-type="text" data-name="text-24bd78" style="height: auto; width: 720px; left: 80px; top: 174px;" data-block-id="cf84901d50a62dd6c8e3a5fee08897aa"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10;" data-fragment-index="0"><p style="text-align:left">Accessibility</p></div></div>
+<div class="sl-block" data-block-type="text" style="width: 768px; left: 80px; top: 84.5px; height: auto;" data-name="text-3cde1f" data-block-id="625be9bf0abb1f6b3cda95390c291ae4">
+							<div class="sl-block-content" style="text-align: left; font-size: 110%; line-height: 1.469; z-index: 11; color: rgb(61, 133, 198);" data-has-line-heightdata-has-letter-spacing="" data-placeholder-tag="p" data-placeholder-text="Text" data-has-line-height=""><h3>Things to keep in mind.</h3></div>
+						</div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 768px; left: 80px; top: 472px;" data-name="text-0e8c6a" data-block-id="96cd1b935e2e4bd326a6d316d920bacc"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;" data-fragment-index="2"><p style="text-align:left">Security</p></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 128px; top: 231px;" data-block-id="2632f9b3e03144ae5aa6b84cb9584542" data-name="text-a74a42"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14;" data-fragment-index="1">
+<p style="text-align:left"><em>Examples of best practices:<br>
+images should have alt-tags,<br>
+font sizes and color contrasts should be reasonable,<br>
+resizing text should not impact the content</em></p>
+
+<p style="text-align:left"><span style="font-size:0.7em"><a href="https://www.w3.org/TR/WCAG21/" target="_blank">Web accessibility guidelines</a></span></p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 784px; left: 128px; top: 538px;" data-block-id="b950dc4089430e4fbecbe2680848010b" data-name="text-7e3dcc"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 15;" data-fragment-index="3"><p style="text-align:left"><em>Static websites are generally not super vulnerable<br>
+Be careful about systems like wordpress (make sure to stay updated), and having forms that can take user input.</em></p></div></div></section></section><section data-id="a2b74ab3cfc1d09518e23beccd220d84"><div class="sl-block" data-block-type="text" style="width: 768px; left: 80px; top: 210px; height: auto;" data-block-id="ae6cddb60b8583fd0c522a625d282fa4">
+							<div class="sl-block-content" style="text-align: left; font-size: 90%; line-height: 1.469; z-index: 10;" data-has-line-heightdata-has-letter-spacing="" data-placeholder-tag="p" data-placeholder-text="Text" data-has-line-height="">
+<h1>Part IV.</h1>
+
+<h1>Let's make a website!</h1>
+</div>
+						</div></section>
+			</div>
+		</div>
+
+		<script>
+			var SLConfig = {"deck": {"id":3161395,"slug":"website","title":"Personal Website Workshop","description":"","width":960,"height":700,"margin":0.05,"visibility":"all","published_at":"2024-04-06T05:03:28.456Z","sanitize_messages":null,"thumbnail_url":"https://s3.amazonaws.com/media-p.slid.es/thumbnails/4184e975bdc2929b276496625f44301f/thumb.jpg?1743652700","view_count":1034,"user":{"id":428671,"username":"neeldhara","name":"Neeldhara Misra","description":"","thumbnail_url":"https://media.slid.es/avatars/428671/P1000160-NPTEL.jpg","account_type":"pro","team_id":null,"settings":{"id":267964,"present_controls":true,"present_upsizing":true,"present_pointer":true,"present_notes":true,"default_deck_tag_id":null}},"background_transition":"none","transition":"none","theme_id":null,"theme_font":"overpass2","theme_color":"white-blue","auto_slide_interval":0,"comments_enabled":false,"forking_enabled":false,"rolling_links":false,"center":false,"shuffle":false,"should_loop":false,"share_notes":false,"slide_number":false,"slide_count":42,"rtl":false,"version":2,"collaborative":false,"deck_user_editor_limit":3,"data_updated_at":1712380160717,"font_typekit":null,"font_google":null,"time_limit":null,"navigation_mode":"default","upsizing_enabled":true,"language":"en","source_deck_id":null,"notes":{}}};
+
+
+			// Use local fonts
+			SLConfig.fonts_url = 'lib/fonts/';
+		</script>
+
+		<script src="lib/reveal.js"></script>
+		<script src="lib/reveal-plugins.js"></script>
+		<script src="lib/offline.js"></script>
+
+		<!-- Initialize the presentation -->
+		<script>
+			Reveal.initialize({
+				width: 960,
+				height: 700,
+				margin: 0.05,
+				
+
+				hash: true,
+				controls: true,
+				progress: true,
+				mouseWheel: false,
+				showNotes: false,
+				slideNumber: false,
+				fragmentInURL: true,
+
+				autoSlide: 0,
+				autoSlideStoppable: true,
+
+				autoAnimateMatcher: SL.deck.AutoAnimate.matcher,
+
+				scrollActivationWidth: null,
+
+				center: false,
+				shuffle: false,
+				loop: false,
+				rtl: false,
+				navigationMode: "default",
+
+				transition: "none",
+				backgroundTransition: "none",
+
+				highlight: {
+					escapeHTML: false
+				},
+
+				plugins: [ RevealZoom, RevealNotes, RevealMarkdown, RevealHighlight ]
+			});
+		</script>
+
+		
+
+
+	</body>
+</html>
